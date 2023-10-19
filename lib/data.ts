@@ -71,7 +71,7 @@ export const experiencesData = [
     title: "Lead Data Product Manager",
     location: "BioMark",
     description:
-      "Took a leap of faith, I am now working at a regional SEA healthtech startup to help digitize healthcare.",
+      "Took a leap of faith and now working at a regional SEA healthtech startup to help digitize healthcare. My team is responsible for data engineering, BI, product analytics, GenAI.",
     icon: React.createElement("img", { src: "biomark_logo.png" }, null),
     date: "Oct 2022 - present",
   },
