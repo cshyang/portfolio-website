@@ -1,5 +1,5 @@
-# AI Todo Summary
-This is a simple drag-and-drop todo app with GPT summary. https://ai-todo-summary.vercel.app/
+# Personal Portfolio Website
+This is a simple portfolio website created with Next.js and React.
 
 <img width="1275" alt="image" src="https://github.com/cshyang/portfolio-website/assets/45311586/8698e572-ca5c-4038-a571-698ffbba323f">
 
