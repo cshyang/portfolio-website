@@ -84,6 +84,7 @@ export const projectsData = [
       "Extract biomarker results from medical reports and present a simplified, patient-friendly summary for better comprehension.",
     tags: ["Python", "Streamlit", "LangChain", "OpenAI"],
     imageUrl: aiMedicalAgentImg,
+    projectUrl: "https://github.com/cshyang/langchain-pdf-medical-agent",
   },
   {
     title: "Netflix Clone",
@@ -91,6 +92,7 @@ export const projectsData = [
       "This is a front-end movie streaming UI project designed to emulate the user experience of platforms like Netflix, utilizing the TMDB movie database as its primary source of data.",
     tags: ["React", "Next.js", "Tailwind", "TMDB API"],
     imageUrl: netflixCloneImg,
+    projectUrl: "https://netflix-clone-4c05e.web.app",
   },
   {
     title: "AI Todo Summary",
@@ -105,6 +107,7 @@ export const projectsData = [
       "React Beautiful DnD",
     ],
     imageUrl: trelliImg,
+    projectUrl: "https://ai-todo-summary.vercel.app",
   },
 ] as const;
 
