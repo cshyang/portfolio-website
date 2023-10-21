@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import ThemeContextProvider from "@/context/theme-context";
 import { Analytics } from "@vercel/analytics/react";
+import GoogleTagManager from "@/components/GoogleTagManager";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +42,9 @@ export default function RootLayout({
           </ActiveSectionContextProvider>
           <Analytics />
         </ThemeContextProvider>
+        <Suspense>
+          <GoogleTagManager />
+        </Suspense>
       </body>
     </html>
   );
