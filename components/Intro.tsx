@@ -60,10 +60,11 @@ function Intro() {
         <br /> I'm a <span className="font-bold">
           data product manager
         </span>{" "}
-        with 8 years of experience. Currently, I'm getting my hands dirty with
-        web development, particularly{" "}
-        <span className="underline">React (Next.js)</span> to improve my
-        knowledge as a product manager.
+        with 8 years of experience in <span className="font-medium">data</span>,{" "}
+        <span className="font-medium">AI </span>and{" "}
+        <span className="font-medium">Machine Learning</span>. Currently, I'm
+        getting my hands dirty with web development, particularly{" "}
+        <span className="underline">React (Next.js)</span>
       </motion.h1>
       <motion.div
         className="flex sm:flex-row flex-col items-center justify-center sm:gap-x-6 gap-y-5"

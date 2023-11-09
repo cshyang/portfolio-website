@@ -3,6 +3,7 @@ import { CgWorkAlt } from "react-icons/cg";
 import { LuGraduationCap } from "react-icons/lu";
 import netflixCloneImg from "@/public/netflix_clone.png";
 import trelliImg from "@/public/trelli.png";
+import aiCompanionImg from "@/public/ai-companion.png";
 import aiMedicalAgentImg from "@/public/ai_medical_agent.png";
 import grabIcon from "@/public/grab_icon.png";
 import moneyLionIcon from "@/public/moneylion_icon.jpeg";
@@ -79,6 +80,24 @@ export const experiencesData = [
 
 export const projectsData = [
   {
+    title: "AI Companion",
+    description:
+      "An app that enables users to create an AI companion that emulates the personalities of their favorite celebrities.",
+    tags: [
+      "React",
+      "Next.js",
+      "Tailwind",
+      "PrismaDB",
+      "OpenAI",
+      "Replicate",
+      "LLAMA2",
+      "Clerk",
+      "Stripe",
+    ],
+    imageUrl: aiCompanionImg,
+    projectUrl: "https://ai-companion-cshyang.vercel.app",
+  },
+  {
     title: "AI Medical Agent",
     description:
       "Extract biomarker results from medical reports and present a simplified, patient-friendly summary for better comprehension.",
@@ -94,21 +113,21 @@ export const projectsData = [
     imageUrl: netflixCloneImg,
     projectUrl: "https://netflix-clone-4c05e.web.app",
   },
-  {
-    title: "AI Todo Summary",
-    description:
-      "A drag and drop to-do app that used Appwrite as the backend and OpenAI GPT to sumamrise the tasks.",
-    tags: [
-      "React",
-      "Next.js",
-      "Tailwind",
-      "AppWrite",
-      "OpenAI",
-      "React Beautiful DnD",
-    ],
-    imageUrl: trelliImg,
-    projectUrl: "https://ai-todo-summary.vercel.app",
-  },
+  // {
+  //   title: "AI Todo Summary",
+  //   description:
+  //     "A drag and drop to-do app that used Appwrite as the backend and OpenAI GPT to sumamrise the tasks.",
+  //   tags: [
+  //     "React",
+  //     "Next.js",
+  //     "Tailwind",
+  //     "AppWrite",
+  //     "OpenAI",
+  //     "React Beautiful DnD",
+  //   ],
+  //   imageUrl: trelliImg,
+  //   projectUrl: "https://ai-todo-summary.vercel.app",
+  // },
 ] as const;
 
 export const skillsData = [
