@@ -50,9 +50,6 @@ export default function RootLayout({
             </ActiveSectionContextProvider>
             <Analytics />
           </ThemeContextProvider>
-          <Suspense>
-            <GoogleTagManager />
-          </Suspense>
         </body>
       </PHProvider>
     </html>
