@@ -23,14 +23,12 @@ function About() {
         career in <span className="font-medium">data analytics</span>. Over
         time, I found a passion for{" "}
         <span className="font-medium">data science and technology</span> as I
-        solved problems and interpreted data. I primarily use{" "}
-        <span className="font-medium">SQL, Snowflake, Python, and Tableau</span>{" "}
-        in my work. <br />
-        Currently, I am expanding my knowledge by learning{" "}
-        <span className="font-medium">
-          React, Next.js, GenAI, and backend technologies
-        </span>
-        . It's exciting to keep up with the latest advancements in the field.
+        solved problems and interpreted data. I have experience leading{" "}
+        <span className="font-medium">Data Engineering and Data Science</span>{" "}
+        team. <br />
+        Currently, I am expanding my knowledge by working on{" "}
+        <span className="font-medium">LLM and GenAI and RAG system.</span> It's
+        exciting to keep up with the latest advancements in the field.
       </p>
     </motion.section>
   );

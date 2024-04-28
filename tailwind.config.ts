@@ -44,6 +44,14 @@ const config: Config = {
       },
     },
   },
+  corePlugins: {
+    backdropOpacity: false,
+    backgroundOpacity: false,
+    borderOpacity: false,
+    divideOpacity: false,
+    ringOpacity: false,
+    textOpacity: false,
+  },
   plugins: [],
   darkMode: "class",
 };

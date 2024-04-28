@@ -8,6 +8,8 @@ html{
 
 .fix-safari {
     -webkit-filter: blur(10rem);
+    filter: blur(10rem);
+    transform: translate3d(0,0,0);
 
 }
 

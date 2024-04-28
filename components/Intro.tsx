@@ -57,14 +57,10 @@ function Intro() {
         animate={{ opacity: 1, y: 0 }}
       >
         <span className="font-bold">Hello, I'm Shyang.</span>
-        <br /> I'm a <span className="font-bold">
-          data product manager
-        </span>{" "}
-        with 8 years of experience in <span className="font-medium">data</span>,{" "}
-        <span className="font-medium">AI </span>and{" "}
-        <span className="font-medium">Machine Learning</span>. Currently, I'm
-        getting my hands dirty with web development, particularly{" "}
-        <span className="underline">React (Next.js)</span>
+        <br /> I'm a <span className="font-bold">Data & AI Tech Lead.</span> I
+        have experience building data and AI team from scratch and managing data
+        product. Currently, I am focusing on GenAI and LLM particularly building{" "}
+        <span className="underline">RAG system</span> for AI applications.
       </motion.h1>
       <motion.div
         className="flex sm:flex-row flex-col items-center justify-center sm:gap-x-6 gap-y-5"
