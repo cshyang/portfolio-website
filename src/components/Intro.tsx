@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import headshot from "@/public/shyang_headshot.png";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BsArrowRight, BsGithub } from "react-icons/bs";
@@ -28,7 +27,7 @@ function Intro() {
           transition={{ type: "tween", duration: 0.2 }}
         >
           <Image
-            src={headshot}
+            src="/images/avatars/shyang_headshot.png"
             alt="profile-pic"
             width={192}
             height={192}
@@ -57,10 +56,11 @@ function Intro() {
         animate={{ opacity: 1, y: 0 }}
       >
         <span className="font-bold">Hello, I'm Shyang.</span>
-        <br /> I'm a <span className="font-bold">Data & AI Tech Lead.</span> I
-        have experience building data and AI team from scratch and managing data
-        product. Currently, I am focusing on GenAI and LLM particularly building{" "}
-        <span className="underline">RAG system</span> for AI applications.
+        <br /> I'm a generalist that have experience in 
+        <br /><span className="font-bold">Data, AI, Lead Generation and Product.</span> 
+        <br />I’ve experience building high-performing data and AI teams, delivering impactful data products.
+        <br />Right now, I’m focusing on{" "}
+        <span className="underline">Agentic System</span> for AI applications.
       </motion.h1>
       <motion.div
         className="flex sm:flex-row flex-col items-center justify-center sm:gap-x-6 gap-y-5"
@@ -82,7 +82,7 @@ function Intro() {
           <BsArrowRight className="group-hover:translate-x-1 opacity-70 transition" />{" "}
         </Link>
         <a
-          href="/shyang_cv.pdf"
+          href="/docs/shyang_cv.pdf"
           download
           className="group flex items-center justify-center gap-x-2 bg-white rounded-3xl text-gray-900 px-7 py-3 outline-none
           ring-2 ring-gray-100 hover:ring-gray-900 hover:scale-110 focus:scale-110 active:scale-105 sm:w-fit w-10/12 transition

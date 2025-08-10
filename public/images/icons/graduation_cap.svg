@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Balanced, centered graduation cap -->
+  <rect width="128" height="128" fill="none"/>
+  <g transform="translate(0,2)">
+    <path d="M64 24L16 44l48 20 48-20-48-20z" fill="#111827"/>
+    <path d="M32 58v14c0 11.046 14.327 20 32 20s32-8.954 32-20V58L64 74 32 58z" fill="#111827"/>
+    <path d="M96 58l12 6v18" stroke="#111827" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

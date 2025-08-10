@@ -58,6 +58,9 @@ function ProjectItem({
           src={imageUrl}
           alt="Project I workded on"
           quality={95}
+          width={900}
+          height={600}
+          sizes="(min-width: 640px) 452px, 100vw"
           className="absolute top-8 -right-40 w-[28.25rem] rounded-t-lg shadow-2-xl hidden sm:block
         group-even:right-[initial] group-even:-left-40 transition
         group-hover:-translate-x-3

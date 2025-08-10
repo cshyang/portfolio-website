@@ -19,6 +19,7 @@ export default function ThemeContextProvider({
   children,
 }: ThemeContextProviderProps) {
   const [theme, setTheme] = useState<Theme>("light");
+  const [mounted, setMounted] = useState(false);
 
   const toggleTheme = () => {
     if (theme === "light") {
@@ -45,7 +46,13 @@ export default function ThemeContextProvider({
       setTheme("dark");
       document.documentElement.classList.add("dark");
     }
+    
+    setMounted(true);
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <ThemeContext.Provider

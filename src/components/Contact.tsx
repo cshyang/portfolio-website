@@ -31,10 +31,7 @@ function Contact() {
     >
       <SectionHeading>Contact Me</SectionHeading>
       <p className="text-gray-700 -mt-5 dark:text-white/80">
-        Please contact me directly at{" "}
-        <a className="underline" href="mailto:cshyang.chng@gmail.com">
-          cshyang.chng@gmail.com
-        </a>{" "}
+        Please contact me directly on Linkedin
         or through this form.
       </p>
       <form

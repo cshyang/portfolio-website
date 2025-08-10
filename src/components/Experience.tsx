@@ -9,6 +9,8 @@ import "react-vertical-timeline-component/style.min.css";
 import { experiencesData } from "@/lib/data";
 import { useSectionInView } from "@/lib/hooks";
 import { useTheme } from "@/context/theme-context";
+import CompanyIcon from "./CompanyIcon";
+import IconBadge from "./IconBadge";
 
 function Experience() {
   const { ref } = useSectionInView("Experience", 0.4);
@@ -37,12 +39,31 @@ function Experience() {
                     : "0.4rem solid  rgba(255,255,255,005)",
               }}
               date={item.date}
-              icon={item.icon}
+              icon={
+                // Prefer normalized logo rendering when iconSrc is provided
+                (item as any).iconSrc ? (
+                  <CompanyIcon
+                    src={(item as any).iconSrc}
+                    alt={(item as any).iconAlt ?? "Company logo"}
+                    size={60}
+                  />
+                ) : (
+                  <IconBadge
+                    size={72}
+                    offsetY={(item as any).iconOffsetY ?? -3}
+                  >
+                    {(item as any).icon}
+                  </IconBadge>
+                )
+              }
               iconStyle={{
-                background:
-                  theme === "light" ? "white" : "rgba(255,255,255,0.15)",
-                fontSize: "2.5rem",
-                paddingTop: "1px",
+                background: theme === "light" ? "white" : "rgba(255,255,255,0.15)",
+                width: "72px",
+                height: "72px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.75rem",
               }}
             >
               <h3 className="font-semibold captalize">{item.title}</h3>
