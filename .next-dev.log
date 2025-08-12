@@ -198,3 +198,17 @@ Import trace for requested module:
  ✓ Compiled in 347ms (719 modules)
  ✓ Compiled in 573ms (717 modules)
  ✓ Compiled in 552ms (717 modules)
+ ✓ Compiled in 175ms (717 modules)
+ ✓ Compiled in 523ms (908 modules)
+ ✓ Compiled in 135ms (908 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/Users/cshyang/Documents/Coding Repositories/portfolio-website/portfolio-website/.next/cache/webpack/client-development-fallback/1.pack.gz_' -> '/Users/cshyang/Documents/Coding Repositories/portfolio-website/portfolio-website/.next/cache/webpack/client-development-fallback/1.pack.gz'
+ ✓ Compiled in 1063ms (720 modules)
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 15.4.6
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.100.240:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1501ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/Users/cshyang/Documents/Coding Repositories/portfolio-website/portfolio-website/.next/cache/webpack/client-development/0.pack.gz_' -> '/Users/cshyang/Documents/Coding Repositories/portfolio-website/portfolio-website/.next/cache/webpack/client-development/0.pack.gz'

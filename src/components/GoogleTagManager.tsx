@@ -4,9 +4,9 @@
 import { GTM_ID, pageview } from "@/lib/gtm";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 
-export default function Analytics() {
+function AnalyticsContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -44,5 +44,13 @@ export default function Analytics() {
         }}
       />
     </>
+  );
+}
+
+export default function Analytics() {
+  return (
+    <Suspense fallback={null}>
+      <AnalyticsContent />
+    </Suspense>
   );
 }
