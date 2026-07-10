@@ -29,17 +29,17 @@ The unifying promise is “multidisciplinary builder who ships.” Audience-spec
 
 The page should feel like a well-composed working surface: modular, direct, personal, and visibly connected to real output. It borrows the rhythm of a field board or studio wall without copying the supplied blue portfolio reference's palette, serif styling, or exact tile geometry.
 
-The composition uses visible seams, asymmetric modules, project imagery, and small utility details. Warmth comes from portraiture, ember color, plain language, and responsive behavior—not pastel decoration.
+The composition uses visible seams, asymmetric modules, project imagery, and small utility details. Warmth comes from portraiture, print-derived color, plain language, and responsive behavior—not pastel decoration.
 
 ### Palette
 
-- Graphite: primary ink and dark project surfaces.
-- Neutral off-white: primary reading surface; chroma-neutral rather than beige.
-- Ember: committed accent and major section field.
-- Oxide: darker ember endpoint and depth tone.
-- Pale ember: restrained tint for selected states and supporting surfaces.
+- Deep indigo: primary ink, footer, featured-project surface, and dark gradient endpoint.
+- Warm paper: primary reading surface, derived directly from the illustrated portrait.
+- Vivid blue: committed color for the Operating Range field and selected image surfaces.
+- Signal orange and vermilion: visual signal, portrait field, and accessible closing surface.
+- Petrol teal: one supporting structural field in the hero.
 
-Use one controlled ember-to-oxide spatial gradient in image-led surfaces such as the portrait field. Do not use gradient text. Optional raster dither may appear at 1–2% opacity on one or two large color fields only. Reading surfaces remain clean.
+Use controlled orange-to-vermilion and blue-to-indigo spatial gradients in image-led surfaces. Do not use gradient text. Optional raster dither may appear on a few large color fields only. Reading surfaces remain clean.
 
 ### Typography
 
@@ -96,7 +96,7 @@ Replace the boxed third-party timeline with a continuous, first-party layout. Co
 
 ### 5. Contact: Decisive Close
 
-End with an ember-drenched field containing:
+End with a vermilion-drenched field containing:
 
 - A plain statement of the work Shyang wants.
 - Existing email form behavior.
@@ -122,7 +122,7 @@ Motion is section-specific but shares exponential ease-out timing.
 - Projects: image movement matched to each artifact's composition.
 - Operating range: connective paths resolve as evidence enters view.
 - Journey: one progressing path rather than per-card fades.
-- Contact: ember field expands into the final section.
+- Contact: vermilion field expands into the final section.
 
 Content remains visible by default. Motion enhances the rendered page and never gates it. Every animation has a `prefers-reduced-motion` alternative.
 

@@ -2,7 +2,7 @@
 
 ## Goal
 
-Build the approved Graphite + Ember redesign at `/v2` while preserving `/` for direct comparison.
+Build the approved Signal Print redesign at `/v2` while preserving `/` for direct comparison.
 
 ## 1. Protect the Legacy Shell
 
@@ -45,8 +45,8 @@ Work:
 
 - Load Archivo only for the V2 route.
 - Define semantic color, spacing, radius, z-index, and motion tokens.
-- Build the responsive modular grid, neutral reading surfaces, ember/oxide image field, visible seams, focus styles, and reduced-motion rules.
-- Use one controlled ember-to-oxide spatial gradient; keep text solid.
+- Build the responsive modular grid, warm-paper reading surfaces, portrait-derived color fields, visible seams, focus styles, and reduced-motion rules.
+- Use controlled orange-to-vermilion and blue-to-indigo spatial gradients; keep text solid.
 - Avoid global selectors that could alter `/`.
 
 ## 4. Build V2 Navigation and Hero
@@ -95,7 +95,7 @@ Work:
 - Reuse existing experience logos and data where accurate.
 - Reuse the existing email server action.
 - Add persistent labels, field-level validation, an accessible status region, duplicate-submit protection, and visible error/success states.
-- End with LinkedIn, GitHub, and CV actions in the ember closing field.
+- End with LinkedIn, GitHub, and CV actions in the vermilion closing field.
 
 ## 7. Verification and Audit
 

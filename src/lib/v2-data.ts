@@ -17,7 +17,7 @@ export const v2Projects = [
     tags: ["Next.js", "OpenAI", "Llama 2", "Prisma", "Stripe"],
     image: "/images/projects/ai-companion.png",
     href: "https://ai-companion-cshyang.vercel.app",
-    tone: "ember",
+    tone: "orange",
   },
   {
     title: "AI Medical Agent",
@@ -30,7 +30,7 @@ export const v2Projects = [
     tags: ["Python", "Streamlit", "LangChain", "OpenAI"],
     image: "/images/projects/ai_medical_agent.png",
     href: "https://github.com/cshyang/langchain-pdf-medical-agent",
-    tone: "graphite",
+    tone: "indigo",
   },
   {
     title: "Netflix Clone",

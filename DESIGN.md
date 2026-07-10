@@ -2,15 +2,15 @@
 name: Shyang Portfolio V2
 description: A sharp, warm field board for a multidisciplinary builder who ships.
 colors:
-  graphite: "#191210"
-  neutral-white: "#fafafa"
-  neutral-paper: "#f3f3f3"
-  neutral-surface: "#eae5e3"
-  seam: "#b2a8a5"
-  ember: "#ae3819"
-  oxide: "#681308"
-  pale-ember: "#fad4ca"
-  focus-blue: "#0045b0"
+  deep-indigo: "#06265f"
+  vivid-blue: "#0966d6"
+  signal-orange: "#f04b1d"
+  vermilion: "#b7331b"
+  petrol-teal: "#15576a"
+  paper: "#f7f0e3"
+  warm-white: "#faf7ef"
+  surface: "#e9e1d4"
+  seam: "#a6a092"
 typography:
   display:
     fontFamily: "Archivo, Arial, sans-serif"
@@ -48,14 +48,14 @@ spacing:
   xl: "88px"
 components:
   button-primary:
-    backgroundColor: "{colors.graphite}"
-    textColor: "{colors.neutral-white}"
+    backgroundColor: "{colors.deep-indigo}"
+    textColor: "{colors.warm-white}"
     typography: "{typography.label}"
     rounded: "{rounded.pill}"
     padding: "13px 16px"
   input:
-    backgroundColor: "{colors.neutral-white}"
-    textColor: "{colors.graphite}"
+    backgroundColor: "{colors.warm-white}"
+    textColor: "{colors.deep-indigo}"
     typography: "{typography.body}"
     rounded: "0px"
     padding: "12px 0"
@@ -67,43 +67,43 @@ components:
 
 **Creative North Star: "The Builder's Field Board"**
 
-The system feels like a carefully composed working surface: modular, direct, personal, and connected to real output. Visible seams and asymmetric fields create order; portraiture, ember color, and responsive behavior supply warmth. The interface is experimental in composition, not in usability.
+The system feels like a carefully composed working surface: modular, direct, personal, and connected to real output. Visible seams and asymmetric fields create order; the illustrated portrait supplies deep indigo, vivid blue, signal orange, vermilion, and petrol teal. The interface is experimental in composition, not in usability.
 
 It rejects generic polished SaaS, developer-terminal brutalism, artsy layouts that hide evidence, youthful candy color, and pervasive faux-vintage noise. Mobile is a deliberate single-column narrative, not a miniature desktop grid.
 
 **Key Characteristics:**
 
 - Capability-first hierarchy with proof in the first viewport.
-- Graphite reading structure and committed ember fields.
+- Deep-indigo structure with vivid-blue, vermilion, and petrol fields.
 - Visible seams, limited rounding, and physical project artifacts.
 - Section-specific motion with a complete reduced-motion path.
 - Clean reading surfaces; grain appears only where color is the material.
 
 ## Colors
 
-Graphite and neutral-white carry the reading experience. Ember is a committed identity color, with oxide for depth and pale ember for image-led tonal range.
+Deep indigo and warm paper carry the reading experience. Vivid blue, vermilion, signal orange, and petrol teal come directly from the illustrated portrait and turn it into the palette source for the whole system.
 
 ### Primary
 
-- **Fired Ember:** The main identity field, availability signal, and high-emphasis section color. White body text on ember must maintain at least 4.5:1 contrast.
-- **Oxide:** The dark endpoint for spatial gradients, hover states, and deep image fields.
+- **Deep Indigo:** Primary ink, footer, featured-project surface, and the dark endpoint of blue spatial gradients. It replaces black everywhere.
+- **Vivid Blue:** Carries the Operating Range field and selected image-led project surfaces.
 
 ### Secondary
 
-- **Focus Blue:** Reserved for keyboard focus and functional interaction state. It is not a decorative brand accent.
-- **Pale Ember:** Used behind imagery where no body text sits directly on the surface.
+- **Signal Orange:** High-chroma visual signal used for small marks, image fields, and emphasis where body text does not sit directly on it.
+- **Vermilion:** Accessible dark-orange field for the contact close and action states.
+- **Petrol Teal:** One supporting structural field in the hero. It never becomes a competing primary color.
 
 ### Neutral
 
-- **Graphite:** Primary ink and the dark operating-range surface.
-- **Neutral White:** Main reading modules and form surface.
-- **Neutral Paper:** Page background.
-- **Neutral Surface:** Supporting modules and technology tags.
+- **Paper:** Main page background, justified by the portrait's print material rather than generic beige styling.
+- **Warm White:** Main reading modules and form surface.
+- **Surface:** Supporting modules and technology tags.
 - **Seam:** Structural 1px divisions between modules.
 
 **The Clean Reading Rule.** Noise and gradients are forbidden behind body copy. They belong only to portrait, project-image, or closing fields.
 
-**The Functional Blue Rule.** Focus blue is never used decoratively; its rarity makes keyboard focus unmistakable.
+**The Indigo Anchor Rule.** Deep indigo replaces black and anchors every high-chroma field. Never reintroduce neutral-black section backgrounds.
 
 ## Typography
 
@@ -139,27 +139,27 @@ The system is flat by default. Tonal layering, crop, overlap, seams, and motion 
 ### Buttons
 
 - **Shape:** Full pill only for compact actions (999px).
-- **Primary:** Graphite with neutral-white text and compact 13px × 16px padding.
-- **Hover / Focus:** Hover increases contrast or changes to oxide; focus uses a 3px blue outline with 4px offset.
-- **Secondary:** Transparent with a 1px current-color border; fills graphite on hover.
+- **Primary:** Deep indigo with warm-white text and compact 13px × 16px padding.
+- **Hover / Focus:** Hover changes to vivid blue; focus uses a 3px indigo outline on light fields and warm-white on dark fields.
+- **Secondary:** Transparent with a 1px current-color border; fills deep indigo on hover.
 
 ### Chips
 
-- **Style:** Neutral-surface fill, graphite text, full pill, compact padding.
+- **Style:** Surface fill, deep-indigo text, full pill, compact padding.
 - **State:** Metadata only. Chips do not become a repeated card system or faux filter UI.
 
 ### Cards / Containers
 
 - **Corner Style:** Mostly square modules; artifact imagery uses 8–10px corners.
-- **Background:** Neutral-white, graphite, or committed ember according to narrative role.
+- **Background:** Warm-white, deep indigo, vivid blue, vermilion, or petrol teal according to narrative role.
 - **Shadow Strategy:** Flat modules; Artifact Edge only for screenshots.
 - **Border:** 1px seam divisions, never colored side stripes.
 - **Internal Padding:** Fluid 24–88px based on viewport and narrative density.
 
 ### Inputs / Fields
 
-- **Style:** Persistent label, neutral-white surface, square geometry, and graphite bottom rule.
-- **Focus:** Blue bottom rule plus visible focus outline.
+- **Style:** Persistent label, warm-white surface, square geometry, and deep-indigo bottom rule.
+- **Focus:** Deep-indigo bottom rule plus visible focus outline.
 - **Error / Disabled:** Inline status with next-step language; disabled submit state appears only after submission begins.
 
 ### Navigation
@@ -175,9 +175,9 @@ The signature portrait module shows the confident transparent portrait by defaul
 ### Do:
 
 - **Do** lead with capability and place proof in the first viewport.
-- **Do** use graphite, neutral-white, ember, and oxide as committed surfaces.
+- **Do** use deep indigo, vivid blue, signal orange, vermilion, petrol teal, and paper as the portrait-derived palette.
 - **Do** keep body lines below 70ch and text contrast at WCAG AA.
-- **Do** use one controlled ember-to-oxide spatial gradient in image-led fields.
+- **Do** use controlled blue-to-indigo and vermilion spatial gradients in image-led fields.
 - **Do** use static raster-like grain sparingly and keep reading surfaces clean.
 - **Do** give hover interactions equivalent keyboard and touch behavior.
 
