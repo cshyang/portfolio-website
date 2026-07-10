@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-10T00:00:00+08:00",
+  "title": "Design System: Shyang Portfolio V2",
+  "extensions": {
+    "colorMeta": {
+      "graphite": { "role": "neutral", "displayName": "Graphite", "canonical": "oklch(0.19 0.012 42)", "tonalRamp": ["oklch(0.15 0.012 42)", "oklch(0.25 0.012 42)", "oklch(0.35 0.012 42)", "oklch(0.45 0.012 42)", "oklch(0.58 0.012 42)", "oklch(0.7 0.012 42)", "oklch(0.83 0.008 42)", "oklch(0.95 0.004 42)"] },
+      "ember": { "role": "primary", "displayName": "Fired Ember", "canonical": "oklch(0.51 0.16 35)", "tonalRamp": ["oklch(0.15 0.08 35)", "oklch(0.25 0.12 35)", "oklch(0.35 0.15 35)", "oklch(0.45 0.16 35)", "oklch(0.55 0.15 35)", "oklch(0.68 0.12 35)", "oklch(0.82 0.08 35)", "oklch(0.95 0.03 35)"] },
+      "oxide": { "role": "secondary", "displayName": "Oxide", "canonical": "oklch(0.34 0.12 31)", "tonalRamp": ["oklch(0.15 0.06 31)", "oklch(0.25 0.1 31)", "oklch(0.35 0.12 31)", "oklch(0.45 0.12 31)", "oklch(0.58 0.1 31)", "oklch(0.7 0.08 31)", "oklch(0.83 0.05 31)", "oklch(0.95 0.02 31)"] },
+      "focus-blue": { "role": "tertiary", "displayName": "Functional Blue", "canonical": "oklch(0.42 0.19 255)", "tonalRamp": ["oklch(0.15 0.08 255)", "oklch(0.25 0.13 255)", "oklch(0.35 0.18 255)", "oklch(0.45 0.19 255)", "oklch(0.58 0.16 255)", "oklch(0.7 0.12 255)", "oklch(0.83 0.07 255)", "oklch(0.95 0.025 255)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero statement only." },
+      "headline": { "displayName": "Headline", "purpose": "Major section arguments." },
+      "body": { "displayName": "Body", "purpose": "Narrative and evidence up to 70ch." },
+      "label": { "displayName": "Utility Label", "purpose": "Compact metadata used sparingly." }
+    },
+    "shadows": [
+      { "name": "artifact-edge", "value": "0 8px 0 rgba(24, 18, 16, 0.17)", "purpose": "Structural edge under project screenshots only." }
+    ],
+    "motion": [
+      { "name": "ease-expo-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "State transitions and page choreography." },
+      { "name": "duration-state", "value": "260ms", "purpose": "Hover and navigation response." },
+      { "name": "duration-material", "value": "580ms", "purpose": "Portrait and artifact movement." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "560px" },
+      { "name": "mobile", "value": "820px" },
+      { "name": "tablet", "value": "1080px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Compact, direct action used at major decision points.",
+      "html": "<button class=\"ds-btn-primary\">SEND MESSAGE <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-btn-primary { display:inline-flex;gap:2.5rem;align-items:center;padding:13px 16px;border:0;border-radius:999px;background:#191210;color:#fafafa;font:720 12px/1.2 Archivo,Arial,sans-serif;transition:background-color 260ms cubic-bezier(.16,1,.3,1); } .ds-btn-primary:hover { background:#681308; } .ds-btn-primary:focus-visible { outline:3px solid #0045b0;outline-offset:4px; }"
+    },
+    {
+      "name": "Contact Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Persistent label and structural bottom rule.",
+      "html": "<label class=\"ds-field\">Your email<input type=\"email\" placeholder=\"you@example.com…\"></label>",
+      "css": ".ds-field { display:flex;flex-direction:column;gap:9px;color:#191210;font:720 12px/1.2 Archivo,Arial,sans-serif; } .ds-field input { min-height:52px;border:0;border-bottom:1px solid #191210;border-radius:0;background:#fafafa;color:#191210;font:400 16px/1.6 Archivo,Arial,sans-serif; } .ds-field input:focus-visible { outline:3px solid #0045b0;outline-offset:4px;border-bottom-color:#0045b0; }"
+    },
+    {
+      "name": "Slim Navigation",
+      "kind": "nav",
+      "description": "Sticky section navigation with underline response.",
+      "html": "<nav class=\"ds-nav\"><strong>SHYANG.</strong><a href=\"#work\">Work</a><a href=\"#contact\">Contact</a></nav>",
+      "css": ".ds-nav { display:flex;align-items:center;gap:32px;padding:20px 24px;border-bottom:1px solid #b2a8a5;background:#f3f3f3;color:#191210;font:720 12px/1.2 Archivo,Arial,sans-serif; } .ds-nav strong { margin-right:auto; } .ds-nav a { color:inherit;text-decoration-underline-offset:7px; } .ds-nav a:hover { text-decoration:underline; } .ds-nav a:focus-visible { outline:3px solid #0045b0;outline-offset:4px; }"
+    },
+    {
+      "name": "Project Artifact",
+      "kind": "custom",
+      "description": "Image-led evidence surface with a tight structural edge.",
+      "html": "<div class=\"ds-artifact\"><div>AI COMPANION</div><div class=\"ds-artifact-screen\">PRODUCT SCREEN</div></div>",
+      "css": ".ds-artifact { padding:32px;background:#ae3819;color:#fafafa;font:720 12px/1.2 Archivo,Arial,sans-serif; } .ds-artifact-screen { margin-top:24px;padding:56px 24px;border-radius:8px;background:#fafafa;color:#191210;box-shadow:0 8px 0 rgba(24,18,16,.17);text-align:center; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Builder's Field Board",
+    "overview": "The system feels like a carefully composed working surface: modular, direct, personal, and connected to real output. Visible seams and asymmetric fields create order; portraiture, ember color, and responsive behavior supply warmth. The interface is experimental in composition, not in usability.",
+    "keyCharacteristics": ["Capability-first hierarchy with proof in the first viewport.", "Graphite reading structure and committed ember fields.", "Visible seams, limited rounding, and physical project artifacts.", "Section-specific motion with a complete reduced-motion path.", "Clean reading surfaces; grain appears only where color is the material."],
+    "rules": [
+      { "name": "The Clean Reading Rule", "body": "Noise and gradients are forbidden behind body copy. They belong only to portrait, project-image, or closing fields.", "section": "colors" },
+      { "name": "The Functional Blue Rule", "body": "Focus blue is never used decoratively; its rarity makes keyboard focus unmistakable.", "section": "colors" },
+      { "name": "The 0.04 Rule", "body": "Display letter spacing is never tighter than -0.04em.", "section": "typography" },
+      { "name": "The Structural Depth Rule", "body": "If a module needs a wide soft shadow to feel separate, the composition is wrong. Fix the seam, tone, or spacing.", "section": "elevation" }
+    ],
+    "dos": ["Do lead with capability and place proof in the first viewport.", "Do keep body lines below 70ch and text contrast at WCAG AA.", "Do give hover interactions equivalent keyboard and touch behavior."],
+    "donts": ["Don't build generic polished SaaS with glass cards, pastel blobs, or interchangeable feature grids.", "Don't use developer-terminal brutalism or monospace decoration.", "Don't use youthful candy palettes, pervasive faux-vintage noise, or decorative motion without meaning."]
+  }
+}
