@@ -34,12 +34,12 @@ The composition uses visible seams, asymmetric modules, project imagery, and sma
 ### Palette
 
 - Deep indigo: primary ink, footer, featured-project surface, and dark gradient endpoint.
-- Warm paper: primary reading surface, derived directly from the illustrated portrait.
+- Cool blue-gray canvas and near-white modules: primary reading surfaces that balance the portrait's saturated blue without repeating its cream paper.
 - Vivid blue: committed color for the Operating Range field and selected image surfaces.
 - Signal orange and vermilion: visual signal, portrait field, and accessible closing surface.
 - Petrol teal: one supporting structural field in the hero.
 
-Use controlled orange-to-vermilion and blue-to-indigo spatial gradients in image-led surfaces. Do not use gradient text. Optional raster dither may appear on a few large color fields only. Reading surfaces remain clean.
+Use controlled orange-to-vermilion and blue-to-indigo spatial gradients in image-led surfaces. Do not use gradient text. A shared seamless raster grain tile may appear on a few large color fields only. Reading surfaces remain clean.
 
 ### Typography
 
@@ -120,11 +120,13 @@ Motion is section-specific but shares exponential ease-out timing.
 
 - Hero: orchestrated module reveal and portrait swap.
 - Projects: image movement matched to each artifact's composition.
-- Operating range: connective paths resolve as evidence enters view.
+- Operating range: an oversized layer of blue radial lights drifts slowly beneath static raster grain; connective paths resolve as evidence enters view.
 - Journey: one progressing path rather than per-card fades.
 - Contact: vermilion field expands into the final section.
 
 Content remains visible by default. Motion enhances the rendered page and never gates it. Every animation has a `prefers-reduced-motion` alternative.
+
+The grain texture never animates. The Operating Range light field moves only through compositor-friendly transform and opacity over an 18-second alternating cycle. Reduced-motion mode freezes it.
 
 ## Technical Boundary
 

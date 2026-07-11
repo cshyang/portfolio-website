@@ -7,10 +7,10 @@ colors:
   signal-orange: "#f04b1d"
   vermilion: "#b7331b"
   petrol-teal: "#15576a"
-  paper: "#f7f0e3"
-  warm-white: "#faf7ef"
-  surface: "#e9e1d4"
-  seam: "#a6a092"
+  cool-canvas: "#eef3f7"
+  near-white: "#fbfcfd"
+  cool-surface: "#e2e9ef"
+  seam: "#9ba8b5"
 typography:
   display:
     fontFamily: "Archivo, Arial, sans-serif"
@@ -49,12 +49,12 @@ spacing:
 components:
   button-primary:
     backgroundColor: "{colors.deep-indigo}"
-    textColor: "{colors.warm-white}"
+    textColor: "{colors.near-white}"
     typography: "{typography.label}"
     rounded: "{rounded.pill}"
     padding: "13px 16px"
   input:
-    backgroundColor: "{colors.warm-white}"
+    backgroundColor: "{colors.near-white}"
     textColor: "{colors.deep-indigo}"
     typography: "{typography.body}"
     rounded: "0px"
@@ -76,12 +76,12 @@ It rejects generic polished SaaS, developer-terminal brutalism, artsy layouts th
 - Capability-first hierarchy with proof in the first viewport.
 - Deep-indigo structure with vivid-blue, vermilion, and petrol fields.
 - Visible seams, limited rounding, and physical project artifacts.
-- Section-specific motion with a complete reduced-motion path.
+- Section-specific motion, including one slow drifting light field, with a complete reduced-motion path.
 - Clean reading surfaces; grain appears only where color is the material.
 
 ## Colors
 
-Deep indigo and warm paper carry the reading experience. Vivid blue, vermilion, signal orange, and petrol teal come directly from the illustrated portrait and turn it into the palette source for the whole system.
+Deep indigo and a cool blue-gray canvas carry the reading experience. Vivid blue, vermilion, signal orange, and petrol teal come directly from the illustrated portrait and turn it into the palette source for the whole system. The portrait keeps its own warm paper; the interface does not imitate it.
 
 ### Primary
 
@@ -96,12 +96,14 @@ Deep indigo and warm paper carry the reading experience. Vivid blue, vermilion, 
 
 ### Neutral
 
-- **Paper:** Main page background, justified by the portrait's print material rather than generic beige styling.
-- **Warm White:** Main reading modules and form surface.
-- **Surface:** Supporting modules and technology tags.
+- **Cool Canvas:** Main page background, lightly biased toward the portrait's blue rather than its cream paper.
+- **Near White:** Main reading modules and form surface.
+- **Cool Surface:** Supporting modules and technology tags.
 - **Seam:** Structural 1px divisions between modules.
 
-**The Clean Reading Rule.** Noise and gradients are forbidden behind body copy. They belong only to portrait, project-image, or closing fields.
+**The Clean Reading Rule.** Noise and gradients are forbidden behind body copy on reading surfaces. They belong only to portrait, project-image, Operating Range, or closing fields.
+
+**The Static Grain Rule.** The raster grain tile never animates. Light may drift underneath it; the texture itself remains still.
 
 **The Indigo Anchor Rule.** Deep indigo replaces black and anchors every high-chroma field. Never reintroduce neutral-black section backgrounds.
 
@@ -139,8 +141,8 @@ The system is flat by default. Tonal layering, crop, overlap, seams, and motion 
 ### Buttons
 
 - **Shape:** Full pill only for compact actions (999px).
-- **Primary:** Deep indigo with warm-white text and compact 13px × 16px padding.
-- **Hover / Focus:** Hover changes to vivid blue; focus uses a 3px indigo outline on light fields and warm-white on dark fields.
+- **Primary:** Deep indigo with near-white text and compact 13px × 16px padding.
+- **Hover / Focus:** Hover changes to vivid blue; focus uses a 3px indigo outline on light fields and near-white on dark fields.
 - **Secondary:** Transparent with a 1px current-color border; fills deep indigo on hover.
 
 ### Chips
@@ -151,14 +153,14 @@ The system is flat by default. Tonal layering, crop, overlap, seams, and motion 
 ### Cards / Containers
 
 - **Corner Style:** Mostly square modules; artifact imagery uses 8–10px corners.
-- **Background:** Warm-white, deep indigo, vivid blue, vermilion, or petrol teal according to narrative role.
+- **Background:** Near-white, deep indigo, vivid blue, vermilion, or petrol teal according to narrative role.
 - **Shadow Strategy:** Flat modules; Artifact Edge only for screenshots.
 - **Border:** 1px seam divisions, never colored side stripes.
 - **Internal Padding:** Fluid 24–88px based on viewport and narrative density.
 
 ### Inputs / Fields
 
-- **Style:** Persistent label, warm-white surface, square geometry, and deep-indigo bottom rule.
+- **Style:** Persistent label, near-white surface, square geometry, and deep-indigo bottom rule.
 - **Focus:** Deep-indigo bottom rule plus visible focus outline.
 - **Error / Disabled:** Inline status with next-step language; disabled submit state appears only after submission begins.
 
@@ -170,15 +172,20 @@ Slim sticky navigation uses Archivo labels and underline motion. Desktop keeps t
 
 The signature portrait module shows the confident transparent portrait by default and reveals the illustrated laughing portrait on hover, focus, or tap. Reduced motion uses a near-instant dissolve. The default image remains visible without interaction.
 
+### Animated Light Field
+
+Operating Range uses a deep-indigo base, an oversized CSS layer of radial blue lights, and one seamless 256px raster grain tile. Only the light layer moves, using transform and opacity over an 18-second alternating cycle. Reduced-motion mode freezes the layer at its strongest composition.
+
 ## Do's and Don'ts
 
 ### Do:
 
 - **Do** lead with capability and place proof in the first viewport.
-- **Do** use deep indigo, vivid blue, signal orange, vermilion, petrol teal, and paper as the portrait-derived palette.
+- **Do** use deep indigo, vivid blue, signal orange, vermilion, petrol teal, and cool neutrals as the portrait-derived palette.
 - **Do** keep body lines below 70ch and text contrast at WCAG AA.
 - **Do** use controlled blue-to-indigo and vermilion spatial gradients in image-led fields.
-- **Do** use static raster-like grain sparingly and keep reading surfaces clean.
+- **Do** use the shared static raster grain sparingly and keep reading surfaces clean.
+- **Do** animate light with transform and opacity while keeping grain stationary.
 - **Do** give hover interactions equivalent keyboard and touch behavior.
 
 ### Don't:

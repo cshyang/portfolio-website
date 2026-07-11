@@ -1,19 +1,19 @@
 .v2-shell {
-  background: oklch(0.957 0.019 83.1);
+  background: oklch(0.962 0.008 241.7);
 }
 
 .v2-page {
   --v2-ink: oklch(0.287 0.108 260.9);
-  --v2-paper: oklch(0.957 0.019 83.1);
-  --v2-surface: oklch(0.913 0.019 80.1);
-  --v2-seam: oklch(0.707 0.021 87.5);
+  --v2-paper: oklch(0.962 0.008 241.7);
+  --v2-surface: oklch(0.93 0.011 243.7);
+  --v2-seam: oklch(0.726 0.024 248.2);
   --v2-orange: oklch(0.642 0.209 35.2);
   --v2-vermilion: oklch(0.52 0.173 32.5);
   --v2-oxide: oklch(0.36 0.13 31);
   --v2-pale-orange: oklch(0.9 0.06 42);
   --v2-blue: oklch(0.53 0.189 257.7);
   --v2-teal: oklch(0.426 0.07 221.8);
-  --v2-white: oklch(0.976 0.011 89.7);
+  --v2-white: oklch(0.991 0.002 247.8);
   --v2-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --v2-sticky: 30;
   min-height: 100vh;
@@ -235,7 +235,7 @@
 .v2-hero-summary {
   max-width: 38rem;
   margin-bottom: 2.1rem;
-  color: oklch(0.35 0.018 42);
+  color: oklch(0.38 0.045 260);
   font-size: clamp(1rem, 1.4vw, 1.2rem);
   line-height: 1.55;
 }
@@ -286,14 +286,12 @@
   position: absolute;
   inset: 0;
   z-index: 3;
-  opacity: 0.45;
-  background-image:
-    radial-gradient(circle at 15% 25%, oklch(1 0 0 / 0.22) 0 0.45px, transparent 0.7px),
-    radial-gradient(circle at 72% 63%, oklch(0.12 0 0 / 0.22) 0 0.45px, transparent 0.75px),
-    radial-gradient(circle at 38% 82%, oklch(1 0 0 / 0.14) 0 0.35px, transparent 0.65px);
-  background-position: 0 0, 2px 3px, 5px 1px;
-  background-size: 7px 9px, 11px 13px, 13px 11px;
+  opacity: 0.48;
+  background-image: url("/images/textures/print-grain.webp");
+  background-repeat: repeat;
+  background-size: 256px 256px;
   content: "";
+  mix-blend-mode: soft-light;
   pointer-events: none;
 }
 
@@ -493,7 +491,7 @@
 .v2-section-heading > p:last-child {
   max-width: 32rem;
   margin-bottom: 0;
-  color: oklch(0.36 0.018 42);
+  color: oklch(0.38 0.045 260);
 }
 
 .v2-project-list {
@@ -539,7 +537,7 @@
 
 .v2-project-description {
   max-width: 42rem;
-  color: oklch(0.34 0.016 42);
+  color: oklch(0.38 0.045 260);
   font-size: 1.05rem;
 }
 
@@ -627,32 +625,63 @@
 
 .v2-range {
   position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(3rem, 8vw, 9rem);
   overflow: hidden;
-  background: radial-gradient(circle at 18% 24%, oklch(0.62 0.17 242), var(--v2-blue) 34%, var(--v2-ink) 100%);
+  background: var(--v2-ink);
   color: var(--v2-white);
+}
+
+.v2-range::before {
+  position: absolute;
+  inset: -18%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 10% 24%, oklch(0.74 0.13 222 / 0.95) 0%, transparent 25%),
+    radial-gradient(ellipse at 84% 12%, oklch(0.66 0.16 236 / 0.78) 0%, transparent 25%),
+    radial-gradient(ellipse at 56% 82%, oklch(0.58 0.2 259 / 0.9) 0%, transparent 34%),
+    linear-gradient(135deg, var(--v2-blue), var(--v2-ink));
+  content: "";
+  transform: translate3d(-2%, -1%, 0) scale(1.05);
+  transform-origin: center;
+  animation: v2-light-drift 18s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .v2-range::after {
   position: absolute;
   inset: 0;
   z-index: 1;
-  opacity: 0.42;
+  opacity: 0.62;
   background-image:
-    radial-gradient(circle at 15% 25%, oklch(1 0 0 / 0.26) 0 0.45px, transparent 0.7px),
-    radial-gradient(circle at 72% 63%, oklch(0.08 0.02 260 / 0.28) 0 0.45px, transparent 0.75px),
-    radial-gradient(circle at 38% 82%, oklch(1 0 0 / 0.16) 0 0.35px, transparent 0.65px);
-  background-position: 0 0, 2px 3px, 5px 1px;
-  background-size: 7px 9px, 11px 13px, 13px 11px;
+    url("/images/textures/print-grain.webp");
+  background-repeat: repeat;
+  background-size: 256px 256px;
   content: "";
+  mix-blend-mode: soft-light;
   pointer-events: none;
 }
 
 .v2-range > * {
   position: relative;
   z-index: 2;
+}
+
+@keyframes v2-light-drift {
+  0% {
+    opacity: 0.9;
+    transform: translate3d(-2%, -1%, 0) scale(1.05);
+  }
+  48% {
+    opacity: 1;
+    transform: translate3d(1.5%, 1%, 0) scale(1.08);
+  }
+  100% {
+    opacity: 0.94;
+    transform: translate3d(3%, -1.5%, 0) scale(1.06);
+  }
 }
 
 .v2-range-intro {
@@ -799,7 +828,7 @@
 .v2-journey-copy > p:last-child {
   max-width: 48rem;
   margin-bottom: 0;
-  color: oklch(0.35 0.016 42);
+  color: oklch(0.38 0.045 260);
 }
 
 .v2-contact {
@@ -902,7 +931,7 @@
 
 .v2-field input::placeholder,
 .v2-field textarea::placeholder {
-  color: oklch(0.43 0.012 42);
+  color: oklch(0.43 0.04 260);
   opacity: 1;
 }
 
@@ -1175,4 +1204,9 @@
   }
 
   .v2-reveal { animation: none; }
+
+  .v2-range::before {
+    animation: none;
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
 }
