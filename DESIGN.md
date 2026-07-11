@@ -65,9 +65,9 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Layered Working Surface"**
+**Creative North Star: "The Open Working Surface"**
 
-The system feels like a carefully composed working surface: direct, personal, and connected to real output. Alignment stays disciplined, but most structural lines remain invisible. Controlled overlap appears only in the hero portrait and first project artifact. The illustrated portrait supplies deep indigo, vivid blue, signal orange, vermilion, and petrol teal. The interface is experimental in composition, not in usability.
+The system feels like a carefully composed working surface: direct, personal, and connected to real output. Alignment stays disciplined, but most structural lines remain invisible. Hero and project stories use clear image-and-copy flow without decorative overlap. The illustrated portrait supplies deep indigo, vivid blue, signal orange, vermilion, and petrol teal. The interface is experimental in art direction, not in usability.
 
 It rejects generic polished SaaS, developer-terminal brutalism, artsy layouts that hide evidence, youthful candy color, and pervasive faux-vintage noise. Mobile is a deliberate single-column narrative, not a miniature desktop grid.
 

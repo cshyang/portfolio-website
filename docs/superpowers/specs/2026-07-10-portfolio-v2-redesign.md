@@ -25,9 +25,9 @@ The unifying promise is “multidisciplinary builder who ships.” Audience-spec
 
 ## Creative Direction
 
-### North Star: The Layered Working Surface
+### North Star: The Open Working Surface
 
-The page should feel like a well-composed working surface: direct, personal, and visibly connected to real output. Its underlying alignment is disciplined, but most structure remains invisible. Controlled overlap is limited to the hero portrait and first featured artifact.
+The page should feel like a well-composed working surface: direct, personal, and visibly connected to real output. Its underlying alignment is disciplined, but most structure remains invisible. Hero and project stories use clear image-and-copy flow without decorative overlap.
 
 The composition uses open space, asymmetric image placement, project imagery, and small utility details. Warmth comes from portraiture, print-derived color, plain language, and responsive behavior—not pastel decoration.
 
@@ -55,7 +55,7 @@ Use Archivo as a single variable family. Width and weight variation create the c
 - Hairline rules appear only where they clarify a transition or sequence.
 - Corners use 8–12px radii where a contained surface needs separation.
 - Full pills are limited to actions and compact status controls.
-- Depth comes from tonal layering, overlap, crop, and movement.
+- Depth comes from tonal contrast, crop, and restrained movement.
 - Shadows are reserved for physical artifacts such as tilted project screenshots and never paired decoratively with a full border and wide blur.
 
 ## Information Architecture

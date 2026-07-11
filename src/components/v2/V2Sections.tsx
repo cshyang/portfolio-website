@@ -48,8 +48,8 @@ export function SelectedWork() {
       </div>
 
       <div className="v2-project-list">
-        {v2Projects.map((project, index) => (
-          <article className={`v2-project v2-project--${project.tone}${index === 0 ? " v2-project--featured" : ""}`} key={project.title}>
+        {v2Projects.map((project) => (
+          <article className={`v2-project v2-project--${project.tone}`} key={project.title}>
             <div className="v2-project-copy">
               <div className="v2-project-meta">
                 <span>{project.category}</span>
