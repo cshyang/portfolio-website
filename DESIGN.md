@@ -65,9 +65,9 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Builder's Field Board"**
+**Creative North Star: "The Layered Working Surface"**
 
-The system feels like a carefully composed working surface: modular, direct, personal, and connected to real output. Visible seams and asymmetric fields create order; the illustrated portrait supplies deep indigo, vivid blue, signal orange, vermilion, and petrol teal. The interface is experimental in composition, not in usability.
+The system feels like a carefully composed working surface: direct, personal, and connected to real output. Alignment stays disciplined, but most structural lines remain invisible. Controlled overlap appears only in the hero portrait and first project artifact. The illustrated portrait supplies deep indigo, vivid blue, signal orange, vermilion, and petrol teal. The interface is experimental in composition, not in usability.
 
 It rejects generic polished SaaS, developer-terminal brutalism, artsy layouts that hide evidence, youthful candy color, and pervasive faux-vintage noise. Mobile is a deliberate single-column narrative, not a miniature desktop grid.
 
@@ -75,7 +75,7 @@ It rejects generic polished SaaS, developer-terminal brutalism, artsy layouts th
 
 - Capability-first hierarchy with proof in the first viewport.
 - Deep-indigo structure with vivid-blue, vermilion, and petrol fields.
-- Visible seams, limited rounding, and physical project artifacts.
+- Open reading space, limited rounding, and physical project artifacts.
 - Section-specific motion, including one slow drifting light field, with a complete reduced-motion path.
 - Clean reading surfaces; grain appears only where color is the material.
 
@@ -92,7 +92,7 @@ Deep indigo and a cool blue-gray canvas carry the reading experience. Vivid blue
 
 - **Signal Orange:** High-chroma visual signal used for small marks, image fields, and emphasis where body text does not sit directly on it.
 - **Vermilion:** Accessible dark-orange field for the contact close and action states.
-- **Petrol Teal:** One supporting structural field in the hero. It never becomes a competing primary color.
+- **Petrol Teal:** A supporting accent available for restrained metadata or project details. It never becomes a competing primary color.
 
 ### Neutral
 

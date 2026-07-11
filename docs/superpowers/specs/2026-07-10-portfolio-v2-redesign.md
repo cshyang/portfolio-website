@@ -25,11 +25,11 @@ The unifying promise is “multidisciplinary builder who ships.” Audience-spec
 
 ## Creative Direction
 
-### North Star: The Builder's Field Board
+### North Star: The Layered Working Surface
 
-The page should feel like a well-composed working surface: modular, direct, personal, and visibly connected to real output. It borrows the rhythm of a field board or studio wall without copying the supplied blue portfolio reference's palette, serif styling, or exact tile geometry.
+The page should feel like a well-composed working surface: direct, personal, and visibly connected to real output. Its underlying alignment is disciplined, but most structure remains invisible. Controlled overlap is limited to the hero portrait and first featured artifact.
 
-The composition uses visible seams, asymmetric modules, project imagery, and small utility details. Warmth comes from portraiture, print-derived color, plain language, and responsive behavior—not pastel decoration.
+The composition uses open space, asymmetric image placement, project imagery, and small utility details. Warmth comes from portraiture, print-derived color, plain language, and responsive behavior—not pastel decoration.
 
 ### Palette
 
@@ -37,7 +37,7 @@ The composition uses visible seams, asymmetric modules, project imagery, and sma
 - Cool blue-gray canvas and near-white modules: primary reading surfaces that balance the portrait's saturated blue without repeating its cream paper.
 - Vivid blue: committed color for the Operating Range field and selected image surfaces.
 - Signal orange and vermilion: visual signal, portrait field, and accessible closing surface.
-- Petrol teal: one supporting structural field in the hero.
+- Petrol teal: one restrained supporting accent.
 
 Use controlled orange-to-vermilion and blue-to-indigo spatial gradients in image-led surfaces. Do not use gradient text. A shared seamless raster grain tile may appear on a few large color fields only. Reading surfaces remain clean.
 
@@ -52,7 +52,7 @@ Use Archivo as a single variable family. Width and weight variation create the c
 
 ### Geometry and Elevation
 
-- Modules use visible 1px seams and mostly square geometry.
+- Hairline rules appear only where they clarify a transition or sequence.
 - Corners use 8–12px radii where a contained surface needs separation.
 - Full pills are limited to actions and compact status controls.
 - Depth comes from tonal layering, overlap, crop, and movement.
@@ -62,11 +62,10 @@ Use Archivo as a single variable family. Width and weight variation create the c
 
 ### 1. Hero: Identity and Proof
 
-A near-viewport modular composition contains:
+A near-viewport open composition contains:
 
 - One capability-first positioning statement.
 - A portrait module.
-- One featured project preview.
 - Location and availability.
 - Primary action to selected work.
 - Compact navigation.

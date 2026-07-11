@@ -45,7 +45,7 @@ Work:
 
 - Load Archivo only for the V2 route.
 - Define semantic color, spacing, radius, z-index, and motion tokens.
-- Build the responsive modular grid, cool-neutral reading surfaces, portrait-derived color fields, visible seams, focus styles, and reduced-motion rules.
+- Build the responsive layered composition, cool-neutral reading surfaces, portrait-derived color fields, restrained seams, focus styles, and reduced-motion rules.
 - Use controlled orange-to-vermilion and blue-to-indigo spatial gradients; keep text solid.
 - Add one reusable seamless raster grain tile and keep it static above the animated light layer.
 - Avoid global selectors that could alter `/`.
@@ -62,7 +62,7 @@ Work:
 
 - Add a compact quiet-island navigation with visible active/focus states, a standalone mobile Menu pill, and a reduced-transparency fallback.
 - Use a native dialog for mobile navigation and restore focus on close.
-- Build the capability-first modular hero with one featured project, location, and availability.
+- Build the capability-first open hero with controlled portrait layering, location, and availability.
 - Support portrait hover, keyboard focus, and tap.
 - Keep the default portrait visible if client behavior fails.
 - Use a quick dissolve under reduced motion.

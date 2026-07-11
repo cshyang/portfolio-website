@@ -21,33 +21,18 @@ export function V2Hero() {
         <PortraitSwap />
       </div>
 
-      <a
-        className="v2-featured-project v2-reveal v2-reveal--three"
-        href={v2Projects[0].href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={`View ${v2Projects[0].title} project (opens in a new tab)`}
-      >
-        <div className="v2-featured-topline">
-          <span>Featured build</span><span aria-hidden="true">↗</span>
+      <div className="v2-hero-context v2-reveal v2-reveal--three">
+        <div className="v2-hero-range">
+          <p>Data systems · Agentic AI · Product direction · Hands-on building</p>
         </div>
-        <h2>{v2Projects[0].title}</h2>
-        <Image src={v2Projects[0].image} alt="AI Companion interface" width={900} height={600} priority sizes="(min-width: 900px) 30vw, 100vw" />
-      </a>
-
-      <div className="v2-hero-range v2-reveal v2-reveal--four">
-        <p>Data systems<br />Agentic AI<br />Product direction<br />Hands-on building</p>
-      </div>
-
-      <div className="v2-hero-principle v2-reveal v2-reveal--five">
-        <p>Working principle</p>
-        <strong>Useful beats impressive.</strong>
-      </div>
-
-      <div className="v2-hero-status v2-reveal v2-reveal--six">
-        <span><i aria-hidden="true" /> Kuala Lumpur</span>
-        <strong>Open to the right problem.</strong>
-        <span>GMT +8</span>
+        <div className="v2-hero-principle">
+          <p>Working principle</p>
+          <strong>Useful beats impressive.</strong>
+        </div>
+        <div className="v2-hero-status">
+          <span><i aria-hidden="true" /> Kuala Lumpur · GMT +8</span>
+          <strong>Open to the right problem.</strong>
+        </div>
       </div>
     </section>
   );
@@ -63,8 +48,8 @@ export function SelectedWork() {
       </div>
 
       <div className="v2-project-list">
-        {v2Projects.map((project) => (
-          <article className={`v2-project v2-project--${project.tone}`} key={project.title}>
+        {v2Projects.map((project, index) => (
+          <article className={`v2-project v2-project--${project.tone}${index === 0 ? " v2-project--featured" : ""}`} key={project.title}>
             <div className="v2-project-copy">
               <div className="v2-project-meta">
                 <span>{project.category}</span>
