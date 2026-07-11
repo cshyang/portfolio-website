@@ -107,7 +107,7 @@ Form fields use persistent labels, visible focus states, inline validation, an a
 
 ## Navigation and Responsive Behavior
 
-- Desktop uses one centered floating Liquid Lens capsule with a sliding active-section indicator. Glass is reserved for navigation; the content system remains tactile and print-textured.
+- Desktop uses one centered, quiet translucent capsule with four section links and a restrained active indicator. Mobile uses only a standalone Menu pill.
 - Active-section state remains visible but does not animate a decorative blob behind every item.
 - Mobile uses a compact header and native dialog or popover menu when needed.
 - Desktop grids collapse into a deliberate single-column narrative on small screens.

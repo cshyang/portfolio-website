@@ -30,10 +30,6 @@ export default function V2Header() {
 
   return (
     <header className="v2-header">
-      <a className="v2-wordmark" href="#top" aria-label="Shyang, back to top">
-        SHYANG<span aria-hidden="true">.</span>
-      </a>
-
       <nav className="v2-desktop-nav" aria-label="Primary navigation">
         <span
           className="v2-nav-lens"
@@ -52,10 +48,6 @@ export default function V2Header() {
           </a>
         ))}
       </nav>
-
-      <a className="v2-availability" href="#contact">
-        <span aria-hidden="true" /> Available
-      </a>
 
       <button
         className="v2-menu-trigger"

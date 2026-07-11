@@ -166,7 +166,7 @@ The system is flat by default. Tonal layering, crop, overlap, seams, and motion 
 
 ### Navigation
 
-The floating Liquid Lens navigation is the interface's single glass surface. A cool translucent capsule uses restrained blur, a tight reflection, and a sliding active-section lens; the rest of the site stays tactile and print-textured. Desktop keeps the full section list, while mobile reduces the island to the wordmark and a native dialog trigger with a clear close action, focus restoration, and contained overscroll.
+The quiet floating navigation borrows the original site's strongest idea: a neutral capsule with one restrained active pill. Desktop contains only the four section links. On small screens, the capsule disappears and a standalone Menu pill opens the native dialog. Navigation remains quieter than the portrait, hero typography, and textured background.
 
 ### Portrait Swap
 
@@ -193,7 +193,7 @@ Operating Range uses a deep-indigo base, an oversized CSS layer of radial blue l
 - **Don't** build generic polished SaaS with glass cards, pastel blobs, or interchangeable feature grids.
 - **Don't** use developer-terminal brutalism, monospace decoration, or dark mode as shorthand for technical credibility.
 - **Don't** use artsy layouts that conceal navigation, weaken readability, or hide evidence.
-- **Don't** repeat liquid glass across cards or sections. The floating navigation owns that material.
+- **Don't** add branding, availability, or decorative reflections to navigation. Orientation is its only job.
 - **Don't** use youthful candy palettes, pervasive faux-vintage noise, or decorative motion without meaning.
 - **Don't** use gradient text, colored side-stripe borders, identical card grids, or repeated eyebrow labels.
 - **Don't** pair a 1px border with a wide soft shadow or round modules beyond 12px.

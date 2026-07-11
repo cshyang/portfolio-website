@@ -60,7 +60,7 @@ Files:
 
 Work:
 
-- Add a compact floating Liquid Lens navigation with visible active/focus states and a reduced-transparency fallback.
+- Add a compact quiet-island navigation with visible active/focus states, a standalone mobile Menu pill, and a reduced-transparency fallback.
 - Use a native dialog for mobile navigation and restore focus on close.
 - Build the capability-first modular hero with one featured project, location, and availability.
 - Support portrait hover, keyboard focus, and tap.
