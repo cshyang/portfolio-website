@@ -60,7 +60,7 @@ Files:
 
 Work:
 
-- Add compact sticky navigation with visible active/focus states.
+- Add a compact floating Liquid Lens navigation with visible active/focus states and a reduced-transparency fallback.
 - Use a native dialog for mobile navigation and restore focus on close.
 - Build the capability-first modular hero with one featured project, location, and availability.
 - Support portrait hover, keyboard focus, and tap.
