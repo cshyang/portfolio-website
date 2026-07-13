@@ -29,6 +29,7 @@ export default function PortraitSwap() {
         src="/images/avatars/shyang-laughing.png"
         alt="Illustrated portrait of Shyang laughing"
         fill
+        priority
         sizes="(min-width: 900px) 30vw, 100vw"
       />
       <span className="v2-portrait-hint" aria-hidden="true">

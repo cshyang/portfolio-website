@@ -13,7 +13,7 @@ const PHRASES = [
   "still learning",
 ];
 
-// Same glyph ramp the ASCII leaves are drawn with — one character world.
+// Same glyph ramp the ASCII streams are drawn with — one character world.
 const GLYPHS = ".':;+i1t2f5s8X0@";
 
 const HOLD_MS = 2400;
@@ -21,7 +21,8 @@ const LEARNING_HOLD_MS = 4600;
 const SCRAMBLE_MS = 450;
 
 export default function RotatingIdentity() {
-  const [text, setText] = useState(STATIC_PHRASE);
+  // done = resolved words (official ink), raw = still-decoding glyphs (quiet ink)
+  const [display, setDisplay] = useState({ done: STATIC_PHRASE, raw: "" });
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -35,15 +36,14 @@ export default function RotatingIdentity() {
       const tick = (now: number) => {
         const t = Math.min(1, (now - start) / SCRAMBLE_MS);
         const front = Math.floor(t * target.length);
-        let out = "";
-        for (let c = 0; c < target.length; c++) {
+        let raw = "";
+        for (let c = front; c < target.length; c++) {
           const ch = target[c];
-          out +=
-            ch === " " || c < front
-              ? ch
-              : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+          raw += ch === " " ? " " : GLYPHS[(Math.random() * GLYPHS.length) | 0];
         }
-        setText(t < 1 ? out : target);
+        setDisplay(
+          t < 1 ? { done: target.slice(0, front), raw } : { done: target, raw: "" }
+        );
         if (t < 1) raf = requestAnimationFrame(tick);
       };
       raf = requestAnimationFrame(tick);
@@ -63,5 +63,10 @@ export default function RotatingIdentity() {
     };
   }, []);
 
-  return <span className="v2-identity">{text}.</span>;
+  return (
+    <span className="v2-identity">
+      {display.done}
+      {display.raw && <span className="v2-identity-raw">{display.raw}</span>}.
+    </span>
+  );
 }

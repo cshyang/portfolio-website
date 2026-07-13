@@ -1,4 +1,5 @@
 .v2-shell {
+  display: flow-root;
   background: oklch(0.962 0.008 241.7);
 }
 
@@ -74,9 +75,9 @@
   position: absolute;
   bottom: 0;
   left: -6rem;
-  width: min(78rem, 64vw);
+  width: min(88rem, 88vw);
   aspect-ratio: 1080 / 640;
-  background: url("/images/textures/confluence-microtext.svg") no-repeat center / contain;
+  background: url("/images/textures/confluence-microtext-drift.svg") no-repeat center / contain;
   opacity: 0.34;
   pointer-events: none;
 }
@@ -210,7 +211,7 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
-  grid-template-rows: minmax(auto, calc(100svh - 9rem)) auto;
+  grid-template-rows: minmax(auto, min(calc(100svh - 9rem), 54rem)) auto;
   column-gap: clamp(2rem, 6vw, 7rem);
   width: min(calc(100% - 3rem), 90rem);
   margin: 5.25rem auto 0;
@@ -256,6 +257,11 @@
   display: block;
   color: var(--v2-vermilion);
   animation: v2-identity-in 520ms var(--v2-ease) both;
+}
+
+.v2-identity-raw {
+  color: var(--v2-muted);
+  opacity: 0.55;
 }
 
 @keyframes v2-identity-in {
@@ -342,9 +348,8 @@
 
 .v2-portrait-base {
   z-index: 1;
-  object-fit: contain;
+  object-fit: cover;
   object-position: 50% 100%;
-  transform: scale(1.04);
   transform-origin: 50% 100%;
 }
 
@@ -359,7 +364,7 @@
 .v2-portrait-swap:focus-visible .v2-portrait-base,
 .v2-portrait-swap[data-revealed="true"] .v2-portrait-base {
   opacity: 0;
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .v2-portrait-swap:hover .v2-portrait-laugh,
@@ -1304,6 +1309,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .v2-hero::before {
+    background-image: url("/images/textures/confluence-microtext.svg");
+  }
+
   .v2-page {
     scroll-behavior: auto;
   }
