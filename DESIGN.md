@@ -6,7 +6,6 @@ colors:
   vivid-blue: "#0966d6"
   signal-orange: "#f04b1d"
   vermilion: "#b7331b"
-  petrol-teal: "#15576a"
   cool-canvas: "#eef3f7"
   near-white: "#fbfcfd"
   cool-surface: "#e2e9ef"
@@ -67,7 +66,7 @@ components:
 
 **Creative North Star: "The Open Working Surface"**
 
-The system feels like a carefully composed working surface: direct, personal, and connected to real output. Alignment stays disciplined, but most structural lines remain invisible. Hero and project stories use clear image-and-copy flow without decorative overlap. The illustrated portrait supplies deep indigo, vivid blue, signal orange, vermilion, and petrol teal. The interface is experimental in art direction, not in usability.
+The system feels like a carefully composed working surface: direct, personal, and connected to real output. Alignment stays disciplined, but most structural lines remain invisible. Hero and project stories use clear image-and-copy flow without decorative overlap. The illustrated portrait supplies deep indigo, vivid blue, signal orange, and vermilion; its light-blue strokes survive as the field-lighting hues. The interface is experimental in art direction, not in usability.
 
 It rejects generic polished SaaS, developer-terminal brutalism, artsy layouts that hide evidence, youthful candy color, and pervasive faux-vintage noise. Mobile is a deliberate single-column narrative, not a miniature desktop grid.
 
@@ -81,7 +80,7 @@ It rejects generic polished SaaS, developer-terminal brutalism, artsy layouts th
 
 ## Colors
 
-Deep indigo and a cool blue-gray canvas carry the reading experience. Vivid blue, vermilion, signal orange, and petrol teal come directly from the illustrated portrait and turn it into the palette source for the whole system. The portrait keeps its own warm paper; the interface does not imitate it.
+Deep indigo and a cool blue-gray canvas carry the reading experience. Vivid blue, vermilion, and signal orange come directly from the illustrated portrait and turn it into the palette source for the whole system. The portrait keeps its own warm paper; the interface does not imitate it.
 
 ### Primary
 
@@ -153,7 +152,7 @@ The system is flat by default. Tonal layering, crop, overlap, seams, and motion 
 ### Cards / Containers
 
 - **Corner Style:** Mostly square modules; artifact imagery uses 8–10px corners.
-- **Background:** Near-white, deep indigo, vivid blue, vermilion, or petrol teal according to narrative role.
+- **Background:** Near-white, deep indigo, vivid blue, or vermilion according to narrative role.
 - **Shadow Strategy:** Flat modules; Artifact Edge only for screenshots.
 - **Border:** 1px seam divisions, never colored side stripes.
 - **Internal Padding:** Fluid 24–88px based on viewport and narrative density.
@@ -181,7 +180,7 @@ Operating Range uses a deep-indigo base, an oversized CSS layer of radial blue l
 ### Do:
 
 - **Do** lead with capability and place proof in the first viewport.
-- **Do** use deep indigo, vivid blue, signal orange, vermilion, petrol teal, and cool neutrals as the portrait-derived palette.
+- **Do** use deep indigo, vivid blue, signal orange, vermilion, and cool neutrals as the portrait-derived palette; light-blue hues (222-259) exist only as field-lighting tokens inside gradient materials.
 - **Do** keep body lines below 70ch and text contrast at WCAG AA.
 - **Do** use controlled blue-to-indigo and vermilion spatial gradients in image-led fields.
 - **Do** use the shared static raster grain sparingly and keep reading surfaces clean.
@@ -197,3 +196,21 @@ Operating Range uses a deep-indigo base, an oversized CSS layer of radial blue l
 - **Don't** use youthful candy palettes, pervasive faux-vintage noise, or decorative motion without meaning.
 - **Don't** use gradient text, colored side-stripe borders, identical card grids, or repeated eyebrow labels.
 - **Don't** pair a 1px border with a wide soft shadow or round modules beyond 12px.
+
+## Materials
+
+Texture is never a color; it is a material applied on top of a token. Three materials are allowed:
+
+- **flat** — the token color alone. Default for all reading surfaces, cards, and forms.
+- **grained** — token color + the shared 256px `print-grain.webp` tile at ~0.6 opacity, soft-light. Only where color is the material (Range, Contact). Grain never moves and never sits behind body copy.
+- **live-lit** — grained + a pointer-aware light layer that eases toward the cursor using transform and opacity only. At most one section per page. Requires a fine pointer; reduced-motion and touch fall back to the static drift composition.
+
+### Extended material palette
+
+Built from the tokens with inline SVG filters — no image assets. Available but unassigned; each must earn a real surface before shipping:
+
+- **confluence** — the cool and warm ramps meeting along a displaced organic boundary, a cream sliver surfacing where they touch; the "across boundaries" idea as material. Assigned: Contact section backdrop on two-column layouts; single-column keeps the warm radial so the boundary never sits behind body copy.
+- **riso** — two-pass print speckle, warm over cool, misregistered by a few pixels on paper. Candidate for print-flavored cards or dividers.
+- **halftone** — print-dot falloff masked across the warm field. Candidate for one accent moment; never behind text.
+- **patina** — mottled rust wash: oxide clouds and orange bloom over vermilion, a clustered pale-gold corrosion band eaten through with pits, fine grit on top. Layered flat turbulence, no lighting. Candidate for a warm feature panel or image backdrop.
+- **ink-wash** — soft watercolor pools of blue with faint orange flecks on paper, echoing the portrait illustration. Candidate for quiet transitional surfaces.

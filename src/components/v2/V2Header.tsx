@@ -12,13 +12,22 @@ export default function V2Header() {
       .map((item) => document.querySelector(item.href))
       .filter((section): section is Element => section !== null);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const activeEntry = entries.find((entry) => entry.isIntersecting);
-        if (activeEntry) setActiveHref(`#${activeEntry.target.id}`);
-      },
-      { rootMargin: "-34% 0px -56%", threshold: 0 },
-    );
+    // Entries only report changes, so a section already covering the band never re-reports;
+    // use each callback as a trigger and derive the active section from geometry instead.
+    const updateActive = () => {
+      const bandTop = window.innerHeight * 0.34;
+      const bandBottom = window.innerHeight * 0.44;
+      const current = sections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= bandBottom && rect.bottom >= bandTop;
+      });
+      setActiveHref(current ? `#${current.id}` : null);
+    };
+
+    const observer = new IntersectionObserver(updateActive, {
+      rootMargin: "-34% 0px -56%",
+      threshold: 0,
+    });
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();

@@ -12,8 +12,16 @@
   --v2-oxide: oklch(0.36 0.13 31);
   --v2-pale-orange: oklch(0.9 0.06 42);
   --v2-blue: oklch(0.53 0.189 257.7);
-  --v2-teal: oklch(0.426 0.07 221.8);
   --v2-white: oklch(0.991 0.002 247.8);
+  --v2-light-1: oklch(0.74 0.13 222 / 0.95);
+  --v2-light-2: oklch(0.66 0.16 236 / 0.78);
+  --v2-light-3: oklch(0.58 0.2 259 / 0.9);
+  --v2-glow: oklch(0.72 0.14 230 / 0.5);
+  --v2-muted: oklch(0.38 0.045 260);
+  --v2-text-display: clamp(3.45rem, 6.3vw, 6rem);
+  --v2-text-headline: clamp(2.8rem, 5.5vw, 5.5rem);
+  --v2-text-body: 1rem;
+  --v2-text-label: 0.78rem;
   --v2-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --v2-sticky: 30;
   min-height: 100vh;
@@ -59,6 +67,18 @@
 .v2-page a,
 .v2-page button {
   -webkit-tap-highlight-color: transparent;
+}
+
+.v2-hero::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -6rem;
+  width: min(78rem, 64vw);
+  aspect-ratio: 1080 / 640;
+  background: url("/images/textures/confluence-microtext.svg") no-repeat center / contain;
+  opacity: 0.34;
+  pointer-events: none;
 }
 
 .v2-page :focus-visible {
@@ -122,7 +142,7 @@
 .v2-desktop-nav a,
 .v2-menu-trigger {
   color: inherit;
-  font-size: 0.76rem;
+  font-size: var(--v2-text-label);
   font-weight: 720;
   text-decoration: none;
 }
@@ -190,7 +210,7 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
-  grid-template-rows: minmax(38rem, calc(100svh - 9rem)) auto;
+  grid-template-rows: minmax(auto, calc(100svh - 9rem)) auto;
   column-gap: clamp(2rem, 6vw, 7rem);
   width: min(calc(100% - 3rem), 90rem);
   margin: 5.25rem auto 0;
@@ -213,7 +233,7 @@
 .v2-featured-topline,
 .v2-portrait-label,
 .v2-portrait-hint {
-  font-size: 0.72rem;
+  font-size: var(--v2-text-label);
   font-weight: 720;
   letter-spacing: 0.02em;
 }
@@ -224,17 +244,35 @@
 }
 
 .v2-hero-copy h1 {
-  max-width: 9ch;
+  max-width: 17ch;
+  min-height: 2.85em;
   margin-bottom: 1.6rem;
-  font-size: clamp(3.45rem, 6.3vw, 6rem);
+  font-size: var(--v2-text-display);
   font-weight: 760;
   line-height: 0.94;
+}
+
+.v2-identity {
+  display: block;
+  color: var(--v2-vermilion);
+  animation: v2-identity-in 520ms var(--v2-ease) both;
+}
+
+@keyframes v2-identity-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.22em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .v2-hero-summary {
   max-width: 38rem;
   margin-bottom: 2.1rem;
-  color: oklch(0.38 0.045 260);
+  color: var(--v2-muted);
   font-size: clamp(1rem, 1.4vw, 1.2rem);
   line-height: 1.55;
 }
@@ -248,7 +286,7 @@
   border: 1px solid currentColor;
   border-radius: 999px;
   color: inherit;
-  font-size: 0.78rem;
+  font-size: var(--v2-text-label);
   font-weight: 720;
   text-decoration: none;
   transition: gap 260ms var(--v2-ease), background-color 260ms var(--v2-ease), color 260ms var(--v2-ease);
@@ -262,6 +300,7 @@
 }
 
 .v2-hero-portrait {
+  display: grid;
   grid-column: 2;
   grid-row: 1;
   min-height: 34rem;
@@ -330,10 +369,20 @@
   transform: scale(1);
 }
 
+.v2-portrait-swap:hover .v2-portrait-label,
+.v2-portrait-swap:focus-visible .v2-portrait-label,
+.v2-portrait-swap[data-revealed="true"] .v2-portrait-label,
+.v2-portrait-swap:hover .v2-portrait-hint,
+.v2-portrait-swap:focus-visible .v2-portrait-hint,
+.v2-portrait-swap[data-revealed="true"] .v2-portrait-hint {
+  color: var(--v2-ink);
+}
+
 .v2-portrait-label,
 .v2-portrait-hint {
   position: absolute;
   z-index: 5;
+  transition: color 260ms var(--v2-ease);
 }
 
 .v2-portrait-label {
@@ -352,55 +401,18 @@
   outline-color: var(--v2-white);
 }
 
-.v2-hero-context {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-row: 2;
-  grid-template-columns: 1.15fr 0.85fr 1fr;
-  gap: clamp(1.5rem, 4vw, 4rem);
-  padding: 1.75rem 0 2.75rem;
-  border-top: 1px solid var(--v2-seam);
-}
-
-.v2-hero-range {
-  display: flex;
-  align-items: center;
-}
-
-.v2-hero-range p {
-  margin: 0;
-  font-weight: 650;
-  line-height: 1.55;
-}
-
-.v2-hero-principle {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.v2-hero-principle p,
-.v2-hero-status span {
-  margin: 0;
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.v2-hero-principle strong {
-  font-size: clamp(1.35rem, 2vw, 2rem);
-  line-height: 1;
-}
-
 .v2-hero-status {
   display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.v2-hero-status strong {
-  max-width: 15ch;
-  font-size: clamp(1.2rem, 1.7vw, 1.8rem);
-  line-height: 1.05;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--v2-seam);
+  font-size: var(--v2-text-label);
+  font-weight: 700;
 }
 
 .v2-reveal {
@@ -433,11 +445,16 @@
   margin: 0 auto clamp(3.5rem, 7vw, 6rem);
 }
 
+.v2-section-heading .v2-utility {
+  align-self: start;
+  margin-top: 0.4em;
+}
+
 .v2-section-heading h2,
 .v2-range-intro h2,
 .v2-contact-intro h2 {
   margin-bottom: 0;
-  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+  font-size: var(--v2-text-headline);
   font-weight: 740;
   line-height: 0.98;
 }
@@ -445,7 +462,7 @@
 .v2-section-heading > p:last-child {
   max-width: 32rem;
   margin-bottom: 0;
-  color: oklch(0.38 0.045 260);
+  color: var(--v2-muted);
 }
 
 .v2-project-list {
@@ -489,7 +506,7 @@
 
 .v2-project-description {
   max-width: 42rem;
-  color: oklch(0.38 0.045 260);
+  color: var(--v2-muted);
   font-size: 1.05rem;
 }
 
@@ -507,7 +524,7 @@
 }
 
 .v2-project-copy dt {
-  font-size: 0.75rem;
+  font-size: var(--v2-text-label);
   font-weight: 720;
 }
 
@@ -529,7 +546,7 @@
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
   background: var(--v2-surface);
-  font-size: 0.72rem;
+  font-size: var(--v2-text-label);
   font-weight: 650;
 }
 
@@ -592,9 +609,9 @@
   inset: -18%;
   z-index: 0;
   background:
-    radial-gradient(circle at 10% 24%, oklch(0.74 0.13 222 / 0.95) 0%, transparent 25%),
-    radial-gradient(ellipse at 84% 12%, oklch(0.66 0.16 236 / 0.78) 0%, transparent 25%),
-    radial-gradient(ellipse at 56% 82%, oklch(0.58 0.2 259 / 0.9) 0%, transparent 34%),
+    radial-gradient(circle at 10% 24%, var(--v2-light-1) 0%, transparent 25%),
+    radial-gradient(ellipse at 84% 12%, var(--v2-light-2) 0%, transparent 25%),
+    radial-gradient(ellipse at 56% 82%, var(--v2-light-3) 0%, transparent 34%),
     linear-gradient(135deg, var(--v2-blue), var(--v2-ink));
   content: "";
   transform: translate3d(-2%, -1%, 0) scale(1.05);
@@ -620,6 +637,90 @@
 .v2-range > * {
   position: relative;
   z-index: 2;
+}
+
+/* ---- extended material palette: print-and-studio textures, token-driven, static.
+   Demoed on /v2/design; assign to a surface before shipping elsewhere. ---- */
+
+/* confluence: the cool and warm ramps meeting along displaced organic boundaries;
+   a cream sliver surfaces where the warm field recedes. Two independent
+   displacement seeds keep the edges from tracking each other. */
+.v2-mat-confluence {
+  background-color: var(--v2-blue);
+  background-image:
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="g" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="19"/><feColorMatrix values="0 0 0 0 0.1  0 0 0 0 0.05  0 0 0 0 0.02  1.3 0 0 0 -1.02"/></filter><rect width="100%25" height="100%25" filter="url(%23g)"/></svg>'),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720"><defs><linearGradient id="cool" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="%230966d6"/><stop offset="1" stop-color="%2306265f"/></linearGradient><linearGradient id="warm" x1="0" y1="0" x2="1" y2="0.25"><stop offset="0" stop-color="%23f04b1d"/><stop offset="0.5" stop-color="%23b7331b"/><stop offset="1" stop-color="%23721408"/></linearGradient><filter id="c1" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="5" seed="9" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="135" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="c2" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.014" numOctaves="5" seed="27" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="155" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect x="0" y="0" width="720" height="720" fill="url(%23cool)"/><g filter="url(%23c1)"><rect x="295" y="-80" width="600" height="880" fill="%23ffd2c0"/></g><g filter="url(%23c2)"><rect x="330" y="-80" width="600" height="880" fill="url(%23warm)"/></g></svg>');
+  background-blend-mode: multiply, normal;
+  background-size: cover, cover;
+}
+
+/* patina: mottled rust — oxide clouds and orange bloom over vermilion, a corroded
+   pale band eaten through with pits, fine grit on top. Pure layered turbulence. */
+.v2-mat-patina {
+  background-color: var(--v2-vermilion);
+  background-image:
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="g" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="31"/><feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.05  0 0 0 0 0.01  1.6 0 0 0 -0.96"/></filter><rect width="100%25" height="100%25" filter="url(%23g)"/></svg>'),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="e" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.014 0.01" numOctaves="3" seed="17" result="big"/><feColorMatrix in="big" type="matrix" values="0 0 0 0 0.96  0 0 0 0 0.7  0 0 0 0 0.38  7 0 0 0 -4.5" result="shape"/><feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="2" seed="3" result="zone"/><feColorMatrix in="zone" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  2.6 0 0 0 -1.2" result="cluster"/><feComposite in="shape" in2="cluster" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" result="patch"/><feTurbulence type="fractalNoise" baseFrequency="0.12" numOctaves="2" seed="8" result="dots"/><feColorMatrix in="dots" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.2 0 0 0 -1.1" result="holes"/><feComposite in="patch" in2="holes" operator="out"/></filter><rect width="100%25" height="100%25" filter="url(%23e)"/></svg>'),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="b" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="3" seed="52"/><feColorMatrix values="0 0 0 0 0.942  0 0 0 0 0.294  0 0 0 0 0.114  0.95 0 0 0 -0.5"/></filter><rect width="100%25" height="100%25" filter="url(%23b)"/></svg>'),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="d" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="3" seed="44"/><feColorMatrix values="0 0 0 0 0.448  0 0 0 0 0.078  0 0 0 0 0.03  1.2 0 0 0 -0.45"/></filter><rect width="100%25" height="100%25" filter="url(%23d)"/></svg>');
+  background-blend-mode: multiply, normal, screen, multiply;
+  background-size: cover;
+}
+
+/* riso print: two-pass speckle, warm over cool, misregistered by a few px */
+.v2-mat-riso {
+  background-color: var(--v2-paper);
+  background-image:
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="r" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="5"/><feColorMatrix values="0 0 0 0 0.718  0 0 0 0 0.199  0 0 0 0 0.105  1.7 0 0 0 -1.02"/></filter><rect width="100%25" height="100%25" filter="url(%23r)"/></svg>'),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280"><filter id="r" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="12"/><feColorMatrix values="0 0 0 0 0.032  0 0 0 0 0.4  0 0 0 0 0.838  1.7 0 0 0 -1.08"/></filter><rect width="100%25" height="100%25" filter="url(%23r)"/></svg>');
+  background-position: 0 0, 5px 3px;
+  background-blend-mode: multiply, multiply;
+}
+
+/* halftone: print-dot falloff on the warm field; dots live in ::after so the
+   mask can fade them across the surface */
+.v2-mat-halftone {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(circle at 70% 20%, var(--v2-orange), var(--v2-vermilion) 85%);
+}
+
+.v2-mat-halftone::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, oklch(0.36 0.13 31 / 0.55) 0 0.9px, transparent 1.6px);
+  background-size: 7px 7px;
+  content: "";
+  mask-image: linear-gradient(315deg, black 10%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ink wash: soft watercolor pools of blue on paper, edges left visible */
+.v2-mat-wash {
+  background-color: var(--v2-paper);
+  background-image:
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="w" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="4" seed="21"/><feColorMatrix values="0 0 0 0 0.127  0 0 0 0 0.453  0 0 0 0 0.932  1.6 0 0 0 -0.88"/><feGaussianBlur stdDeviation="2"/></filter><rect width="100%25" height="100%25" filter="url(%23w)"/></svg>'),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="w2" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="3" seed="47"/><feColorMatrix values="0 0 0 0 0.942  0 0 0 0 0.294  0 0 0 0 0.114  1.3 0 0 0 -0.98"/><feGaussianBlur stdDeviation="2.5"/></filter><rect width="100%25" height="100%25" filter="url(%23w2)"/></svg>');
+  background-blend-mode: multiply, multiply;
+  background-size: cover, cover;
+}
+
+/* live-lit material: one extra light source that eases toward the pointer */
+.v2-range-glow {
+  position: absolute;
+  z-index: 0 !important;
+  top: 0;
+  left: 0;
+  width: 56rem;
+  height: 56rem;
+  margin: -28rem 0 0 -28rem;
+  background: radial-gradient(circle, var(--v2-glow) 0%, transparent 62%);
+  opacity: 0;
+  transition: opacity 900ms var(--v2-ease);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 @keyframes v2-light-drift {
@@ -688,7 +789,7 @@
   margin: 0;
   font-size: clamp(1.2rem, 2vw, 1.75rem);
   font-weight: 620;
-  line-height: 1.25;
+  line-height: 1.35;
 }
 
 .v2-discipline-list span {
@@ -701,11 +802,11 @@
 }
 
 .v2-section-heading--journey {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
 }
 
 .v2-section-heading--journey h2 {
-  max-width: 12ch;
+  max-width: 18ch;
 }
 
 .v2-journey-list {
@@ -762,7 +863,7 @@
 
 .v2-journey-copy > span {
   grid-row: 1 / span 3;
-  font-size: 0.78rem;
+  font-size: var(--v2-text-label);
   font-weight: 720;
 }
 
@@ -779,9 +880,9 @@
 }
 
 .v2-journey-copy > p:last-child {
-  max-width: 48rem;
+  max-width: 68ch;
   margin-bottom: 0;
-  color: oklch(0.38 0.045 260);
+  color: var(--v2-muted);
 }
 
 .v2-contact {
@@ -791,7 +892,10 @@
   gap: clamp(3rem, 8vw, 9rem);
   overflow: hidden;
   padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 5vw, 5.5rem);
-  background: radial-gradient(circle at 76% 20%, var(--v2-vermilion), oklch(0.46 0.17 31) 46%, var(--v2-oxide) 100%);
+  /* confluence material: warm story side left, cool structure side behind the form */
+  background:
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720"><defs><radialGradient id="warm" cx="0.3" cy="0.2" r="1.1"><stop offset="0" stop-color="%23b7331b"/><stop offset="0.46" stop-color="%23a11d0b"/><stop offset="1" stop-color="%23721408"/></radialGradient><linearGradient id="cool" x1="0" y1="0" x2="1" y2="0.8"><stop offset="0" stop-color="%230966d6"/><stop offset="1" stop-color="%2306265f"/></linearGradient><filter id="c1" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="5" seed="9" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="135" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="c2" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.014" numOctaves="5" seed="27" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="155" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect x="0" y="0" width="720" height="720" fill="url(%23warm)"/><g filter="url(%23c1)"><rect x="415" y="-80" width="500" height="880" fill="%23ffd2c0"/></g><g filter="url(%23c2)"><rect x="450" y="-80" width="500" height="880" fill="url(%23cool)"/></g></svg>')
+    center / cover no-repeat var(--v2-oxide);
   color: var(--v2-white);
 }
 
@@ -857,7 +961,7 @@
 }
 
 .v2-field label {
-  font-size: 0.78rem;
+  font-size: var(--v2-text-label);
   font-weight: 720;
 }
 
@@ -900,6 +1004,12 @@
   align-items: center;
 }
 
+.v2-form-note {
+  margin: 0.9rem 0 0;
+  color: var(--v2-muted);
+  font-size: 0.82rem;
+}
+
 .v2-form-footer button {
   display: inline-flex;
   min-height: 3rem;
@@ -911,7 +1021,7 @@
   border-radius: 0;
   background: var(--v2-ink);
   color: var(--v2-white);
-  font-size: 0.78rem;
+  font-size: var(--v2-text-label);
   font-weight: 720;
   cursor: pointer;
 }
@@ -940,7 +1050,7 @@
   padding: 1.4rem clamp(1.25rem, 5vw, 5.5rem);
   background: var(--v2-ink);
   color: var(--v2-white);
-  font-size: 0.72rem;
+  font-size: var(--v2-text-label);
   font-weight: 650;
 }
 
@@ -976,12 +1086,12 @@
 @media (max-width: 1080px) {
   .v2-hero {
     grid-template-columns: 1.2fr 0.8fr;
-    grid-template-rows: minmax(34rem, 72svh) auto;
+    grid-template-rows: minmax(auto, 72svh) auto;
   }
 
   .v2-hero-copy { grid-column: 1; grid-row: 1; }
   .v2-hero-portrait { grid-column: 2; grid-row: 1; }
-  .v2-hero-context { grid-column: 1 / -1; grid-row: 2; }
+  .v2-hero-status { grid-column: 1 / -1; grid-row: 2; }
 }
 
 @media (max-width: 820px) {
@@ -1046,7 +1156,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
-    font-size: 0.78rem;
+    font-size: var(--v2-text-label);
     font-weight: 700;
   }
 
@@ -1082,6 +1192,8 @@
     flex-direction: column;
   }
 
+  .v2-hero::before { display: none; }
+
   .v2-hero-copy {
     min-height: 32rem;
     padding: 2.5rem 0;
@@ -1089,14 +1201,6 @@
 
   .v2-hero-copy h1 { font-size: clamp(3.2rem, 15vw, 5rem); }
   .v2-hero-portrait { min-height: 34rem; margin: 0; }
-  .v2-hero-context {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 2rem 0 3rem;
-  }
-
-  .v2-hero-principle,
-  .v2-hero-status { gap: 0.4rem; }
 
   .v2-section-heading,
   .v2-section-heading--journey {
@@ -1124,6 +1228,7 @@
 
   .v2-contact {
     grid-template-columns: 1fr;
+    background: radial-gradient(circle at 76% 20%, var(--v2-vermilion), oklch(0.46 0.17 31) 46%, var(--v2-oxide) 100%);
   }
 }
 

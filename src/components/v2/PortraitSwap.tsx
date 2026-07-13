@@ -32,7 +32,7 @@ export default function PortraitSwap() {
         sizes="(min-width: 900px) 30vw, 100vw"
       />
       <span className="v2-portrait-hint" aria-hidden="true">
-        Hover · focus · tap
+        Tap for the other me
       </span>
     </button>
   );

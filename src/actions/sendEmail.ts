@@ -13,20 +13,20 @@ export const sendEmail = async (formData: FormData) => {
 
   if (!message || typeof message !== "string") {
     return {
-      error: "Invalid message",
+      error: "Please add a short message.",
     };
   }
 
   // simple server-side validation
   if (!validateString(senderEmail, 500)) {
     return {
-      error: "Invalide sender email.",
+      error: "Please enter a valid email address.",
     };
   }
 
   if (!validateString(message, 5000)) {
     return {
-      error: "Invalid message.",
+      error: "Please add a short message.",
     };
   }
 
@@ -35,7 +35,7 @@ export const sendEmail = async (formData: FormData) => {
       from: "Contact From <onboarding@resend.dev>",
       to: "cshyang92@gmail.com",
       replyTo: senderEmail as string,
-      subject: "Message to test",
+      subject: "New message from your portfolio",
       //   text: message as string,
       react: React.createElement(ContactFormEmail, {
         message: message as string,

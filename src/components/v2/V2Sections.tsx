@@ -1,5 +1,7 @@
 import Image from "next/image";
 import PortraitSwap from "./PortraitSwap";
+import RangeGlow from "./RangeGlow";
+import RotatingIdentity from "./RotatingIdentity";
 import V2Contact from "./V2Contact";
 import { disciplines, journey, v2Projects } from "@/lib/v2-data";
 
@@ -7,8 +9,9 @@ export function V2Hero() {
   return (
     <section className="v2-hero" aria-labelledby="v2-hero-heading">
       <div className="v2-hero-copy v2-reveal v2-reveal--one">
-        <p className="v2-utility">Data · AI · Product · Code</p>
-        <h1 id="v2-hero-heading">I build across boundaries—and ship.</h1>
+        <h1 id="v2-hero-heading">
+          I&rsquo;m <RotatingIdentity />
+        </h1>
         <p className="v2-hero-summary">
           I turn rough ideas into useful systems by moving between evidence, product judgment, AI, and hands-on building.
         </p>
@@ -21,19 +24,10 @@ export function V2Hero() {
         <PortraitSwap />
       </div>
 
-      <div className="v2-hero-context v2-reveal v2-reveal--three">
-        <div className="v2-hero-range">
-          <p>Data systems · Agentic AI · Product direction · Hands-on building</p>
-        </div>
-        <div className="v2-hero-principle">
-          <p>Working principle</p>
-          <strong>Useful beats impressive.</strong>
-        </div>
-        <div className="v2-hero-status">
-          <span><i aria-hidden="true" /> Kuala Lumpur · GMT +8</span>
-          <strong>Open to the right problem.</strong>
-        </div>
-      </div>
+      <p className="v2-hero-status v2-reveal v2-reveal--three">
+        <span><i aria-hidden="true" /> Kuala Lumpur · GMT +8</span>
+        <span>Open to the right problem.</span>
+      </p>
     </section>
   );
 }
@@ -81,6 +75,7 @@ export function SelectedWork() {
 export function OperatingRange() {
   return (
     <section className="v2-range" id="range" aria-labelledby="range-heading">
+      <RangeGlow />
       <div className="v2-range-intro">
         <h2 id="range-heading">The useful work lives between disciplines.</h2>
         <p>I started in analytics, moved into product and AI, then learned to build enough of the real thing to test the assumptions myself.</p>
@@ -128,6 +123,7 @@ export function V2Footer() {
   return (
     <footer className="v2-footer">
       <span>© {new Date().getFullYear()} Chau Shyang</span>
+      <a href="/v2/design">Design system</a>
       <a href="#top">Back to top ↑</a>
     </footer>
   );

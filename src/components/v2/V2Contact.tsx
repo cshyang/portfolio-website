@@ -21,16 +21,24 @@ export default function V2Contact() {
 
     setIsSubmitting(true);
     setStatus(initialStatus);
-    const result = await sendEmail(new FormData(event.currentTarget));
 
-    if (result.error) {
-      setStatus({ kind: "error", message: result.error });
-    } else {
-      setStatus({ kind: "success", message: "Message sent. I’ll get back to you soon." });
-      formRef.current?.reset();
+    try {
+      const result = await sendEmail(new FormData(event.currentTarget));
+
+      if (result.error) {
+        setStatus({ kind: "error", message: result.error });
+      } else {
+        setStatus({ kind: "success", message: "Message sent. I’ll get back to you soon." });
+        formRef.current?.reset();
+      }
+    } catch {
+      setStatus({
+        kind: "error",
+        message: "Something went wrong and your message wasn’t sent. Please try again in a moment.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   }
 
   return (
@@ -65,6 +73,7 @@ export default function V2Contact() {
             {status.message}
           </p>
         </div>
+        <p className="v2-form-note">Goes straight to my inbox — I read and reply to every message.</p>
       </form>
     </section>
   );
