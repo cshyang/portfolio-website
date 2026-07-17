@@ -818,7 +818,9 @@ html:root:has(.v2-page) {
 
 .v2-range-intro .v2-utility {
   margin-bottom: 1.5rem;
-  color: var(--v2-pale-orange);
+  /* lighter warm than --v2-pale-orange: small text on the royal-blue field
+     needs the extra lightness to clear AA */
+  color: oklch(0.95 0.045 45);
 }
 
 .v2-range-intro {
@@ -846,16 +848,20 @@ html:root:has(.v2-page) {
    chips, and a visible claim. Hovering it dissolves the grid's walls. */
 .v2-ai-plate {
   position: relative;
-  padding: 1.4rem 1.5rem 1.2rem;
+  padding: 1.4rem 1.5rem;
+  border-radius: 8px;
+  /* darkened backing: anchors the plate and lifts the warm label past AA */
+  background: oklch(0.23 0.07 258 / 0.6);
 }
 
 .v2-ai-plate::before {
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   background: url("/images/textures/confluence-microtext-drift.svg") center / 46rem repeat;
   content: "";
   filter: invert(1);
-  opacity: 0.18;
+  opacity: 0.12;
   mask-image: radial-gradient(120% 100% at 50% 50%, black 40%, transparent 78%);
   -webkit-mask-image: radial-gradient(120% 100% at 50% 50%, black 40%, transparent 78%);
   pointer-events: none;
@@ -870,19 +876,6 @@ html:root:has(.v2-page) {
   color: var(--v2-pale-orange);
   font-size: 1.05rem;
   font-weight: 740;
-}
-
-.v2-ai-plate-hint {
-  margin: 0.9rem 0 0;
-  color: oklch(1 0 0 / 0.55);
-  font-size: var(--v2-text-label);
-  font-weight: 650;
-}
-
-@media (hover: none) {
-  .v2-ai-plate-hint {
-    display: none;
-  }
 }
 
 .v2-ai-plate .v2-ai-tools li {
@@ -984,17 +977,6 @@ html:root:has(.v2-page) {
 .v2-domain-grid article {
   padding: clamp(1.8rem, 3vw, 3rem) 0;
   border-bottom: 1px solid oklch(1 0 0 / 0.3);
-  transition: border-color 700ms var(--v2-ease);
-}
-
-/* Discovery reward: touching the AI layer dissolves the walls between the
-   domains and swells the current. */
-.v2-range:has(.v2-ai-plate:hover) .v2-domain-grid article {
-  border-color: oklch(1 0 0 / 0.05);
-}
-
-.v2-range:has(.v2-ai-plate:hover) .v2-domain-grid::before {
-  opacity: 0.3;
 }
 
 .v2-domain-grid h3 {
@@ -1116,14 +1098,22 @@ html:root:has(.v2-page) {
    reduced motion → content simply visible; no JS, nothing gated on a class. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .v2-story-list li,
+    .v2-story-list li {
+      animation: v2-assemble both var(--v2-ease);
+      animation-timeline: view();
+      animation-range: entry 5% entry 45%;
+    }
+
+    .v2-story-list li:nth-child(even) {
+      animation-name: v2-assemble-flip;
+    }
+
     .v2-domain-grid article {
       animation: v2-assemble both var(--v2-ease);
       animation-timeline: view();
       animation-range: entry 5% entry 45%;
     }
 
-    .v2-story-list li:nth-child(even),
     .v2-domain-grid article:nth-child(even) {
       animation-name: v2-assemble-flip;
     }
@@ -1149,6 +1139,25 @@ html:root:has(.v2-page) {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* The thesis, performed: while the confluence is on screen (RangeFlow sets
+   data-flow), the walls between the domains dissolve and the current swells.
+   Color/opacity only, so reduced-motion users lose nothing. */
+.v2-domain-grid article {
+  transition: border-color 900ms var(--v2-ease);
+}
+
+.v2-domain-grid::before {
+  transition: opacity 900ms var(--v2-ease);
+}
+
+.v2-range[data-flow="true"] .v2-domain-grid article {
+  border-color: oklch(1 0 0 / 0.05);
+}
+
+.v2-range[data-flow="true"] .v2-domain-grid::before {
+  opacity: 0.34;
 }
 
 @keyframes v2-assemble-up {

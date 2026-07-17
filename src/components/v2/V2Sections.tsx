@@ -1,5 +1,6 @@
 import Image from "next/image";
 import PortraitSwap from "./PortraitSwap";
+import RangeFlow from "./RangeFlow";
 import RangeGlow from "./RangeGlow";
 import RotatingIdentity from "./RotatingIdentity";
 import ToolMark from "./ToolMark";
@@ -57,6 +58,7 @@ export function OperatingRange() {
   return (
     <section className="v2-range" id="skills" aria-labelledby="skills-heading">
       <RangeGlow />
+      <RangeFlow />
       <div className="v2-range-intro">
         <div className="v2-range-lede">
           <p className="v2-utility">Skills</p>
@@ -76,9 +78,6 @@ export function OperatingRange() {
               </li>
             ))}
           </ul>
-          <p className="v2-ai-plate-hint" aria-hidden="true">
-            Run your cursor over it — watch the walls go.
-          </p>
         </div>
       </div>
       <div className="v2-domain-grid">
