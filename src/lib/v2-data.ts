@@ -5,15 +5,26 @@ export const v2Navigation = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
-export const v2Projects = [
+type V2Project = {
+  title: string;
+  category: string;
+  description: string;
+  /** The sharpest decision or insight — the thing a senior reader would ask
+      about. Admission test for the shelf: no hook, no featured slot. */
+  hook?: string;
+  tags: readonly string[];
+  image: string;
+  href: string;
+  tone: "orange" | "indigo" | "neutral";
+};
+
+export const v2Projects: readonly V2Project[] = [
   {
     title: "AI Companion",
     category: "Consumer AI experiment",
     description:
-      "A full-stack product for creating conversational companions inspired by familiar public personas.",
-    contribution:
-      "Designed and built the product loop across onboarding, model behavior, subscriptions, and delivery.",
-    result: "A complete consumer AI product—shipped end to end, from model behavior to billing.",
+      "A full-stack product for creating conversational companions inspired by familiar public personas — built end to end, from onboarding to billing.",
+    hook: "The model was the easy part. The real build was the product loop around it: persona behavior, memory, and payments.",
     tags: ["Next.js", "OpenAI", "Llama 2", "Prisma", "Stripe"],
     image: "/images/projects/ai-companion.png",
     href: "https://github.com/cshyang/ai-companion",
@@ -24,9 +35,7 @@ export const v2Projects = [
     category: "Applied AI prototype",
     description:
       "A patient-facing workflow that extracts biomarkers from medical reports and rewrites them in plain language.",
-    contribution:
-      "Shaped the extraction and explanation flow, then shipped the prototype with retrieval and LLM tooling.",
-    result: "Complex laboratory information becomes easier to inspect and discuss.",
+    hook: "Turns a raw lab PDF into something a patient can question their doctor about.",
     tags: ["Python", "Streamlit", "LangChain", "OpenAI"],
     image: "/images/projects/ai_medical_agent.png",
     href: "https://github.com/cshyang/langchain-pdf-medical-agent",
@@ -37,9 +46,6 @@ export const v2Projects = [
     category: "Frontend systems study",
     description:
       "A responsive streaming interface using live TMDB content to study navigation, discovery, and dense media layouts.",
-    contribution:
-      "Built the application shell, content discovery surfaces, and responsive interaction model.",
-    result: "An interface study that behaves like a real media product.",
     tags: ["React", "Next.js", "Tailwind", "TMDB API"],
     image: "/images/projects/netflix_clone.png",
     href: "https://github.com/cshyang/netflix-clone",

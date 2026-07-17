@@ -591,27 +591,23 @@ html:root:has(.v2-page) {
   font-size: 1.05rem;
 }
 
-.v2-project-copy dl {
-  width: 100%;
-  margin: 2rem 0;
-}
-
-.v2-project-copy dl > div {
-  display: grid;
-  grid-template-columns: 7.5rem 1fr;
-  gap: 1rem;
-  padding: 1rem 0;
+.v2-project-hook {
+  max-width: 42rem;
+  margin: 1.8rem 0 0.4rem;
+  padding-top: 1.1rem;
   border-top: 1px solid var(--v2-seam);
+  color: var(--v2-muted);
+  line-height: 1.55;
 }
 
-.v2-project-copy dt {
-  font-size: var(--v2-text-label);
+.v2-project-hook strong {
+  color: var(--v2-oxide);
   font-weight: 720;
 }
 
-.v2-project-copy dd {
-  margin: 0;
-  line-height: 1.5;
+.v2-project-description + ul,
+.v2-project-hook + ul {
+  margin-top: 1.6rem;
 }
 
 .v2-project-copy ul {
@@ -1424,11 +1420,6 @@ html:root:has(.v2-page) {
     padding: 2rem 1.25rem;
   }
 
-  .v2-project-copy dl > div {
-    grid-template-columns: 1fr;
-  }
-
-  .v2-project-copy dt { margin-bottom: 0.4rem; }
   .v2-project-image { min-height: 19rem; padding: 1.2rem; }
 
   .v2-story-list li,

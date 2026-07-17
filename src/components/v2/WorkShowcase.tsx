@@ -129,10 +129,11 @@ export default function WorkShowcase() {
               <h3>{project.title}</h3>
               <p className="v2-project-meta">{project.category}</p>
               <p className="v2-project-description">{project.description}</p>
-              <dl>
-                <div><dt>My contribution</dt><dd>{project.contribution}</dd></div>
-                <div><dt>What shipped</dt><dd>{project.result}</dd></div>
-              </dl>
+              {project.hook && (
+                <p className="v2-project-hook">
+                  <strong>The hook:</strong> {project.hook}
+                </p>
+              )}
               <ul aria-label={`${project.title} technologies`}>
                 {project.tags.map((tag) => (
                   <li key={tag}>
