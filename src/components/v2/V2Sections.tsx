@@ -59,12 +59,12 @@ export function OperatingRange() {
       <RangeGlow />
       <div className="v2-range-intro">
         <p className="v2-utility">Skills</p>
-        <h2 id="skills-heading">AI didn&rsquo;t replace the stack. It wrapped it.</h2>
+        <h2 id="skills-heading">Four careers, collapsed into one.</h2>
         <p>
-          Most people use AI to do what they already know. Same here — these
-          are the domains it multiplies for me.
+          AI didn&rsquo;t replace the stack — it dissolved the walls between
+          marketing, product, data, and engineering.
         </p>
-        <ul className="v2-ai-tools" aria-label="AI tooling">
+        <ul className="v2-ai-tools" aria-label="The AI layer that dissolved the walls">
           {aiWrapperTools.map((tool) => (
             <li key={tool}>
               <ToolMark name={tool} />
@@ -89,6 +89,17 @@ export function OperatingRange() {
           </article>
         ))}
       </div>
+      {/* Confluence: the four domains stream into one direction */}
+      <svg className="v2-confluence" viewBox="0 0 100 12" aria-hidden="true">
+        <path d="M 12 0 C 12 8, 50 5, 50 12" pathLength={1} />
+        <path d="M 38 0 C 38 6, 50 6, 50 12" pathLength={1} />
+        <path d="M 62 0 C 62 6, 50 6, 50 12" pathLength={1} />
+        <path d="M 88 0 C 88 8, 50 5, 50 12" pathLength={1} />
+      </svg>
+      <p className="v2-range-terminal">
+        <strong>One loop now:</strong> find the problem, build the fix, ship
+        it to people.
+      </p>
     </section>
   );
 }
