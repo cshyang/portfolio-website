@@ -837,7 +837,7 @@ html:root:has(.v2-page) {
   margin: 0 0 1.4rem;
 }
 
-.v2-range-intro > p {
+.v2-range-lede > p {
   max-width: 39rem;
   color: var(--v2-white);
 }
