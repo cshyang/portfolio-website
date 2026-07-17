@@ -1,7 +1,34 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import LiquidLens from "./LiquidLens";
 import { v2Navigation } from "@/lib/v2-data";
+
+// Eased scroll glide, cancelled by user input. (Native CSS smooth scroll is
+// disabled on v2 — it fights ScrollTrigger's pin/snap and both cancel out.)
+function glideTo(targetY: number) {
+  const startY = window.scrollY;
+  const dist = targetY - startY;
+  if (!dist) return;
+  const duration = Math.min(1100, 450 + Math.abs(dist) * 0.1);
+  const start = performance.now();
+  let raf = 0;
+  const stop = () => {
+    cancelAnimationFrame(raf);
+    window.removeEventListener("wheel", stop);
+    window.removeEventListener("touchstart", stop);
+  };
+  window.addEventListener("wheel", stop, { passive: true });
+  window.addEventListener("touchstart", stop, { passive: true });
+  const step = (now: number) => {
+    const p = Math.min(1, (now - start) / duration);
+    const eased = p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2;
+    window.scrollTo(0, startY + dist * eased);
+    if (p < 1) raf = requestAnimationFrame(step);
+    else stop();
+  };
+  raf = requestAnimationFrame(step);
+}
 
 export default function V2Header() {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -33,12 +60,39 @@ export default function V2Header() {
     return () => observer.disconnect();
   }, []);
 
+  // Native CSS smooth scrolling fights ScrollTrigger's pin/snap (each cancels the
+  // other's scroll), so v2 disables it and drives in-page anchors through GSAP.
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const anchor = (event.target as Element).closest?.('a[href^="#"]');
+      if (!anchor || !anchor.closest(".v2-page")) return;
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      const target = href === "#top" ? document.body : document.querySelector(href);
+      if (!target) return;
+      event.preventDefault();
+      history.pushState(null, "", href);
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        target.scrollIntoView();
+        return;
+      }
+      const y =
+        href === "#top"
+          ? 0
+          : target.getBoundingClientRect().top + window.scrollY - 72;
+      glideTo(y);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
   const activeIndex = v2Navigation.findIndex((item) => item.href === activeHref);
 
   const closeMenu = () => dialogRef.current?.close();
 
   return (
     <header className="v2-header">
+      <LiquidLens />
       <nav className="v2-desktop-nav" aria-label="Primary navigation">
         <span
           className="v2-nav-lens"

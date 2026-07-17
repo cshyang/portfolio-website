@@ -1,3 +1,8 @@
+/* GSAP owns in-page scrolling on v2; native smooth scroll fights pin/snap */
+html:root:has(.v2-page) {
+  scroll-behavior: auto !important;
+}
+
 .v2-shell {
   display: flow-root;
   background: oklch(0.962 0.008 241.7);
@@ -19,8 +24,9 @@
   --v2-light-3: oklch(0.58 0.2 259 / 0.9);
   --v2-glow: oklch(0.72 0.14 230 / 0.5);
   --v2-muted: oklch(0.38 0.045 260);
-  --v2-text-display: clamp(3.45rem, 6.3vw, 6rem);
+  --v2-text-display: clamp(3.45rem, 7.4vw, 6rem);
   --v2-text-headline: clamp(2.8rem, 5.5vw, 5.5rem);
+  --v2-text-title: clamp(2.4rem, 4.2vw, 4.2rem);
   --v2-text-body: 1rem;
   --v2-text-label: 0.78rem;
   --v2-ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -78,7 +84,11 @@
   width: min(88rem, 88vw);
   aspect-ratio: 1080 / 640;
   background: url("/images/textures/confluence-microtext-drift.svg") no-repeat center / contain;
-  opacity: 0.34;
+  opacity: 0.26;
+  /* keep the glyph stream out of the copy column: fade it away toward the
+     top-left where the headline and summary sit */
+  mask-image: radial-gradient(115% 115% at 92% 104%, black 28%, transparent 60%);
+  -webkit-mask-image: radial-gradient(115% 115% at 92% 104%, black 28%, transparent 60%);
   pointer-events: none;
 }
 
@@ -128,11 +138,20 @@
   padding: 0.25rem;
   overflow: hidden;
   border-radius: 999px;
-  background: oklch(0.99 0.004 247 / 0.82);
-  box-shadow: 0 3px 8px oklch(0.16 0.07 260 / 0.11);
-  backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid oklch(1 0 0 / 0.45);
+  background:
+    radial-gradient(140% 120% at 18% -20%, oklch(1 0 0 / 0.55), oklch(1 0 0 / 0) 55%),
+    radial-gradient(120% 150% at 85% 130%, oklch(1 0 0 / 0.3), oklch(1 0 0 / 0) 50%),
+    oklch(0.99 0.004 247 / 0.36);
+  box-shadow:
+    inset 0 1.5px 1px oklch(1 0 0 / 0.75),
+    inset 0 -1px 1px oklch(1 0 0 / 0.28),
+    inset 3px 6px 12px -8px oklch(1 0 0 / 0.65),
+    inset -4px -8px 14px -10px oklch(0.35 0.05 260 / 0.4),
+    0 4px 8px oklch(0.16 0.07 260 / 0.13);
+  backdrop-filter: blur(18px) saturate(190%) brightness(1.06);
   transform: translateX(-50%);
-  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(190%) brightness(1.06);
 }
 
 .v2-header > * {
@@ -188,14 +207,6 @@
   opacity: 1;
 }
 
-.v2-hero-status i {
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-right: 0.4rem;
-  border-radius: 50%;
-  background: var(--v2-orange);
-}
 
 .v2-menu-trigger,
 .v2-menu {
@@ -210,22 +221,24 @@
 .v2-hero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
-  grid-template-rows: minmax(auto, min(calc(100svh - 9rem), 54rem)) auto;
-  column-gap: clamp(2rem, 6vw, 7rem);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  min-height: min(calc(100svh - 5.25rem), 54rem);
   width: min(calc(100% - 3rem), 90rem);
   margin: 5.25rem auto 0;
   padding: 0 clamp(0rem, 2vw, 2rem);
 }
 
+/* Copy spans into the portrait's columns on purpose: long phrases ride over
+   the card (copy z2 > portrait z1). Separation is polite; overlap is the POV. */
 .v2-hero-copy {
   display: flex;
-  grid-column: 1;
+  z-index: 2;
+  grid-column: 1 / 9;
   grid-row: 1;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: clamp(3rem, 6vw, 7rem) 0;
+  padding: clamp(4rem, 10vh, 7rem) 0 clamp(3rem, 8vh, 6rem);
   background: transparent;
 }
 
@@ -245,23 +258,52 @@
 }
 
 .v2-hero-copy h1 {
-  max-width: 17ch;
-  min-height: 2.85em;
-  margin-bottom: 1.6rem;
+  max-width: 15ch;
+  margin-bottom: 0;
   font-size: var(--v2-text-display);
   font-weight: 760;
   line-height: 0.94;
 }
 
-.v2-identity {
+.v2-hero-lead {
   display: block;
+  margin-bottom: 0.45em;
+  color: var(--v2-ink);
+  font-size: 0.34em;
+  font-weight: 720;
+  letter-spacing: 0;
+}
+
+.v2-identity {
+  position: relative;
+  display: block;
+  min-height: 1.88em; /* two phrase lines; keeps short phrases from collapsing the row */
   color: var(--v2-vermilion);
   animation: v2-identity-in 520ms var(--v2-ease) both;
+}
+
+/* Knockout clone: same text, card ink, visible only past the portrait's left
+   edge (--v2-cut, set by RotatingIdentity). Negative insets keep glyph
+   overshoot from the 0.94 line-height unclipped. */
+.v2-identity-cut {
+  position: absolute;
+  inset: 0;
+  color: var(--v2-ink);
+  clip-path: inset(-0.25em -0.25em -0.25em var(--v2-cut, 9999px));
+  pointer-events: none;
+  /* paper halo lifts the card-side letters off the busy artwork; the stroke
+     paints behind the fill so letterforms stay intact */
+  paint-order: stroke fill;
+  -webkit-text-stroke: 0.06em var(--v2-paper);
 }
 
 .v2-identity-raw {
   color: var(--v2-muted);
   opacity: 0.55;
+}
+
+.v2-identity-cut .v2-identity-raw {
+  color: var(--v2-ink);
 }
 
 @keyframes v2-identity-in {
@@ -275,15 +317,33 @@
   }
 }
 
+.v2-hero-context {
+  z-index: 2;
+  display: flex;
+  grid-column: 10 / 13;
+  grid-row: 1;
+  align-self: end;
+  align-items: flex-start;
+  padding: 0 0 clamp(3rem, 8vh, 6rem) clamp(1.25rem, 2.5vw, 2.5rem);
+  flex-direction: column;
+}
+
+.v2-hero-principle {
+  margin-bottom: 0.9rem;
+  color: var(--v2-ink);
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  font-weight: 740;
+  letter-spacing: -0.02em;
+}
+
 .v2-hero-summary {
-  max-width: 38rem;
-  margin-bottom: 2.1rem;
+  max-width: 28ch;
+  margin-bottom: 1.8rem;
   color: var(--v2-muted);
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
   line-height: 1.55;
 }
 
-.v2-primary-action,
 .v2-project-copy > a {
   display: inline-flex;
   align-items: center;
@@ -298,7 +358,28 @@
   transition: gap 260ms var(--v2-ease), background-color 260ms var(--v2-ease), color 260ms var(--v2-ease);
 }
 
+.v2-primary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 2.75rem;
+  color: var(--v2-vermilion);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-weight: 740;
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.4em;
+  transition: gap 260ms var(--v2-ease), color 260ms var(--v2-ease), text-decoration-color 260ms var(--v2-ease);
+}
+
 .v2-primary-action:hover,
+.v2-primary-action:focus-visible {
+  gap: 1.6rem;
+  color: var(--v2-oxide);
+  text-decoration-color: currentColor;
+}
+
 .v2-project-copy > a:hover {
   gap: 3.1rem;
   background: var(--v2-ink);
@@ -307,12 +388,15 @@
 
 .v2-hero-portrait {
   display: grid;
-  grid-column: 2;
+  z-index: 1;
+  grid-column: 6 / 10;
   grid-row: 1;
-  min-height: 34rem;
-  margin: clamp(2rem, 5vw, 5rem) 0;
+  /* viewport-aware: 36rem is the ceiling, not the floor — on 13" laptops the
+     card shrinks so the hero still resolves within the first screen */
+  min-height: min(36rem, calc(100svh - 5.75rem));
+  margin: clamp(1.5rem, 5vh, 3.5rem) 0 clamp(-3rem, -4vh, -1.5rem);
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .v2-portrait-swap {
@@ -406,26 +490,12 @@
   outline-color: var(--v2-white);
 }
 
-.v2-hero-status {
-  display: flex;
-  grid-column: 1 / -1;
-  grid-row: 2;
-  justify-content: space-between;
-  gap: 0.5rem 2rem;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 1.5rem 0 0;
-  border-top: 1px solid var(--v2-seam);
-  font-size: var(--v2-text-label);
-  font-weight: 700;
-}
 
 .v2-reveal {
   animation: v2-enter 760ms var(--v2-ease) both;
 }
 
 .v2-reveal--two { animation-delay: 70ms; }
-.v2-reveal--three { animation-delay: 140ms; }
 .v2-reveal--four { animation-delay: 210ms; }
 .v2-reveal--five { animation-delay: 280ms; }
 .v2-reveal--six { animation-delay: 350ms; }
@@ -442,26 +512,35 @@
 }
 
 .v2-section-heading {
-  display: grid;
-  grid-template-columns: 0.65fr 1.3fr 1fr;
-  gap: 2rem;
-  align-items: end;
   max-width: 90rem;
-  margin: 0 auto clamp(3.5rem, 7vw, 6rem);
+  margin: 0 auto 2.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--v2-seam);
+}
+
+.v2-work {
+  padding-block-start: clamp(4rem, 7vw, 6.5rem);
 }
 
 .v2-section-heading .v2-utility {
-  align-self: start;
-  margin-top: 0.4em;
+  margin-bottom: 0.9rem;
+  color: var(--v2-oxide);
 }
 
-.v2-section-heading h2,
 .v2-range-intro h2,
 .v2-contact-intro h2 {
   margin-bottom: 0;
   font-size: var(--v2-text-headline);
   font-weight: 740;
   line-height: 0.98;
+}
+
+.v2-section-heading h2 {
+  max-width: 24ch;
+  margin-bottom: 0.9rem;
+  font-size: var(--v2-text-title);
+  font-weight: 740;
+  line-height: 1.02;
 }
 
 .v2-section-heading > p:last-child {
@@ -476,8 +555,6 @@
   margin: 0 auto;
   flex-direction: column;
   gap: clamp(5rem, 10vw, 10rem);
-  padding-top: clamp(2rem, 4vw, 4rem);
-  border-top: 1px solid var(--v2-seam);
 }
 
 .v2-project {
@@ -497,16 +574,15 @@
 }
 
 .v2-project-meta {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  margin-bottom: 3rem;
+  margin: 0.3rem 0 1.6rem;
+  color: var(--v2-oxide);
 }
 
 .v2-project-copy h3 {
-  margin: 0 0 1.2rem;
-  font-size: clamp(2.5rem, 4vw, 4.5rem);
-  line-height: 0.98;
+  margin: 0 0 0.4rem;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 740;
+  line-height: 1;
 }
 
 .v2-project-description {
@@ -654,7 +730,7 @@
   background-color: var(--v2-blue);
   background-image:
     url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="g" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="19"/><feColorMatrix values="0 0 0 0 0.1  0 0 0 0 0.05  0 0 0 0 0.02  1.3 0 0 0 -1.02"/></filter><rect width="100%25" height="100%25" filter="url(%23g)"/></svg>'),
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720"><defs><linearGradient id="cool" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="%230966d6"/><stop offset="1" stop-color="%2306265f"/></linearGradient><linearGradient id="warm" x1="0" y1="0" x2="1" y2="0.25"><stop offset="0" stop-color="%23f04b1d"/><stop offset="0.5" stop-color="%23b7331b"/><stop offset="1" stop-color="%23721408"/></linearGradient><filter id="c1" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="5" seed="9" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="135" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="c2" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.014" numOctaves="5" seed="27" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="155" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect x="0" y="0" width="720" height="720" fill="url(%23cool)"/><g filter="url(%23c1)"><rect x="295" y="-80" width="600" height="880" fill="%23ffd2c0"/></g><g filter="url(%23c2)"><rect x="330" y="-80" width="600" height="880" fill="url(%23warm)"/></g></svg>');
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720"><defs><linearGradient id="cool" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="%230966d6"/><stop offset="1" stop-color="%2306265f"/></linearGradient><linearGradient id="warm" x1="0" y1="0" x2="1" y2="0.25"><stop offset="0" stop-color="%23f04b1d"/><stop offset="0.5" stop-color="%23b7331b"/><stop offset="1" stop-color="%23721408"/></linearGradient><filter id="c1" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="5" seed="9" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="135" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="c2" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.014" numOctaves="5" seed="27" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="155" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect x="0" y="0" width="720" height="720" fill="url(%23cool)"/><g filter="url(%23c1)"><rect x="295" y="-80" width="600" height="880" fill="%23f4ecdf"/></g><g filter="url(%23c2)"><rect x="330" y="-80" width="600" height="880" fill="url(%23warm)"/></g></svg>');
   background-blend-mode: multiply, normal;
   background-size: cover, cover;
 }
@@ -665,7 +741,7 @@
   background-color: var(--v2-vermilion);
   background-image:
     url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="g" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="31"/><feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.05  0 0 0 0 0.01  1.6 0 0 0 -0.96"/></filter><rect width="100%25" height="100%25" filter="url(%23g)"/></svg>'),
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="e" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.014 0.01" numOctaves="3" seed="17" result="big"/><feColorMatrix in="big" type="matrix" values="0 0 0 0 0.96  0 0 0 0 0.7  0 0 0 0 0.38  7 0 0 0 -4.5" result="shape"/><feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="2" seed="3" result="zone"/><feColorMatrix in="zone" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  2.6 0 0 0 -1.2" result="cluster"/><feComposite in="shape" in2="cluster" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" result="patch"/><feTurbulence type="fractalNoise" baseFrequency="0.12" numOctaves="2" seed="8" result="dots"/><feColorMatrix in="dots" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.2 0 0 0 -1.1" result="holes"/><feComposite in="patch" in2="holes" operator="out"/></filter><rect width="100%25" height="100%25" filter="url(%23e)"/></svg>'),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="e" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.014 0.01" numOctaves="3" seed="17" result="big"/><feColorMatrix in="big" type="matrix" values="0 0 0 0 0.97  0 0 0 0 0.93  0 0 0 0 0.86  7 0 0 0 -4.5" result="shape"/><feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="2" seed="3" result="zone"/><feColorMatrix in="zone" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  2.6 0 0 0 -1.2" result="cluster"/><feComposite in="shape" in2="cluster" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" result="patch"/><feTurbulence type="fractalNoise" baseFrequency="0.12" numOctaves="2" seed="8" result="dots"/><feColorMatrix in="dots" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.2 0 0 0 -1.1" result="holes"/><feComposite in="patch" in2="holes" operator="out"/></filter><rect width="100%25" height="100%25" filter="url(%23e)"/></svg>'),
     url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="b" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="3" seed="52"/><feColorMatrix values="0 0 0 0 0.942  0 0 0 0 0.294  0 0 0 0 0.114  0.95 0 0 0 -0.5"/></filter><rect width="100%25" height="100%25" filter="url(%23b)"/></svg>'),
     url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="d" x="0" y="0" width="100%25" height="100%25"><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="3" seed="44"/><feColorMatrix values="0 0 0 0 0.448  0 0 0 0 0.078  0 0 0 0 0.03  1.2 0 0 0 -0.45"/></filter><rect width="100%25" height="100%25" filter="url(%23d)"/></svg>');
   background-blend-mode: multiply, normal, screen, multiply;
@@ -743,6 +819,11 @@
   }
 }
 
+.v2-range-intro .v2-utility {
+  margin-bottom: 1.5rem;
+  color: var(--v2-pale-orange);
+}
+
 .v2-range-intro {
   position: sticky;
   top: 8rem;
@@ -769,6 +850,24 @@
   gap: 1.5rem;
   padding: clamp(2rem, 4vw, 4rem) 0;
   border-bottom: 1px solid oklch(1 0 0 / 0.3);
+}
+
+.v2-discipline-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  grid-column: 2;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.v2-discipline-tools li {
+  padding: 0.28em 0.75em;
+  border-radius: 999px;
+  background: oklch(1 0 0 / 0.12);
+  font-size: var(--v2-text-label);
+  font-weight: 650;
 }
 
 .v2-discipline-list h3 {
@@ -803,16 +902,10 @@
 }
 
 .v2-journey {
+  padding-block-end: clamp(3rem, 5vw, 5.5rem);
   background: var(--v2-white);
 }
 
-.v2-section-heading--journey {
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-}
-
-.v2-section-heading--journey h2 {
-  max-width: 18ch;
-}
 
 .v2-journey-list {
   position: relative;
@@ -899,7 +992,7 @@
   padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 5vw, 5.5rem);
   /* confluence material: warm story side left, cool structure side behind the form */
   background:
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720"><defs><radialGradient id="warm" cx="0.3" cy="0.2" r="1.1"><stop offset="0" stop-color="%23b7331b"/><stop offset="0.46" stop-color="%23a11d0b"/><stop offset="1" stop-color="%23721408"/></radialGradient><linearGradient id="cool" x1="0" y1="0" x2="1" y2="0.8"><stop offset="0" stop-color="%230966d6"/><stop offset="1" stop-color="%2306265f"/></linearGradient><filter id="c1" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="5" seed="9" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="135" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="c2" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.014" numOctaves="5" seed="27" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="155" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect x="0" y="0" width="720" height="720" fill="url(%23warm)"/><g filter="url(%23c1)"><rect x="415" y="-80" width="500" height="880" fill="%23ffd2c0"/></g><g filter="url(%23c2)"><rect x="450" y="-80" width="500" height="880" fill="url(%23cool)"/></g></svg>')
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720"><defs><radialGradient id="warm" cx="0.3" cy="0.2" r="1.1"><stop offset="0" stop-color="%23b7331b"/><stop offset="0.46" stop-color="%23a11d0b"/><stop offset="1" stop-color="%23721408"/></radialGradient><linearGradient id="cool" x1="0" y1="0" x2="1" y2="0.8"><stop offset="0" stop-color="%230966d6"/><stop offset="1" stop-color="%2306265f"/></linearGradient><filter id="c1" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="5" seed="9" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="135" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="c2" x="-20%25" y="-20%25" width="140%25" height="140%25"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.014" numOctaves="5" seed="27" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="155" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect x="0" y="0" width="720" height="720" fill="url(%23warm)"/><g filter="url(%23c1)"><rect x="415" y="-80" width="500" height="880" fill="%23f4ecdf"/></g><g filter="url(%23c2)"><rect x="450" y="-80" width="500" height="880" fill="url(%23cool)"/></g></svg>')
     center / cover no-repeat var(--v2-oxide);
   color: var(--v2-white);
 }
@@ -1089,14 +1182,9 @@
 }
 
 @media (max-width: 1080px) {
-  .v2-hero {
-    grid-template-columns: 1.2fr 0.8fr;
-    grid-template-rows: minmax(auto, 72svh) auto;
-  }
-
-  .v2-hero-copy { grid-column: 1; grid-row: 1; }
-  .v2-hero-portrait { grid-column: 2; grid-row: 1; }
-  .v2-hero-status { grid-column: 1 / -1; grid-row: 2; }
+  .v2-hero-copy { grid-column: 1 / 8; }
+  .v2-hero-portrait { grid-column: 6 / 10; }
+  .v2-hero-context { grid-column: 10 / 13; padding-left: 1.25rem; }
 }
 
 @media (max-width: 820px) {
@@ -1200,18 +1288,26 @@
   .v2-hero::before { display: none; }
 
   .v2-hero-copy {
-    min-height: 32rem;
-    padding: 2.5rem 0;
+    min-height: 28rem;
+    padding: 3.5rem 0 2.5rem;
   }
 
   .v2-hero-copy h1 { font-size: clamp(3.2rem, 15vw, 5rem); }
-  .v2-hero-portrait { min-height: 34rem; margin: 0; }
 
-  .v2-section-heading,
-  .v2-section-heading--journey {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  /* narrow columns wrap long phrases to three lines */
+  .v2-identity { min-height: 2.82em; }
+
+  .v2-hero-portrait {
+    min-height: 34rem;
+    margin: 0 -1rem 0 clamp(1.5rem, 8vw, 4rem);
+    border-radius: 8px 0 0 8px;
   }
+
+  .v2-hero-context {
+    padding: 3rem 0 3rem;
+  }
+
+  .v2-hero-summary { max-width: 34rem; }
 
   .v2-project {
     display: flex;
@@ -1332,4 +1428,87 @@
     animation: none;
     transform: translate3d(0, 0, 0) scale(1.06);
   }
+}
+
+/* ---- Work showcase: pinned scroll mode ---- */
+
+.v2-showcase-rail {
+  display: none;
+}
+
+.v2-work-showcase[data-mode="pinned"] {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  max-width: 90rem;
+  height: 100svh;
+  margin: 0 auto;
+}
+
+.v2-work-showcase[data-mode="pinned"] .v2-showcase-rail {
+  position: relative;
+  display: block;
+  justify-self: center;
+  width: 3px;
+  height: min(26rem, 56svh);
+}
+
+.v2-showcase-rail::before,
+.v2-showcase-rail-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.v2-showcase-rail::before {
+  background: var(--v2-seam);
+  content: "";
+}
+
+.v2-showcase-rail-fill {
+  background: var(--v2-vermilion);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.v2-work-showcase[data-mode="pinned"] .v2-project-list {
+  display: grid;
+  gap: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-top: 0;
+}
+
+.v2-work-showcase[data-mode="pinned"] .v2-project {
+  grid-row: 1;
+  grid-column: 1;
+  min-height: 0;
+  max-height: calc(100svh - 7rem);
+}
+
+/* Pinned slides swap in place: one shared geometry, no alternation */
+.v2-work-showcase[data-mode="pinned"] .v2-project:nth-child(even) .v2-project-copy {
+  grid-column: 1;
+}
+
+.v2-work-showcase[data-mode="pinned"] .v2-project:nth-child(even) .v2-project-image {
+  grid-column: 2;
+}
+
+/* Gallery ring: shared vanishing point for the panel carousel */
+.v2-work-showcase[data-mode="pinned"] .v2-project-list {
+  perspective: 1600px;
+}
+
+.v2-work-showcase[data-mode="pinned"] .v2-project {
+  transform-style: preserve-3d;
+}
+
+.v2-work-showcase[data-mode="pinned"] .v2-project-image {
+  will-change: transform, opacity, filter;
 }

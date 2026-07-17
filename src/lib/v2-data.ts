@@ -1,6 +1,6 @@
 export const v2Navigation = [
   { label: "Work", href: "#work" },
-  { label: "Range", href: "#range" },
+  { label: "Skills", href: "#skills" },
   { label: "Journey", href: "#journey" },
   { label: "Contact", href: "#contact" },
 ] as const;
@@ -52,21 +52,25 @@ export const disciplines = [
     name: "Data",
     statement: "Find the signal, define the decision, and make the evidence usable.",
     proof: "Analytics leadership · data products · decision systems",
+    tools: ["SQL", "Python", "Snowflake", "Tableau", "Machine learning"],
   },
   {
     name: "AI",
     statement: "Turn model capability into a product loop people can actually use.",
     proof: "Agentic systems · LLM applications · recommendation systems",
+    tools: ["LangChain", "PydanticAI", "OpenAI", "Llama", "RAG"],
   },
   {
     name: "Product",
     statement: "Reduce ambiguity, choose the useful shape, and get the work shipped.",
     proof: "Discovery · prioritisation · team leadership",
+    tools: ["Product analytics", "Experiment design", "Roadmaps"],
   },
   {
     name: "Code",
     statement: "Build enough of the real thing to expose weak assumptions early.",
     proof: "Next.js · Python · rapid product prototyping",
+    tools: ["Next.js", "React", "TypeScript", "Tailwind", "Streamlit"],
   },
 ] as const;
 

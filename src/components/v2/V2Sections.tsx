@@ -3,31 +3,33 @@ import PortraitSwap from "./PortraitSwap";
 import RangeGlow from "./RangeGlow";
 import RotatingIdentity from "./RotatingIdentity";
 import V2Contact from "./V2Contact";
-import { disciplines, journey, v2Projects } from "@/lib/v2-data";
+import WorkShowcase from "./WorkShowcase";
+import { disciplines, journey } from "@/lib/v2-data";
 
 export function V2Hero() {
   return (
     <section className="v2-hero" aria-labelledby="v2-hero-heading">
       <div className="v2-hero-copy v2-reveal v2-reveal--one">
         <h1 id="v2-hero-heading">
-          I&rsquo;m <RotatingIdentity />
+          <span className="v2-hero-lead">I&rsquo;m</span>
+          <RotatingIdentity />
         </h1>
-        <p className="v2-hero-summary">
-          I turn rough ideas into useful systems by moving between evidence, product judgment, AI, and hands-on building.
-        </p>
-        <a className="v2-primary-action" href="#work">
-          Explore Selected Work <span aria-hidden="true">↓</span>
-        </a>
       </div>
 
       <div className="v2-hero-portrait v2-reveal v2-reveal--two">
         <PortraitSwap />
       </div>
 
-      <p className="v2-hero-status v2-reveal v2-reveal--three">
-        <span><i aria-hidden="true" /> Kuala Lumpur · GMT +8</span>
-        <span>Open to the right problem.</span>
-      </p>
+      <div className="v2-hero-context v2-reveal v2-reveal--four">
+        <p className="v2-hero-principle">Useful beats impressive.</p>
+        <p className="v2-hero-summary">
+          I turn rough ideas into useful systems by moving between evidence,
+          product judgment, AI, and hands-on building.
+        </p>
+        <a className="v2-primary-action" href="#work">
+          Selected work <span aria-hidden="true">↘</span>
+        </a>
+      </div>
     </section>
   );
 }
@@ -38,46 +40,25 @@ export function SelectedWork() {
       <div className="v2-section-heading">
         <p className="v2-utility">Selected work</p>
         <h2 id="work-heading">Evidence over claims.</h2>
-        <p>Experiments and products that made it far enough to teach something real.</p>
+        <p>
+          Public experiments I built end-to-end and shipped in the open. The
+          professional record — analytics leadership, recommendation systems,
+          healthcare data — lives in the journey below.
+        </p>
       </div>
 
-      <div className="v2-project-list">
-        {v2Projects.map((project) => (
-          <article className={`v2-project v2-project--${project.tone}`} key={project.title}>
-            <div className="v2-project-copy">
-              <div className="v2-project-meta">
-                <span>{project.category}</span>
-                <span>Shipped project</span>
-              </div>
-              <h3>{project.title}</h3>
-              <p className="v2-project-description">{project.description}</p>
-              <dl>
-                <div><dt>My contribution</dt><dd>{project.contribution}</dd></div>
-                <div><dt>What shipped</dt><dd>{project.result}</dd></div>
-              </dl>
-              <ul aria-label={`${project.title} technologies`}>
-                {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
-              </ul>
-              <a href={project.href} target="_blank" rel="noreferrer" aria-label={`View ${project.title} project (opens in a new tab)`}>
-                View the Build <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-            <div className="v2-project-image">
-              <Image src={project.image} alt={`${project.title} product interface`} width={1200} height={800} sizes="(min-width: 900px) 55vw, 100vw" />
-            </div>
-          </article>
-        ))}
-      </div>
+      <WorkShowcase />
     </section>
   );
 }
 
 export function OperatingRange() {
   return (
-    <section className="v2-range" id="range" aria-labelledby="range-heading">
+    <section className="v2-range" id="skills" aria-labelledby="skills-heading">
       <RangeGlow />
       <div className="v2-range-intro">
-        <h2 id="range-heading">The useful work lives between disciplines.</h2>
+        <p className="v2-utility">Skills</p>
+        <h2 id="skills-heading">Every skill here was once a gap.</h2>
         <p>I started in analytics, moved into product and AI, then learned to build enough of the real thing to test the assumptions myself.</p>
       </div>
       <div className="v2-discipline-list">
@@ -86,6 +67,11 @@ export function OperatingRange() {
             <h3>{discipline.name}</h3>
             <p>{discipline.statement}</p>
             <span>{discipline.proof}</span>
+            <ul className="v2-discipline-tools" aria-label={`${discipline.name} tools`}>
+              {discipline.tools.map((tool) => (
+                <li key={tool}>{tool}</li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>
@@ -96,9 +82,14 @@ export function OperatingRange() {
 export function Journey() {
   return (
     <section className="v2-journey" id="journey" aria-labelledby="journey-heading">
-      <div className="v2-section-heading v2-section-heading--journey">
+      <div className="v2-section-heading">
+        <p className="v2-utility">Journey</p>
         <h2 id="journey-heading">A career built by crossing the next boundary.</h2>
-        <p>From analytics to product leadership, then deeper into AI systems and hands-on building.</p>
+        <p>
+          From analytics to product leadership, then deeper into AI systems and
+          hands-on building. This is where the employer-side work lives — the
+          parts I can&rsquo;t open-source.
+        </p>
       </div>
       <ol className="v2-journey-list">
         {journey.map((item) => (
@@ -122,7 +113,7 @@ export function Journey() {
 export function V2Footer() {
   return (
     <footer className="v2-footer">
-      <span>© {new Date().getFullYear()} Chau Shyang</span>
+      <span>© {new Date().getFullYear()} Chau Shyang · Kuala Lumpur · GMT +8</span>
       <a href="/v2/design">Design system</a>
       <a href="#top">Back to top ↑</a>
     </footer>
