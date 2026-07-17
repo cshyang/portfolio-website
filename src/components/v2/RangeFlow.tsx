@@ -2,15 +2,15 @@
 
 import { useEffect } from "react";
 
-// Marks the skills section while the confluence is on screen; CSS dissolves
-// the domain walls and swells the gutter current in response. IO instead of
-// scroll-driven CSS: Chrome's multi-animation view() range mapping proved
-// unreliable here, and this works in every browser.
+// Marks the skills section while the terminal statement is on screen; CSS
+// dissolves the domain walls and swells the gutter current in response. IO
+// instead of scroll-driven CSS: Chrome's multi-animation view() range mapping
+// proved unreliable here, and this works in every browser.
 export default function RangeFlow() {
   useEffect(() => {
     const range = document.querySelector(".v2-range");
-    const confluence = range?.querySelector(".v2-confluence");
-    if (!range || !confluence) return;
+    const terminal = range?.querySelector(".v2-range-terminal");
+    if (!range || !terminal) return;
 
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -19,7 +19,7 @@ export default function RangeFlow() {
       },
       { rootMargin: "0px 0px -12% 0px" }
     );
-    io.observe(confluence);
+    io.observe(terminal);
     return () => io.disconnect();
   }, []);
 

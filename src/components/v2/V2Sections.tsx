@@ -96,13 +96,6 @@ export function OperatingRange() {
           </article>
         ))}
       </div>
-      {/* Confluence: the four domains stream into one direction */}
-      <svg className="v2-confluence" viewBox="0 0 100 12" aria-hidden="true">
-        <path d="M 12 0 C 12 8, 50 5, 50 12" pathLength={1} />
-        <path d="M 38 0 C 38 6, 50 6, 50 12" pathLength={1} />
-        <path d="M 62 0 C 62 6, 50 6, 50 12" pathLength={1} />
-        <path d="M 88 0 C 88 8, 50 5, 50 12" pathLength={1} />
-      </svg>
       <p className="v2-range-terminal">
         <strong>One loop now:</strong> find the problem, build the fix, ship
         it to people.

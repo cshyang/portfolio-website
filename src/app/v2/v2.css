@@ -940,23 +940,11 @@ html:root:has(.v2-page) {
   pointer-events: none;
 }
 
-/* Confluence band: four streams merging into the terminal statement */
-.v2-confluence {
-  display: block;
-  width: min(64rem, 100%);
-  height: auto;
-  margin: 0 auto;
-}
-
-.v2-confluence path {
-  fill: none;
-  stroke: oklch(1 0 0 / 0.45);
-  stroke-width: 0.18;
-}
-
-.v2-range-terminal {
+/* p.-prefixed: outranks the .v2-page p margin reset */
+p.v2-range-terminal {
+  position: relative;
   max-width: 36rem;
-  margin: 0 auto;
+  margin: clamp(3rem, 6vw, 4.5rem) auto 0;
   padding: 1.4rem 2rem;
   border: 1px solid oklch(1 0 0 / 0.35);
   border-radius: 8px;
@@ -972,6 +960,24 @@ html:root:has(.v2-page) {
 .v2-range-terminal strong {
   color: var(--v2-pale-orange);
   font-weight: 740;
+}
+
+/* The gutter current continues past the grid and pours into the loop */
+.v2-range-terminal::before {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: clamp(3.5rem, 6vw, 5.5rem);
+  height: clamp(3rem, 6vw, 4.5rem);
+  background: url("/images/textures/confluence-microtext-drift.svg") center / 46rem repeat;
+  content: "";
+  filter: invert(1);
+  opacity: 0.14;
+  mask-image: linear-gradient(to right, transparent, black 30% 70%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 30% 70%, transparent);
+  transform: translateX(-50%);
+  transition: opacity 900ms var(--v2-ease);
+  pointer-events: none;
 }
 
 .v2-domain-grid article {
@@ -1118,15 +1124,6 @@ html:root:has(.v2-page) {
       animation-name: v2-assemble-flip;
     }
 
-    /* the domains collapse inward, the streams draw, the loop settles */
-    .v2-confluence path {
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
-      animation: v2-flow both linear;
-      animation-timeline: view();
-      animation-range: entry 25% entry 95%;
-    }
-
     .v2-range-terminal {
       animation: v2-assemble-up both var(--v2-ease);
       animation-timeline: view();
@@ -1135,13 +1132,7 @@ html:root:has(.v2-page) {
   }
 }
 
-@keyframes v2-flow {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* The thesis, performed: while the confluence is on screen (RangeFlow sets
+/* The thesis, performed: while the terminal is on screen (RangeFlow sets
    data-flow), the walls between the domains dissolve and the current swells.
    Color/opacity only, so reduced-motion users lose nothing. */
 .v2-domain-grid article {
@@ -1156,7 +1147,8 @@ html:root:has(.v2-page) {
   border-color: oklch(1 0 0 / 0.05);
 }
 
-.v2-range[data-flow="true"] .v2-domain-grid::before {
+.v2-range[data-flow="true"] .v2-domain-grid::before,
+.v2-range[data-flow="true"] .v2-range-terminal::before {
   opacity: 0.34;
 }
 
@@ -1607,8 +1599,13 @@ html:root:has(.v2-page) {
     padding: 1.1rem 1.2rem 1rem;
   }
 
-  .v2-domain-grid::before {
+  .v2-domain-grid::before,
+  .v2-range-terminal::before {
     display: none;
+  }
+
+  p.v2-range-terminal {
+    margin-top: 2.5rem;
   }
 
   .v2-contact-form { padding: 1.4rem 1rem; }
