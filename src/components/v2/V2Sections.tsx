@@ -58,20 +58,28 @@ export function OperatingRange() {
     <section className="v2-range" id="skills" aria-labelledby="skills-heading">
       <RangeGlow />
       <div className="v2-range-intro">
-        <p className="v2-utility">Skills</p>
-        <h2 id="skills-heading">Four careers, collapsed into one.</h2>
-        <p>
-          AI didn&rsquo;t replace the stack — it dissolved the walls between
-          marketing, product, data, and engineering.
-        </p>
-        <ul className="v2-ai-tools" aria-label="The AI layer that dissolved the walls">
-          {aiWrapperTools.map((tool) => (
-            <li key={tool}>
-              <ToolMark name={tool} />
-              {tool}
-            </li>
-          ))}
-        </ul>
+        <div className="v2-range-lede">
+          <p className="v2-utility">Skills</p>
+          <h2 id="skills-heading">Four careers, collapsed into one.</h2>
+          <p>
+            AI didn&rsquo;t replace the stack — it dissolved the walls between
+            marketing, product, data, and engineering.
+          </p>
+        </div>
+        <div className="v2-ai-plate">
+          <p className="v2-ai-plate-label">One AI layer, under all four.</p>
+          <ul className="v2-ai-tools" aria-label="The AI layer that dissolved the walls">
+            {aiWrapperTools.map((tool) => (
+              <li key={tool}>
+                <ToolMark name={tool} />
+                {tool}
+              </li>
+            ))}
+          </ul>
+          <p className="v2-ai-plate-hint" aria-hidden="true">
+            Run your cursor over it — watch the walls go.
+          </p>
+        </div>
       </div>
       <div className="v2-domain-grid">
         {domains.map((domain) => (

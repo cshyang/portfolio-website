@@ -822,7 +822,11 @@ html:root:has(.v2-page) {
 }
 
 .v2-range-intro {
+  display: grid;
   max-width: 90rem;
+  grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
   margin: 0 auto clamp(3.5rem, 6vw, 5.5rem);
   padding-top: 1.4rem;
   border-top: 1px solid oklch(1 0 0 / 0.3);
@@ -838,12 +842,59 @@ html:root:has(.v2-page) {
   color: var(--v2-white);
 }
 
-/* The AI layer the domains are wrapped in — marks on the intro, not per row */
+/* The solvent: the AI layer as its own substance — glyph texture, warm
+   chips, and a visible claim. Hovering it dissolves the grid's walls. */
+.v2-ai-plate {
+  position: relative;
+  padding: 1.4rem 1.5rem 1.2rem;
+}
+
+.v2-ai-plate::before {
+  position: absolute;
+  inset: 0;
+  background: url("/images/textures/confluence-microtext-drift.svg") center / 46rem repeat;
+  content: "";
+  filter: invert(1);
+  opacity: 0.18;
+  mask-image: radial-gradient(120% 100% at 50% 50%, black 40%, transparent 78%);
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 50%, black 40%, transparent 78%);
+  pointer-events: none;
+}
+
+.v2-ai-plate > * {
+  position: relative;
+}
+
+.v2-ai-plate-label {
+  margin: 0 0 0.9rem;
+  color: var(--v2-pale-orange);
+  font-size: 1.05rem;
+  font-weight: 740;
+}
+
+.v2-ai-plate-hint {
+  margin: 0.9rem 0 0;
+  color: oklch(1 0 0 / 0.55);
+  font-size: var(--v2-text-label);
+  font-weight: 650;
+}
+
+@media (hover: none) {
+  .v2-ai-plate-hint {
+    display: none;
+  }
+}
+
+.v2-ai-plate .v2-ai-tools li {
+  background: var(--v2-pale-orange);
+  color: var(--v2-ink);
+}
+
 .v2-ai-tools {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: 1.8rem 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -867,6 +918,7 @@ html:root:has(.v2-page) {
 }
 
 .v2-domain-grid {
+  position: relative;
   display: grid;
   max-width: 90rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -874,6 +926,25 @@ html:root:has(.v2-page) {
   margin: 0 auto;
   align-content: start;
   border-top: 1px solid oklch(1 0 0 / 0.3);
+}
+
+/* the AI current: the solvent's glyph substance running the central gutter,
+   underneath the four domains */
+.v2-domain-grid::before {
+  position: absolute;
+  top: -1.5rem;
+  bottom: -1.5rem;
+  left: 50%;
+  width: clamp(3.5rem, 6vw, 5.5rem);
+  background: url("/images/textures/confluence-microtext-drift.svg") center / 46rem repeat;
+  content: "";
+  filter: invert(1);
+  opacity: 0.14;
+  mask-image: linear-gradient(to right, transparent, black 30% 70%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 30% 70%, transparent);
+  transform: translateX(-50%);
+  transition: opacity 600ms var(--v2-ease);
+  pointer-events: none;
 }
 
 /* Confluence band: four streams merging into the terminal statement */
@@ -913,6 +984,17 @@ html:root:has(.v2-page) {
 .v2-domain-grid article {
   padding: clamp(1.8rem, 3vw, 3rem) 0;
   border-bottom: 1px solid oklch(1 0 0 / 0.3);
+  transition: border-color 700ms var(--v2-ease);
+}
+
+/* Discovery reward: touching the AI layer dissolves the walls between the
+   domains and swells the current. */
+.v2-range:has(.v2-ai-plate:hover) .v2-domain-grid article {
+  border-color: oklch(1 0 0 / 0.05);
+}
+
+.v2-range:has(.v2-ai-plate:hover) .v2-domain-grid::before {
+  opacity: 0.3;
 }
 
 .v2-domain-grid h3 {
@@ -1504,6 +1586,20 @@ html:root:has(.v2-page) {
 
   .v2-domain-grid {
     grid-template-columns: 1fr;
+  }
+
+  .v2-range-intro {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .v2-ai-plate {
+    justify-self: start;
+    padding: 1.1rem 1.2rem 1rem;
+  }
+
+  .v2-domain-grid::before {
+    display: none;
   }
 
   .v2-contact-form { padding: 1.4rem 1rem; }
