@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import ToolMark from "./ToolMark";
 import { v2Projects } from "@/lib/v2-data";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -133,7 +134,12 @@ export default function WorkShowcase() {
                 <div><dt>What shipped</dt><dd>{project.result}</dd></div>
               </dl>
               <ul aria-label={`${project.title} technologies`}>
-                {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                {project.tags.map((tag) => (
+                  <li key={tag}>
+                    <ToolMark name={tag} />
+                    {tag}
+                  </li>
+                ))}
               </ul>
               <a href={project.href} target="_blank" rel="noreferrer" aria-label={`View ${project.title} project (opens in a new tab)`}>
                 View the Build <span aria-hidden="true">↗</span>

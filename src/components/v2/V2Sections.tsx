@@ -2,9 +2,10 @@ import Image from "next/image";
 import PortraitSwap from "./PortraitSwap";
 import RangeGlow from "./RangeGlow";
 import RotatingIdentity from "./RotatingIdentity";
+import ToolMark from "./ToolMark";
 import V2Contact from "./V2Contact";
 import WorkShowcase from "./WorkShowcase";
-import { disciplines, journey } from "@/lib/v2-data";
+import { aiWrapperTools, domains, journey } from "@/lib/v2-data";
 
 export function V2Hero() {
   return (
@@ -58,18 +59,31 @@ export function OperatingRange() {
       <RangeGlow />
       <div className="v2-range-intro">
         <p className="v2-utility">Skills</p>
-        <h2 id="skills-heading">Every skill here was once a gap.</h2>
-        <p>I started in analytics, moved into product and AI, then learned to build enough of the real thing to test the assumptions myself.</p>
+        <h2 id="skills-heading">AI didn&rsquo;t replace the stack. It wrapped it.</h2>
+        <p>
+          Most people use AI to do what they already know. Same here — these
+          are the domains it multiplies for me.
+        </p>
+        <ul className="v2-ai-tools" aria-label="AI tooling">
+          {aiWrapperTools.map((tool) => (
+            <li key={tool}>
+              <ToolMark name={tool} />
+              {tool}
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="v2-discipline-list">
-        {disciplines.map((discipline) => (
-          <article key={discipline.name}>
-            <h3>{discipline.name}</h3>
-            <p>{discipline.statement}</p>
-            <span>{discipline.proof}</span>
-            <ul className="v2-discipline-tools" aria-label={`${discipline.name} tools`}>
-              {discipline.tools.map((tool) => (
-                <li key={tool}>{tool}</li>
+      <div className="v2-domain-grid">
+        {domains.map((domain) => (
+          <article key={domain.name}>
+            <h3>{domain.name}</h3>
+            <p>{domain.blurb}</p>
+            <ul className="v2-domain-tools" aria-label={`${domain.name} tools`}>
+              {domain.tools.map((tool) => (
+                <li key={tool}>
+                  <ToolMark name={tool} />
+                  {tool}
+                </li>
               ))}
             </ul>
           </article>
@@ -91,17 +105,19 @@ export function Journey() {
           parts I can&rsquo;t open-source.
         </p>
       </div>
-      <ol className="v2-journey-list">
+      <ol className="v2-story-list">
         {journey.map((item) => (
           <li key={item.period}>
-            <div className="v2-journey-mark">
-              <Image src={item.logo} alt="" width={56} height={56} />
+            <div className="v2-story-meta">
+              <span className="v2-story-mark">
+                <Image src={item.logo} alt="" width={56} height={56} />
+              </span>
+              <span className="v2-story-period">{item.period}</span>
             </div>
-            <div className="v2-journey-copy">
-              <span>{item.period}</span>
+            <div className="v2-story-copy">
               <h3>{item.role}</h3>
-              <p className="v2-journey-company">{item.company}</p>
-              <p>{item.lesson}</p>
+              <p className="v2-story-company">{item.company}</p>
+              <p>{item.story}</p>
             </div>
           </li>
         ))}

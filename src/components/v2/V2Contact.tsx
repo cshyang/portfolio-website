@@ -44,7 +44,7 @@ export default function V2Contact() {
   return (
     <section className="v2-contact" id="contact" aria-labelledby="contact-heading">
       <div className="v2-contact-intro">
-        <p className="v2-contact-signal">Open to ambitious, practical work.</p>
+        <p className="v2-contact-signal">Kuala Lumpur · GMT +8 · Open to the right problem.</p>
         <h2 id="contact-heading">Have a difficult problem worth shipping?</h2>
         <p>
           I’m interested in AI products, data systems, product leadership, and collaborations that need someone comfortable crossing boundaries.

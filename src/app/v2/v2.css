@@ -624,6 +624,9 @@ html:root:has(.v2-page) {
 }
 
 .v2-project-copy li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
   background: var(--v2-surface);
@@ -831,38 +834,30 @@ html:root:has(.v2-page) {
 }
 
 .v2-range-intro h2 {
-  max-width: 10ch;
+  max-width: 14ch;
   margin: 0 0 2rem;
 }
 
-.v2-range-intro > p:last-child {
+.v2-range-intro > p {
   max-width: 39rem;
   color: var(--v2-white);
 }
 
-.v2-discipline-list {
-  border-top: 1px solid oklch(1 0 0 / 0.3);
-}
-
-.v2-discipline-list article {
-  display: grid;
-  grid-template-columns: minmax(6rem, 0.4fr) 1fr;
-  gap: 1.5rem;
-  padding: clamp(2rem, 4vw, 4rem) 0;
-  border-bottom: 1px solid oklch(1 0 0 / 0.3);
-}
-
-.v2-discipline-tools {
+/* The AI layer the domains are wrapped in — marks on the intro, not per row */
+.v2-ai-tools {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  grid-column: 2;
-  margin: 1.1rem 0 0;
+  margin: 1.8rem 0 0;
   padding: 0;
   list-style: none;
 }
 
-.v2-discipline-tools li {
+.v2-ai-tools li,
+.v2-domain-tools li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
   padding: 0.28em 0.75em;
   border-radius: 999px;
   background: oklch(1 0 0 / 0.12);
@@ -870,17 +865,35 @@ html:root:has(.v2-page) {
   font-weight: 650;
 }
 
-.v2-discipline-list h3 {
+.v2-tool-mark {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+}
+
+.v2-domain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(2rem, 4vw, 4rem);
+  align-content: start;
+  border-top: 1px solid oklch(1 0 0 / 0.3);
+}
+
+.v2-domain-grid article {
+  padding: clamp(1.8rem, 3vw, 3rem) 0;
+  border-bottom: 1px solid oklch(1 0 0 / 0.3);
+}
+
+.v2-domain-grid h3 {
   display: flex;
   gap: 0.7rem;
   align-items: baseline;
-  grid-row: 1 / span 2;
-  margin: 0;
+  margin: 0 0 0.7rem;
   color: var(--v2-white);
-  font-size: clamp(1.7rem, 3vw, 3rem);
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
 }
 
-.v2-discipline-list h3::before {
+.v2-domain-grid h3::before {
   width: 0.55rem;
   height: 0.55rem;
   flex: 0 0 auto;
@@ -888,17 +901,21 @@ html:root:has(.v2-page) {
   content: "";
 }
 
-.v2-discipline-list p {
-  max-width: 38rem;
+.v2-domain-grid p {
+  max-width: 32rem;
   margin: 0;
-  font-size: clamp(1.2rem, 2vw, 1.75rem);
-  font-weight: 620;
-  line-height: 1.35;
+  font-size: 1.02rem;
+  font-weight: 550;
+  line-height: 1.45;
 }
 
-.v2-discipline-list span {
-  color: var(--v2-white);
-  font-size: 0.8rem;
+.v2-domain-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
 .v2-journey {
@@ -907,35 +924,40 @@ html:root:has(.v2-page) {
 }
 
 
-.v2-journey-list {
-  position: relative;
+/* War stories: alternating editorial rows, no timeline furniture */
+.v2-story-list {
   max-width: 82rem;
   margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
-.v2-journey-list::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 2.1rem;
-  width: 1px;
-  background: var(--v2-seam);
-  content: "";
-  transform-origin: top;
-}
-
-.v2-journey-list li {
+.v2-story-list li {
   display: grid;
-  grid-template-columns: 4.25rem minmax(0, 1fr);
+  grid-template-columns: minmax(9rem, 0.28fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 4rem);
-  padding-bottom: clamp(3rem, 6vw, 6rem);
+  padding: clamp(2.2rem, 4vw, 3.5rem) 0;
+  border-top: 1px solid var(--v2-seam);
 }
 
-.v2-journey-mark {
-  position: relative;
-  z-index: 1;
+.v2-story-list li:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, 0.28fr);
+}
+
+.v2-story-list li:nth-child(even) .v2-story-meta {
+  order: 2;
+  justify-items: end;
+  text-align: right;
+}
+
+.v2-story-meta {
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+  justify-items: start;
+}
+
+.v2-story-mark {
   display: grid;
   width: 4.25rem;
   height: 4.25rem;
@@ -946,41 +968,66 @@ html:root:has(.v2-page) {
   background: var(--v2-white);
 }
 
-.v2-journey-mark img {
+.v2-story-mark img {
   width: 68%;
   height: 68%;
   object-fit: contain;
 }
 
-.v2-journey-copy {
-  display: grid;
-  grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1fr);
-  column-gap: 2rem;
-  padding-top: 0.3rem;
-}
-
-.v2-journey-copy > span {
-  grid-row: 1 / span 3;
+.v2-story-period {
   font-size: var(--v2-text-label);
   font-weight: 720;
 }
 
-.v2-journey-copy h3 {
+.v2-story-copy h3 {
   margin-bottom: 0.25rem;
   font-size: clamp(1.6rem, 3vw, 2.8rem);
   line-height: 1.05;
 }
 
-.v2-journey-company {
+.v2-story-company {
   margin-bottom: 1.1rem;
   color: var(--v2-oxide);
   font-weight: 650;
 }
 
-.v2-journey-copy > p:last-child {
-  max-width: 68ch;
+.v2-story-copy > p:last-child {
+  max-width: 62ch;
   margin-bottom: 0;
   color: var(--v2-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Scroll-assembly reveals: pure CSS scroll-driven animation. No support or
+   reduced motion → content simply visible; no JS, nothing gated on a class. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .v2-story-list li,
+    .v2-domain-grid article {
+      animation: v2-assemble both var(--v2-ease);
+      animation-timeline: view();
+      animation-range: entry 5% entry 45%;
+    }
+
+    .v2-story-list li:nth-child(even) {
+      animation-name: v2-assemble-flip;
+    }
+  }
+}
+
+@keyframes v2-assemble {
+  from {
+    opacity: 0;
+    transform: translateX(-1.6rem);
+  }
+}
+
+@keyframes v2-assemble-flip {
+  from {
+    opacity: 0;
+    transform: translateX(1.6rem);
+  }
 }
 
 .v2-contact {
@@ -1164,21 +1211,11 @@ html:root:has(.v2-page) {
     animation-timeline: view();
   }
 
-  .v2-journey-list::before {
-    animation: v2-line-draw linear both;
-    animation-range: entry 10% cover 75%;
-    animation-timeline: view();
-  }
-
   @keyframes v2-artifact-in {
     from { transform: translateY(2rem) rotate(1.5deg) scale(0.96); }
     to { transform: translateY(0) rotate(0) scale(1); }
   }
 
-  @keyframes v2-line-draw {
-    from { transform: scaleY(0.05); }
-    to { transform: scaleY(1); }
-  }
 }
 
 @media (max-width: 1080px) {
@@ -1387,17 +1424,33 @@ html:root:has(.v2-page) {
     padding: 2rem 1.25rem;
   }
 
-  .v2-project-copy dl > div,
-  .v2-journey-copy,
-  .v2-discipline-list article {
+  .v2-project-copy dl > div {
     grid-template-columns: 1fr;
   }
 
   .v2-project-copy dt { margin-bottom: 0.4rem; }
   .v2-project-image { min-height: 19rem; padding: 1.2rem; }
 
-  .v2-journey-copy > span { grid-row: auto; }
-  .v2-journey-list li { gap: 1rem; }
+  .v2-story-list li,
+  .v2-story-list li:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .v2-story-list li:nth-child(even) .v2-story-meta {
+    order: 0;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .v2-story-meta {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+
+  .v2-domain-grid {
+    grid-template-columns: 1fr;
+  }
 
   .v2-contact-form { padding: 1.4rem 1rem; }
   .v2-form-footer { align-items: flex-start; flex-direction: column; }

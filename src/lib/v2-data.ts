@@ -13,10 +13,10 @@ export const v2Projects = [
       "A full-stack product for creating conversational companions inspired by familiar public personas.",
     contribution:
       "Designed and built the product loop across onboarding, model behavior, subscriptions, and delivery.",
-    result: "A working, publicly deployed AI product—not a slide-deck prototype.",
+    result: "A complete consumer AI product—shipped end to end, from model behavior to billing.",
     tags: ["Next.js", "OpenAI", "Llama 2", "Prisma", "Stripe"],
     image: "/images/projects/ai-companion.png",
-    href: "https://ai-companion-cshyang.vercel.app",
+    href: "https://github.com/cshyang/ai-companion",
     tone: "orange",
   },
   {
@@ -39,38 +39,37 @@ export const v2Projects = [
       "A responsive streaming interface using live TMDB content to study navigation, discovery, and dense media layouts.",
     contribution:
       "Built the application shell, content discovery surfaces, and responsive interaction model.",
-    result: "A production-hosted interface that behaves like a real media product.",
+    result: "An interface study that behaves like a real media product.",
     tags: ["React", "Next.js", "Tailwind", "TMDB API"],
     image: "/images/projects/netflix_clone.png",
-    href: "https://netflix-clone-4c05e.web.app",
+    href: "https://github.com/cshyang/netflix-clone",
     tone: "neutral",
   },
 ] as const;
 
-export const disciplines = [
+// The AI layer that wraps every domain below.
+export const aiWrapperTools = ["Claude", "OpenAI", "LangChain", "PydanticAI"] as const;
+
+export const domains = [
   {
-    name: "Data",
-    statement: "Find the signal, define the decision, and make the evidence usable.",
-    proof: "Analytics leadership · data products · decision systems",
-    tools: ["SQL", "Python", "Snowflake", "Tableau", "Machine learning"],
-  },
-  {
-    name: "AI",
-    statement: "Turn model capability into a product loop people can actually use.",
-    proof: "Agentic systems · LLM applications · recommendation systems",
-    tools: ["LangChain", "PydanticAI", "OpenAI", "Llama", "RAG"],
+    name: "Marketing & Growth",
+    blurb: "Campaign analytics and automation across ad platforms — code computes, AI reasons.",
+    tools: ["Google Ads", "Meta", "GA4", "Search Console"],
   },
   {
     name: "Product",
-    statement: "Reduce ambiguity, choose the useful shape, and get the work shipped.",
-    proof: "Discovery · prioritisation · team leadership",
-    tools: ["Product analytics", "Experiment design", "Roadmaps"],
+    blurb: "Reduce ambiguity, choose the useful shape, and get the work shipped.",
+    tools: ["Experiment design", "Product analytics", "Roadmaps"],
   },
   {
-    name: "Code",
-    statement: "Build enough of the real thing to expose weak assumptions early.",
-    proof: "Next.js · Python · rapid product prototyping",
-    tools: ["Next.js", "React", "TypeScript", "Tailwind", "Streamlit"],
+    name: "Data & Analytics",
+    blurb: "Find the signal, define the decision, and make the evidence usable.",
+    tools: ["SQL", "Python", "Snowflake", "Tableau"],
+  },
+  {
+    name: "Engineering",
+    blurb: "Build enough of the real thing to expose weak assumptions early.",
+    tools: ["Next.js", "React", "TypeScript", "Tailwind"],
   },
 ] as const;
 
@@ -79,28 +78,32 @@ export const journey = [
     period: "2015–2018",
     role: "Analytics Consultant",
     company: "Persuasion Technologies → Artefact Asia",
-    lesson: "Learned to turn messy behavior data into decisions clients could act on.",
+    story:
+      "Client-side consulting across brands and messy behaviour data. The habit that formed here still runs everything: analysis isn't finished until someone changes a decision because of it.",
     logo: "/images/icons/briefcase.svg",
   },
   {
     period: "2019–2020",
     role: "Lead Market Analyst, Malaysia",
     company: "Grab",
-    lesson: "Worked at regional scale and learned that a dashboard is only useful when it changes a decision.",
+    story:
+      "Market analytics at regional scale, where every metric had an owner and a deadline. Scale taught the sharpest lesson cheaply: a dashboard nobody acts on is decoration.",
     logo: "/images/icons/grab_logo.png",
   },
   {
     period: "2021–2023",
     role: "AI & Data Product Leadership",
     company: "MoneyLion → BioMark",
-    lesson: "Moved from analysing products to shaping recommendation and healthcare data products.",
+    story:
+      "Crossed from analysing products to building them — recommendation systems in consumer fintech, then healthcare data products where getting it wrong is personal.",
     logo: "/images/icons/moneylion_icon.jpeg",
   },
   {
     period: "2023–now",
     role: "Data & AI Builder",
     company: "Hiredly Group → Independent work",
-    lesson: "Leading across engineering, science, product, and hands-on agentic AI experiments.",
+    story:
+      "Leading across engineering, data science, and product while building agentic AI systems hands-on — the whole stack, exercised weekly.",
     logo: "/images/icons/hiredly_logo.png",
   },
 ] as const;

@@ -25,7 +25,8 @@
     "react-icons": "^4.11.0",
     "react-intersection-observer": "^9.5.2",
     "react-vertical-timeline-component": "^3.6.0",
-    "resend": "^6.0.1"
+    "resend": "^6.0.1",
+    "simple-icons": "^16.26.0"
   },
   "devDependencies": {
     "@types/node": "latest",
