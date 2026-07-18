@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import RangeGlow from "@/components/RangeGlow";
 import MotionDemo from "@/components/design/MotionDemo";
 import TokenGrid from "@/components/design/TokenGrid";
@@ -16,12 +17,12 @@ export default function DesignSystemPage() {
       <main className="ds-page">
         <div className="ds-top">
           <h1>Design system</h1>
-          <a href="/">← Back to the site</a>
+          <Link href="/">← Back to the site</Link>
         </div>
         <p className="ds-lede">
           Every specimen on this page renders from the same CSS custom properties the site
           uses — nothing is duplicated, so what you see here is what ships. Tweak a token
-          in <code>v2.css</code> and both update together.
+          in <code>site.css</code> and both update together.
         </p>
 
         <section className="ds-section" aria-labelledby="ds-color">
