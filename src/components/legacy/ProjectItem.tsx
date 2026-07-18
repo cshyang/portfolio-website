@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { projectsData } from "@/lib/data";
+import { projectsData } from "@/lib/legacy/data";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 

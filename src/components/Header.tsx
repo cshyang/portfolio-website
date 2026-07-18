@@ -1,69 +1,145 @@
 "use client";
-import React, { useContext } from "react";
-import { motion } from "framer-motion";
-import { links } from "@/lib/data";
-import Link from "next/link";
-import clsx from "clsx";
-import { useActiveSectionContext } from "@/context/active-section";
 
-function Header() {
-  const { activeSection, setActiveSection, setTimeOfLastClick } =
-    useActiveSectionContext();
+import { useEffect, useRef, useState } from "react";
+import LiquidLens from "./LiquidLens";
+import { v2Navigation } from "@/lib/data";
+
+// Eased scroll glide, cancelled by user input. (Native CSS smooth scroll is
+// disabled on v2 — it fights ScrollTrigger's pin/snap and both cancel out.)
+function glideTo(targetY: number) {
+  const startY = window.scrollY;
+  const dist = targetY - startY;
+  if (!dist) return;
+  const duration = Math.min(1100, 450 + Math.abs(dist) * 0.1);
+  const start = performance.now();
+  let raf = 0;
+  const stop = () => {
+    cancelAnimationFrame(raf);
+    window.removeEventListener("wheel", stop);
+    window.removeEventListener("touchstart", stop);
+  };
+  window.addEventListener("wheel", stop, { passive: true });
+  window.addEventListener("touchstart", stop, { passive: true });
+  const step = (now: number) => {
+    const p = Math.min(1, (now - start) / duration);
+    const eased = p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2;
+    window.scrollTo(0, startY + dist * eased);
+    if (p < 1) raf = requestAnimationFrame(step);
+    else stop();
+  };
+  raf = requestAnimationFrame(step);
+}
+
+export default function Header() {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [activeHref, setActiveHref] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sections = v2Navigation
+      .map((item) => document.querySelector(item.href))
+      .filter((section): section is Element => section !== null);
+
+    // Entries only report changes, so a section already covering the band never re-reports;
+    // use each callback as a trigger and derive the active section from geometry instead.
+    const updateActive = () => {
+      const bandTop = window.innerHeight * 0.34;
+      const bandBottom = window.innerHeight * 0.44;
+      const current = sections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= bandBottom && rect.bottom >= bandTop;
+      });
+      setActiveHref(current ? `#${current.id}` : null);
+    };
+
+    const observer = new IntersectionObserver(updateActive, {
+      rootMargin: "-34% 0px -56%",
+      threshold: 0,
+    });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  // Native CSS smooth scrolling fights ScrollTrigger's pin/snap (each cancels the
+  // other's scroll), so v2 disables it and drives in-page anchors through GSAP.
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const anchor = (event.target as Element).closest?.('a[href^="#"]');
+      if (!anchor || !anchor.closest(".v2-page")) return;
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      const target = href === "#top" ? document.body : document.querySelector(href);
+      if (!target) return;
+      event.preventDefault();
+      history.pushState(null, "", href);
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        target.scrollIntoView();
+        return;
+      }
+      const y =
+        href === "#top"
+          ? 0
+          : target.getBoundingClientRect().top + window.scrollY - 72;
+      glideTo(y);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  const activeIndex = v2Navigation.findIndex((item) => item.href === activeHref);
+
+  const closeMenu = () => dialogRef.current?.close();
 
   return (
-    <header className="z-[999] relative">
-      <motion.div
-        className="fixed top-0 left-1/2 h-[4.5rem] rounded-none w-full 
-      border border-white/40 bg-white/80 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem]
-      sm:top-6 sm:h-[3.25rem] sm:w-[36rem] sm:rounded-full dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-70"
-        initial={{ y: -100, x: "-50%", opacity: 0 }}
-        animate={{ y: 0, x: "-50%", opacity: 1 }}
-      ></motion.div>
-      <nav className="flex fixed top-[0.15rem] left-1/2 h-12 -translate-x-1/2 py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0">
-        <ul
-          className="flex w-[22rem] justify-center items-center gap-y-1 text-[0.9rem] font-medium text-gray-500
-        flex-wrap sm:flex-nowrap sm:gap-5"
-        >
-          {links.map((link) => (
-            <motion.li
-              key={link.hash}
-              className="h-3/4 flex items-center justify-center relative"
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-            >
-              <Link
-                href={link.hash}
-                onClick={() => {
-                  setActiveSection(link.name);
-                  setTimeOfLastClick(Date.now());
-                }}
-                className={clsx(
-                  "w-full flex justify-center items-cente px-3 py-3 hover:text-gray-950 transition dark:text-gray-500 hover:dark:text-gray-300",
-                  {
-                    "text-gray-950 dark:text-gray-300":
-                      activeSection === link.name,
-                  }
-                )}
-              >
-                {link.name}
-                {link.name === activeSection && (
-                  <motion.span
-                    className="bg-gray-200 dark:bg-gray-700 rounded-full absolute inset-0 -z-10"
-                    layoutId="activeSection"
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 30,
-                    }}
-                  ></motion.span>
-                )}
-              </Link>
-            </motion.li>
-          ))}
-        </ul>
+    <header className="v2-header">
+      <LiquidLens />
+      <nav className="v2-desktop-nav" aria-label="Primary navigation">
+        <span
+          className="v2-nav-lens"
+          aria-hidden="true"
+          data-visible={activeIndex >= 0}
+          style={{ transform: `translateX(${Math.max(activeIndex, 0) * 100}%)` }}
+        />
+        {v2Navigation.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            aria-current={item.href === activeHref ? "location" : undefined}
+            onClick={() => setActiveHref(item.href)}
+          >
+            {item.label}
+          </a>
+        ))}
       </nav>
+
+      <button
+        className="v2-menu-trigger"
+        type="button"
+        aria-label="Open navigation"
+        onClick={() => dialogRef.current?.showModal()}
+      >
+        Menu
+      </button>
+
+      <dialog className="v2-menu" ref={dialogRef} onClick={(event) => {
+        if (event.target === dialogRef.current) closeMenu();
+      }}>
+        <div className="v2-menu-panel">
+          <div className="v2-menu-topline">
+            <span>Navigate</span>
+            <button type="button" onClick={closeMenu} aria-label="Close navigation">
+              Close
+            </button>
+          </div>
+          <nav aria-label="Mobile navigation">
+            {v2Navigation.map((item) => (
+              <a key={item.href} href={item.href} onClick={closeMenu}>
+                {item.label}<span aria-hidden="true">↘</span>
+              </a>
+            ))}
+          </nav>
+        </div>
+      </dialog>
     </header>
   );
 }
-
-export default Header;

@@ -1,69 +1,80 @@
 "use client";
-import React from "react";
-import SectionHeading from "./SectionHeading";
-import { motion } from "framer-motion";
-import { useSectionInView } from "@/lib/hooks";
+
+import { FormEvent, useRef, useState } from "react";
 import { sendEmail } from "@/actions/sendEmail";
 
-import EmailSubmitButton from "./EmailSubmitButton";
-import toast from "react-hot-toast";
+type FormStatus = {
+  kind: "idle" | "success" | "error";
+  message: string;
+};
 
-function Contact() {
-  const { ref } = useSectionInView("Contact", 0.8);
+const initialStatus: FormStatus = { kind: "idle", message: "" };
+
+export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<FormStatus>(initialStatus);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setStatus(initialStatus);
+
+    try {
+      const result = await sendEmail(new FormData(event.currentTarget));
+
+      if (result.error) {
+        setStatus({ kind: "error", message: result.error });
+      } else {
+        setStatus({ kind: "success", message: "Message sent. I’ll get back to you soon." });
+        formRef.current?.reset();
+      }
+    } catch {
+      setStatus({
+        kind: "error",
+        message: "Something went wrong and your message wasn’t sent. Please try again in a moment.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
-    <motion.section
-      ref={ref}
-      id="contact"
-      className="text-center mb-20 sm:mb-28 w-[min(100%,38rem)]"
-      initial={{
-        opacity: 0,
-      }}
-      whileInView={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 1,
-      }}
-      viewport={{
-        once: true,
-      }}
-    >
-      <SectionHeading>Contact Me</SectionHeading>
-      <p className="text-gray-700 -mt-5 dark:text-white/80">
-        Please contact me directly on Linkedin
-        or through this form.
-      </p>
-      <form
-        className="mt-10 flex flex-col gap-3 dark:text-black"
-        action={async (formData: FormData) => {
-          const { data, error } = await sendEmail(formData);
-          if (error) {
-            toast.error(error);
-            return;
-          }
-          toast.success("Email sent suscessfully!");
-        }}
-      >
-        <input
-          className="h-14 rounded-lg borderBlack px-4 focus:outline-gray-900 dark:bg-white dark:bg-opacity-90 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-          type="email"
-          placeholder="Your email"
-          name="senderEmail"
-          required
-          maxLength={500}
-        />
-        <textarea
-          className="borderBlack h-52 rounded-lg px-4 py-1 focus:outline-gray-900 dark:bg-white dark:bg-opacity-90 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-          placeholder="Your message"
-          name="message"
-          required
-          maxLength={5000}
-        />
-        <EmailSubmitButton />
+    <section className="v2-contact" id="contact" aria-labelledby="contact-heading">
+      <div className="v2-contact-intro">
+        <p className="v2-contact-signal">Kuala Lumpur · GMT +8 · Open to the right problem.</p>
+        <h2 id="contact-heading">Have a difficult problem worth shipping?</h2>
+        <p>
+          I’m interested in AI products, data systems, product leadership, and collaborations that need someone comfortable crossing boundaries.
+        </p>
+        <div className="v2-contact-links">
+          <a href="https://www.linkedin.com/in/chaushyang/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://github.com/cshyang" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="/docs/shyang_cv.pdf" download>Download CV ↓</a>
+        </div>
+      </div>
+
+      <form ref={formRef} className="v2-contact-form" onSubmit={handleSubmit}>
+        <div className="v2-field">
+          <label htmlFor="v2-email">Your email</label>
+          <input id="v2-email" name="senderEmail" type="email" autoComplete="email" spellCheck={false} required maxLength={500} placeholder="you@example.com…" />
+        </div>
+        <div className="v2-field">
+          <label htmlFor="v2-message">What are you trying to build?</label>
+          <textarea id="v2-message" name="message" autoComplete="off" required maxLength={5000} rows={6} placeholder="A useful amount of context is enough…" />
+        </div>
+        <div className="v2-form-footer">
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Sending…" : "Send Message"}<span aria-hidden="true">↗</span>
+          </button>
+          <p className={`v2-form-status v2-form-status--${status.kind}`} role="status" aria-live="polite">
+            {status.message}
+          </p>
+        </div>
+        <p className="v2-form-note">Goes straight to my inbox — I read and reply to every message.</p>
       </form>
-    </motion.section>
+    </section>
   );
 }
-
-export default Contact;

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import SectionHeading from "./SectionHeading";
-import { projectsData } from "@/lib/data";
+import { projectsData } from "@/lib/legacy/data";
 import ProjectItem from "./ProjectItem";
 import { useSectionInView } from "@/lib/hooks";
 

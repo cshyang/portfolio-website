@@ -1,162 +1,115 @@
-import React from "react";
-import { CgWorkAlt } from "react-icons/cg";
-import { LuGraduationCap, LuBriefcase } from "react-icons/lu";
-// Images are served from the public/ directory; reference them via absolute paths
-const netflixCloneImg = "/images/projects/netflix_clone.png" as const;
-const trelliImg = "/images/projects/trelli.png" as const;
-const aiCompanionImg = "/images/projects/ai-companion.png" as const;
-const aiMedicalAgentImg = "/images/projects/ai_medical_agent.png" as const;
-const grabIcon = "/images/icons/grab_icon.png" as const;
-const moneyLionIcon = "/images/icons/moneylion_icon.jpeg" as const;
-
-export const links = [
-  {
-    name: "Home",
-    hash: "#home",
-  },
-  {
-    name: "About",
-    hash: "#about",
-  },
-  {
-    name: "Projects",
-    hash: "#projects",
-  },
-  {
-    name: "Skills",
-    hash: "#skills",
-  },
-  {
-    name: "Experience",
-    hash: "#experience",
-  },
-  {
-    name: "Contact",
-    hash: "#contact",
-  },
+export const v2Navigation = [
+  { label: "Work", href: "#work" },
+  { label: "Skills", href: "#skills" },
+  { label: "Journey", href: "#journey" },
+  { label: "Contact", href: "#contact" },
 ] as const;
 
-export const experiencesData = [
-  {
-    title: "Actuarial Science Graduated",
-    location: "University Tunku Abdul Rahman",
-    description:
-      "I graduated from bachelor of Actuarial Science. Unsure what to do, I started to educate myself online and acquire skills that can help me to land my first job.",
-    iconSrc: "/images/icons/graduation_cap.svg",
-    iconAlt: "Graduation cap",
-    date: "May 2015",
-  },
-  {
-    title: "Analytics Consultant",
-    location: "Persuasion Technologies -> Artefact Asia",
-    description:
-      "I got my Google Certification online and worked as an analytics consultant at digital marketing agencies for 3.5 years. I continued to hone my skills to land a big data job.",
-    iconSrc: "/images/icons/briefcase.svg",
-    iconAlt: "Briefcase",
-    date: "Aug 2015 - Nov 2018",
-  },
-  {
-    title: "Lead Market Analyst, MY",
-    location: "Grab Malaysia",
-    description:
-      "I landed a data job with SEA e-hailing giant Grab, where I honed my skills in big data, create beautiful dashbaords, and advanced data storytelling.",
-    iconSrc: "/images/icons/grab_logo.png",
-    iconAlt: "Grab logo",
-    date: "Jan 2019 - Dec 2020",
-  },
-  {
-    title: "AI Product Manager",
-    location: "Moneylion",
-    description:
-      "I joined MoneyLion and to hone my product leadership skills. I worked with data scientists and AI engineers to ship recommendation system on flagship products.",
-    iconSrc: "/images/icons/moneylion_icon.jpeg",
-    iconAlt: "MoneyLion logo",
-    date: "Jul 2021 - Oct 2022",
-  },
-  {
-    title: "Lead Data Product Manager",
-    location: "BioMark",
-    description:
-      "Took a leap of faith and now working at a regional SEA healthtech startup to help digitize healthcare. However, the starup didn't took off and I left the company.",
-    iconSrc: "/images/icons/biomark_logo.png",
-    iconAlt: "BioMark logo",
-    date: "Oct 2022 - Dec 2023",
-  },
-  {
-    title: "Data & AI Tech Lead",
-    location: "Hiredly Group",
-    description:
-      "Led an amazing team of 5 to bridge business and data gap, from data engineering to data science to AI product development.",
-    iconSrc: "/images/icons/hiredly_logo.png",
-    iconAlt: "Hiredly logo",
-    date: "Dec 2023 - Nov 2024",
-  },
-] as const;
+type V2Project = {
+  title: string;
+  category: string;
+  description: string;
+  /** The sharpest decision or insight — the thing a senior reader would ask
+      about. Admission test for the shelf: no hook, no featured slot. */
+  hook?: string;
+  tags: readonly string[];
+  image: string;
+  href: string;
+  tone: "orange" | "indigo" | "neutral";
+};
 
-export const projectsData = [
+export const v2Projects: readonly V2Project[] = [
   {
     title: "AI Companion",
+    category: "Consumer AI experiment",
     description:
-      "An app that enables users to create an AI companion that emulates the personalities of their favorite celebrities.",
-    tags: [
-      "React",
-      "Next.js",
-      "Tailwind",
-      "PrismaDB",
-      "OpenAI",
-      "Replicate",
-      "LLAMA2",
-      "Clerk",
-      "Stripe",
-    ],
-    imageUrl: aiCompanionImg,
-    projectUrl: "https://ai-companion-cshyang.vercel.app",
+      "A full-stack product for creating conversational companions inspired by familiar public personas — built end to end, from onboarding to billing.",
+    hook: "The model was the easy part. The real build was the product loop around it: persona behavior, memory, and payments.",
+    tags: ["Next.js", "OpenAI", "Llama 2", "Prisma", "Stripe"],
+    image: "/images/projects/ai-companion.png",
+    href: "https://github.com/cshyang/ai-companion",
+    tone: "orange",
   },
   {
     title: "AI Medical Agent",
+    category: "Applied AI prototype",
     description:
-      "Extract biomarker results from medical reports and present a simplified, patient-friendly summary for better comprehension.",
+      "A patient-facing workflow that extracts biomarkers from medical reports and rewrites them in plain language.",
+    hook: "Turns a raw lab PDF into something a patient can question their doctor about.",
     tags: ["Python", "Streamlit", "LangChain", "OpenAI"],
-    imageUrl: aiMedicalAgentImg,
-    projectUrl: "https://github.com/cshyang/langchain-pdf-medical-agent",
+    image: "/images/projects/ai_medical_agent.png",
+    href: "https://github.com/cshyang/langchain-pdf-medical-agent",
+    tone: "indigo",
   },
   {
     title: "Netflix Clone",
+    category: "Frontend systems study",
     description:
-      "This is a front-end movie streaming UI project designed to emulate the user experience of platforms like Netflix, utilizing the TMDB movie database as its primary source of data.",
+      "A responsive streaming interface using live TMDB content to study navigation, discovery, and dense media layouts.",
     tags: ["React", "Next.js", "Tailwind", "TMDB API"],
-    imageUrl: netflixCloneImg,
-    projectUrl: "https://netflix-clone-4c05e.web.app",
+    image: "/images/projects/netflix_clone.png",
+    href: "https://github.com/cshyang/netflix-clone",
+    tone: "neutral",
   },
-  // {
-  //   title: "AI Todo Summary",
-  //   description:
-  //     "A drag and drop to-do app that used Appwrite as the backend and OpenAI GPT to sumamrise the tasks.",
-  //   tags: [
-  //     "React",
-  //     "Next.js",
-  //     "Tailwind",
-  //     "AppWrite",
-  //     "OpenAI",
-  //     "React Beautiful DnD",
-  //   ],
-  //   imageUrl: trelliImg,
-  //   projectUrl: "https://ai-todo-summary.vercel.app",
-  // },
 ] as const;
 
-export const skillsData = [
-  "SQL",
-  "Tableau",
-  "Python",
-  "JavaScript",
-  "Data Analytics",
-  "Data Science",
-  "Machine Learning",
-  "Next.js",
-  "TailwindCSS",
-  "Snowflake",
-  "Product Analytics",
-  "LangChain",
-  "PydanticAI",
+// The AI layer that wraps every domain below.
+export const aiWrapperTools = ["Claude", "OpenAI", "LangChain", "PydanticAI"] as const;
+
+export const domains = [
+  {
+    name: "Marketing & Growth",
+    blurb: "Campaign analytics and automation across ad platforms — code computes, AI reasons.",
+    tools: ["Google Ads", "Meta", "GA4", "Search Console"],
+  },
+  {
+    name: "Product",
+    blurb: "Reduce ambiguity, choose the useful shape, and get the work shipped.",
+    tools: ["Experiment design", "Product analytics", "Roadmaps"],
+  },
+  {
+    name: "Data & Analytics",
+    blurb: "Find the signal, define the decision, and make the evidence usable.",
+    tools: ["SQL", "Python", "Snowflake", "Tableau"],
+  },
+  {
+    name: "Engineering",
+    blurb: "Build enough of the real thing to expose weak assumptions early.",
+    tools: ["Next.js", "React", "TypeScript", "Tailwind"],
+  },
+] as const;
+
+export const journey = [
+  {
+    period: "2015–2018",
+    role: "Analytics Consultant",
+    company: "Persuasion Technologies → Artefact Asia",
+    story:
+      "Client-side consulting across brands and messy behaviour data. The habit that formed here still runs everything: analysis isn't finished until someone changes a decision because of it.",
+    logo: "/images/icons/briefcase.svg",
+  },
+  {
+    period: "2019–2020",
+    role: "Lead Market Analyst, Malaysia",
+    company: "Grab",
+    story:
+      "Market analytics at regional scale, where every metric had an owner and a deadline. Scale taught the sharpest lesson cheaply: a dashboard nobody acts on is decoration.",
+    logo: "/images/icons/grab_logo.png",
+  },
+  {
+    period: "2021–2023",
+    role: "AI & Data Product Leadership",
+    company: "MoneyLion → BioMark",
+    story:
+      "Crossed from analysing products to building them — recommendation systems in consumer fintech, then healthcare data products where getting it wrong is personal.",
+    logo: "/images/icons/moneylion_icon.jpeg",
+  },
+  {
+    period: "2023–now",
+    role: "Data & AI Builder",
+    company: "Hiredly Group → Independent work",
+    story:
+      "Leading across engineering, data science, and product while building agentic AI systems hands-on — the whole stack, exercised weekly.",
+    logo: "/images/icons/hiredly_logo.png",
+  },
 ] as const;

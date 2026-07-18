@@ -4,11 +4,11 @@ import RangeFlow from "./RangeFlow";
 import RangeGlow from "./RangeGlow";
 import RotatingIdentity from "./RotatingIdentity";
 import ToolMark from "./ToolMark";
-import V2Contact from "./V2Contact";
+import Contact from "./Contact";
 import WorkShowcase from "./WorkShowcase";
-import { aiWrapperTools, domains, journey } from "@/lib/v2-data";
+import { aiWrapperTools, domains, journey } from "@/lib/data";
 
-export function V2Hero() {
+export function Hero() {
   return (
     <section className="v2-hero" aria-labelledby="v2-hero-heading">
       <div className="v2-hero-copy v2-reveal v2-reveal--one">
@@ -137,24 +137,24 @@ export function Journey() {
   );
 }
 
-export function V2Footer() {
+export function Footer() {
   return (
     <footer className="v2-footer">
       <span>© {new Date().getFullYear()} Chau Shyang · Kuala Lumpur · GMT +8</span>
-      <a href="/v2/design">Design system</a>
+      <a href="/design">Design system</a>
       <a href="#top">Back to top ↑</a>
     </footer>
   );
 }
 
-export function V2PageSections() {
+export function PageSections() {
   return (
     <>
-      <V2Hero />
+      <Hero />
       <SelectedWork />
       <OperatingRange />
       <Journey />
-      <V2Contact />
+      <Contact />
     </>
   );
 }

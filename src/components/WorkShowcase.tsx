@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ToolMark from "./ToolMark";
-import { v2Projects } from "@/lib/v2-data";
+import { v2Projects } from "@/lib/data";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import RangeGlow from "@/components/v2/RangeGlow";
-import MotionDemo from "@/components/v2/design/MotionDemo";
-import TokenGrid from "@/components/v2/design/TokenGrid";
+import RangeGlow from "@/components/RangeGlow";
+import MotionDemo from "@/components/design/MotionDemo";
+import TokenGrid from "@/components/design/TokenGrid";
 import "./design.css";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function DesignSystemPage() {
       <main className="ds-page">
         <div className="ds-top">
           <h1>Design system</h1>
-          <a href="/v2">← Back to the site</a>
+          <a href="/">← Back to the site</a>
         </div>
         <p className="ds-lede">
           Every specimen on this page renders from the same CSS custom properties the site
