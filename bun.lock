@@ -15,8 +15,8 @@
         "next": "15.4.10",
         "posthog-js": "^1.259.0",
         "posthog-node": "^5.6.0",
-        "react": "latest",
-        "react-dom": "latest",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
         "react-hot-toast": "^2.4.1",
         "react-icons": "^4.11.0",
         "react-intersection-observer": "^9.5.2",
@@ -25,17 +25,17 @@
         "simple-icons": "^16.26.0",
       },
       "devDependencies": {
-        "@types/node": "latest",
-        "@types/react": "latest",
-        "@types/react-dom": "latest",
+        "@types/node": "^20.8.0",
+        "@types/react": "^18.2.24",
+        "@types/react-dom": "^18.2.8",
         "@types/react-vertical-timeline-component": "^3.3.5",
         "autoprefixer": "^10.4.16",
-        "eslint": "latest",
-        "eslint-config-next": "latest",
-        "postcss": "latest",
+        "eslint": "^8.50.0",
+        "eslint-config-next": "^13.5.3",
+        "postcss": "^8.4.31",
         "postcss-import": "^15.1.0",
-        "tailwindcss": "latest",
-        "typescript": "latest",
+        "tailwindcss": "^3.3.3",
+        "typescript": "^5.2.2",
       },
     },
   },
@@ -868,13 +868,9 @@
 
     "eslint-plugin-import/doctrine": ["doctrine@2.1.0", "", { "dependencies": { "esutils": "^2.0.2" } }, "sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw=="],
 
-    "eslint-plugin-jsx-a11y/semver": ["semver@6.3.1", "", { "bin": "bin/semver.js" }, "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA=="],
-
     "eslint-plugin-react/doctrine": ["doctrine@2.1.0", "", { "dependencies": { "esutils": "^2.0.2" } }, "sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw=="],
 
     "eslint-plugin-react/resolve": ["resolve@2.0.0-next.4", "", { "dependencies": { "is-core-module": "^2.9.0", "path-parse": "^1.0.7", "supports-preserve-symlinks-flag": "^1.0.0" }, "bin": "bin/resolve" }, "sha512-iMDbmAWtfU+MHpxt/I5iWI7cY6YVEZUQ3MBgPQ++XD1PELuJHIl82xBmObyP2KyQmkNB2dsqF7seoQQiAn5yDQ=="],
-
-    "eslint-plugin-react/semver": ["semver@6.3.1", "", { "bin": "bin/semver.js" }, "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA=="],
 
     "fast-glob/glob-parent": ["glob-parent@5.1.2", "", { "dependencies": { "is-glob": "^4.0.1" } }, "sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow=="],
 
