@@ -760,6 +760,9 @@
   margin-top: 30px;
 }
 .sk-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   padding: 8px 18px;
   border: 2px solid var(--paper);
   border-radius: 999px;
@@ -772,6 +775,11 @@
 .sk-pill:hover {
   background: var(--paper);
   color: var(--ink) !important;
+}
+.sk-pill-icon {
+  width: 14px;
+  height: 14px;
+  flex: none;
 }
 
 /* the note form */
