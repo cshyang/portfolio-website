@@ -85,6 +85,35 @@
     transform: scale(1) rotate(-8deg);
   }
 }
+@keyframes sk-supercharge {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  45% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  52% {
+    opacity: 0.35;
+  }
+  60% {
+    opacity: 1;
+  }
+  68% {
+    opacity: 0.5;
+  }
+  76% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
 @keyframes sk-glow-breathe {
   0%,
   100% {
@@ -574,8 +603,13 @@
   border-radius: 3px;
   background: var(--accent);
   transform-origin: top;
-  transform: scaleY(var(--sk-charge, 0));
-  animation: sk-glow-breathe 2.4s ease-in-out infinite;
+  transform: scaleY(0);
+  opacity: 0;
+}
+/* the surge: fires when ch.4 enters, flickers like a circuit closing */
+.sk-timeline[data-charged="true"] .sk-track-charge {
+  animation: sk-supercharge 1.6s linear both,
+    sk-glow-breathe 2.4s ease-in-out 1.6s infinite;
 }
 .sk-chapter {
   position: relative;
@@ -609,9 +643,11 @@
   height: 100%;
   object-fit: cover;
 }
-.sk-chapter[data-lit="true"] .sk-node {
+/* nodes ignite in sequence as the surge passes them (--ignite-delay per li) */
+.sk-timeline[data-charged="true"] .sk-chapter:not(.sk-chapter--current) .sk-node {
   border-color: var(--accent);
   box-shadow: 0 0 0 2.5px rgba(226, 87, 30, 0.18), 0 0 16px rgba(226, 87, 30, 0.6);
+  transition-delay: var(--ignite-delay, 0s);
 }
 .sk-chapter--current .sk-node {
   border-color: var(--accent);

@@ -10,9 +10,11 @@ import SectionHead from "./SectionHead";
 
 export default function Story() {
   const listRef = useRef<HTMLOListElement>(null);
-  // draw: blue line (leads); charge: orange overlay (follows, flickering in the
-  // design's `supercharge` keyframe — here it fills smoothly with the glow).
-  const [progress, setProgress] = useState({ draw: 0, charge: 0 });
+  // Blue line draws with scroll; the orange supercharge fires only once the
+  // last chapter enters the viewport (the design's --zap timeline), surging
+  // top-to-bottom and igniting each node in sequence.
+  const [draw, setDraw] = useState(0);
+  const [charged, setCharged] = useState(false);
 
   useEffect(() => {
     const el = listRef.current;
@@ -23,14 +25,10 @@ export default function Story() {
       raf = requestAnimationFrame(() => {
         const rect = el.getBoundingClientRect();
         const vh = window.innerHeight;
-        // blue line draws over the timeline's visible travel
-        const draw = (vh * 0.85 - rect.top) / (rect.height + vh * 0.35);
-        // orange charge trails slightly behind
-        const charge = (vh * 0.7 - rect.top) / (rect.height + vh * 0.2);
-        setProgress({
-          draw: Math.min(1, Math.max(0, draw)),
-          charge: Math.min(1, Math.max(0, charge)),
-        });
+        const p = (vh * 0.85 - rect.top) / (rect.height + vh * 0.25);
+        setDraw(Math.min(1, Math.max(0, p)));
+        const last = el.querySelector<HTMLElement>(".sk-chapter:last-child");
+        if (last) setCharged(last.getBoundingClientRect().top < vh * 0.88);
       });
     };
     onScroll();
@@ -50,22 +48,18 @@ export default function Story() {
         title="EARLIER CHAPTERS"
         note="the employer-side work — the pages I can’t open-source"
       />
-      <ol className="sk-timeline" ref={listRef}>
+      <ol className="sk-timeline" ref={listRef} data-charged={charged}>
         <span
           aria-hidden="true"
           className="sk-track"
-          style={{ "--sk-draw": progress.draw } as CSSProperties}
+          style={{ "--sk-draw": draw } as CSSProperties}
         />
-        <span
-          aria-hidden="true"
-          className="sk-track-charge"
-          style={{ "--sk-charge": progress.charge } as CSSProperties}
-        />
+        <span aria-hidden="true" className="sk-track-charge" />
         {chapters.map((ch, i) => (
           <li
             key={ch.kicker}
             className={`sk-chapter${ch.current ? " sk-chapter--current" : ""}`}
-            data-lit={!ch.current && progress.charge >= ch.igniteAt}
+            style={{ "--ignite-delay": `${0.16 + i * 0.34}s` } as CSSProperties}
           >
             {ch.logos.map((logo, j) => (
               <span

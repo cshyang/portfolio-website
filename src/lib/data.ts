@@ -155,8 +155,6 @@ export type Chapter = {
   logos: readonly string[];
   /** Last chapter: orange pulsing nodes + orange unlocked note. */
   current?: boolean;
-  /** Fill progress (0..1) at which this chapter's nodes ignite. */
-  igniteAt: number;
 };
 
 export const chapters: readonly Chapter[] = [
@@ -168,7 +166,6 @@ export const chapters: readonly Chapter[] = [
       "Client-side consulting across brands and messy behaviour data. The habit that formed here still runs everything: analysis isn’t finished until someone changes a decision because of it.",
     unlocked: "+ skill unlocked: how businesses acquire traffic & keep it coming back",
     logos: ["/images/icons/artefact_logo.png", "/images/icons/incubeta_logo.png"],
-    igniteAt: 0.2,
   },
   {
     kicker: "2019–2020 · ch.2 — big data at scale",
@@ -178,7 +175,6 @@ export const chapters: readonly Chapter[] = [
       "Market analytics at regional scale, where every metric had an owner and a deadline. Scale taught the sharpest lesson cheaply: a dashboard nobody acts on is decoration.",
     unlocked: "+ skill unlocked: big data analytics & data science at scale",
     logos: ["/images/icons/grab_logo.png"],
-    igniteAt: 0.42,
   },
   {
     kicker: "2021–2023 · ch.3 — building, not just analysing",
@@ -188,7 +184,6 @@ export const chapters: readonly Chapter[] = [
       "Crossed from analysing products to building them — recommendation systems in consumer fintech, then healthcare data products where getting it wrong is personal.",
     unlocked: "+ skill unlocked: making product decisions & experimenting at scale",
     logos: ["/images/icons/biomark_logo.png", "/images/icons/moneylion_clean.png"],
-    igniteAt: 0.62,
   },
   {
     kicker: "2023–now · ch.4 — the supercharge ⚡",
@@ -199,7 +194,6 @@ export const chapters: readonly Chapter[] = [
     unlocked: "⚡ agentic engineering — every skill above, running through one circuit",
     logos: ["/images/icons/calibrax_logo.png", "/images/icons/hiredly_logo.png"],
     current: true,
-    igniteAt: 0.85,
   },
 ];
 
