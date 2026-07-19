@@ -26,9 +26,11 @@ export default function Story() {
         const rect = el.getBoundingClientRect();
         const vh = window.innerHeight;
         const p = (vh * 0.85 - rect.top) / (rect.height + vh * 0.25);
-        setDraw(Math.min(1, Math.max(0, p)));
+        const draw = Math.min(1, Math.max(0, p));
+        setDraw(draw);
+        // the surge fires only once the drawn blue tip touches ch.4's node
         const last = el.querySelector<HTMLElement>(".sk-chapter:last-child");
-        if (last) setCharged(last.getBoundingClientRect().top < vh * 0.88);
+        if (last) setCharged(draw * rect.height >= last.offsetTop + 6);
       });
     };
     onScroll();
