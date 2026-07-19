@@ -1,115 +1,206 @@
-export const v2Navigation = [
-  { label: "Work", href: "#work" },
-  { label: "Skills", href: "#skills" },
-  { label: "Journey", href: "#journey" },
-  { label: "Contact", href: "#contact" },
+// Content for the Sketchbook site, transcribed from the approved design
+// (design-reference/sketchbook-site.dc.html). Copy is kept verbatim.
+
+export const navigation = [
+  { label: "Pages", href: "#work" },
+  { label: "Toolkit", href: "#skills" },
+  { label: "Story", href: "#journey" },
+  { label: "Note ↗", href: "#contact" },
 ] as const;
 
-type V2Project = {
+export const sectionIds = ["work", "skills", "journey", "contact"] as const;
+
+// Words the hero "currently sketching:" line types out, one after another.
+export const sketchingNow = [
+  "ai agents",
+  "data pipelines",
+  "growth loops",
+  "product bets",
+  "new tricks",
+] as const;
+
+export type Project = {
   title: string;
-  category: string;
+  /** "Sketched as … — shipped …" line under the title. */
   description: string;
-  /** The sharpest decision or insight — the thing a senior reader would ask
-      about. Admission test for the shelf: no hook, no featured slot. */
-  hook?: string;
-  tags: readonly string[];
+  /** Uppercase middot-separated tag line, e.g. "NEXT.JS · OPENAI". */
+  tags: string;
   image: string;
+  imageAlt: string;
   href: string;
-  tone: "orange" | "indigo" | "neutral";
+  /** Resting tilt of the polaroid, in degrees. */
+  tilt: number;
 };
 
-export const v2Projects: readonly V2Project[] = [
+export const projects: readonly Project[] = [
   {
     title: "AI Companion",
-    category: "Consumer AI experiment",
     description:
-      "A full-stack product for creating conversational companions inspired by familiar public personas — built end to end, from onboarding to billing.",
-    hook: "The model was the easy part. The real build was the product loop around it: persona behavior, memory, and payments.",
-    tags: ["Next.js", "OpenAI", "Llama 2", "Prisma", "Stripe"],
+      "Sketched as “a friend in the machine” — shipped with persona behavior, memory, and billing.",
+    tags: "NEXT.JS · OPENAI · LLAMA 2 · STRIPE",
     image: "/images/projects/ai-companion.png",
+    imageAlt: "AI Companion interface",
     href: "https://github.com/cshyang/ai-companion",
-    tone: "orange",
+    tilt: -1.2,
   },
   {
     title: "AI Medical Agent",
-    category: "Applied AI prototype",
     description:
-      "A patient-facing workflow that extracts biomarkers from medical reports and rewrites them in plain language.",
-    hook: "Turns a raw lab PDF into something a patient can question their doctor about.",
-    tags: ["Python", "Streamlit", "LangChain", "OpenAI"],
+      "Sketched as “a translator for lab reports” — shipped for real patients with real questions.",
+    tags: "PYTHON · STREAMLIT · LANGCHAIN · OPENAI",
     image: "/images/projects/ai_medical_agent.png",
+    imageAlt: "AI Medical Agent interface",
     href: "https://github.com/cshyang/langchain-pdf-medical-agent",
-    tone: "indigo",
+    tilt: 1,
   },
   {
     title: "Netflix Clone",
-    category: "Frontend systems study",
-    description:
-      "A responsive streaming interface using live TMDB content to study navigation, discovery, and dense media layouts.",
-    tags: ["React", "Next.js", "Tailwind", "TMDB API"],
+    description: "Sketched as “a density study” — shipped on live TMDB data.",
+    tags: "REACT · NEXT.JS · TAILWIND · TMDB",
     image: "/images/projects/netflix_clone.png",
+    imageAlt: "Netflix Clone interface",
     href: "https://github.com/cshyang/netflix-clone",
-    tone: "neutral",
+    tilt: -0.7,
   },
-] as const;
+];
 
-// The AI layer that wraps every domain below.
-export const aiWrapperTools = ["Claude", "OpenAI", "LangChain", "PydanticAI"] as const;
+export type Tool = {
+  label: string;
+  /** Icon URL (simple-icons CDN or local /images path). Omitted = text-only chip. */
+  src?: string;
+  /** Black SVGs (jsdelivr) that need the blue CSS filter. */
+  filtered?: boolean;
+};
 
-export const domains = [
+export type Pen = {
+  name: string;
+  blurb: string;
+  tools: readonly Tool[];
+  /** The orange-bordered card with the "⚡ the supercharger" label. */
+  supercharge?: boolean;
+  /** Hover tilt, in degrees. */
+  hoverTilt: number;
+};
+
+const si = (slug: string) => `https://cdn.simpleicons.org/${slug}/3a56b5`;
+const siRaw = (slug: string) =>
+  `https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/${slug}.svg`;
+
+export const penCase: readonly Pen[] = [
   {
-    name: "Marketing & Growth",
-    blurb: "Campaign analytics and automation across ad platforms — code computes, AI reasons.",
-    tools: ["Google Ads", "Meta", "GA4", "Search Console"],
+    name: "DATA",
+    blurb: "Find the signal, define the decision, make evidence usable.",
+    hoverTilt: -0.5,
+    tools: [
+      { label: "SQL", src: si("postgresql") },
+      { label: "PYTHON", src: si("python") },
+      { label: "SNOWFLAKE", src: si("snowflake") },
+      { label: "TABLEAU", src: siRaw("tableau"), filtered: true },
+      { label: "LOOKER", src: si("looker") },
+      { label: "METABASE", src: si("metabase") },
+      { label: "AIRBYTE", src: si("airbyte") },
+      { label: "SEARCH CONSOLE", src: si("googlesearchconsole") },
+    ],
   },
   {
-    name: "Product",
-    blurb: "Reduce ambiguity, choose the useful shape, and get the work shipped.",
-    tools: ["Experiment design", "Product analytics", "Roadmaps"],
+    name: "AI",
+    blurb: "The ink under every page — agents built and exercised weekly.",
+    supercharge: true,
+    hoverTilt: 0.5,
+    tools: [
+      { label: "CLAUDE", src: si("claude") },
+      { label: "OPENAI", src: siRaw("openai"), filtered: true },
+      { label: "LANGCHAIN", src: si("langchain") },
+      { label: "PYDANTIC-AI", src: si("pydantic") },
+      { label: "PI", src: "/images/icons/pi_logo.png" },
+      { label: "HERMES AGENT", src: "/images/icons/hermes_logo.png" },
+      { label: "MACHINE LEARNING", src: si("scikitlearn") },
+    ],
   },
   {
-    name: "Data & Analytics",
-    blurb: "Find the signal, define the decision, and make the evidence usable.",
-    tools: ["SQL", "Python", "Snowflake", "Tableau"],
+    name: "PRODUCT",
+    blurb: "Reduce ambiguity, choose the useful shape, get it shipped.",
+    hoverTilt: -0.4,
+    tools: [
+      { label: "POSTHOG", src: si("posthog") },
+      { label: "GOOGLE ANALYTICS", src: si("googleanalytics") },
+      { label: "EXPERIMENTS" },
+      { label: "ROADMAPS" },
+    ],
   },
   {
-    name: "Engineering",
+    name: "CODE",
     blurb: "Build enough of the real thing to expose weak assumptions early.",
-    tools: ["Next.js", "React", "TypeScript", "Tailwind"],
+    hoverTilt: 0.6,
+    tools: [
+      { label: "NEXT.JS", src: si("nextdotjs") },
+      { label: "REACT", src: si("react") },
+      { label: "TAILWIND", src: si("tailwindcss") },
+      { label: "GCP", src: si("googlecloud") },
+      { label: "CLOUDFLARE", src: si("cloudflare") },
+      { label: "VERCEL", src: si("vercel") },
+    ],
   },
-] as const;
+];
 
-export const journey = [
+export type Chapter = {
+  /** Caveat orange label, e.g. "2015–2018 · ch.1 — digital analytics". */
+  kicker: string;
+  role: string;
+  company: string;
+  story: string;
+  /** Green (or orange, on the last chapter) Caveat margin note. */
+  unlocked: string;
+  /** Circular node logos; first sits on the line, second to its left. */
+  logos: readonly string[];
+  /** Last chapter: orange pulsing nodes + orange unlocked note. */
+  current?: boolean;
+  /** Fill progress (0..1) at which this chapter's nodes ignite. */
+  igniteAt: number;
+};
+
+export const chapters: readonly Chapter[] = [
   {
-    period: "2015–2018",
+    kicker: "2015–2018 · ch.1 — digital analytics",
     role: "Analytics Consultant",
-    company: "Persuasion Technologies → Artefact Asia",
+    company: "Incubeta → Artefact Asia",
     story:
-      "Client-side consulting across brands and messy behaviour data. The habit that formed here still runs everything: analysis isn't finished until someone changes a decision because of it.",
-    logo: "/images/icons/briefcase.svg",
+      "Client-side consulting across brands and messy behaviour data. The habit that formed here still runs everything: analysis isn’t finished until someone changes a decision because of it.",
+    unlocked: "+ skill unlocked: how businesses acquire traffic & keep it coming back",
+    logos: ["/images/icons/artefact_logo.png", "/images/icons/incubeta_logo.png"],
+    igniteAt: 0.2,
   },
   {
-    period: "2019–2020",
+    kicker: "2019–2020 · ch.2 — big data at scale",
     role: "Lead Market Analyst, Malaysia",
     company: "Grab",
     story:
       "Market analytics at regional scale, where every metric had an owner and a deadline. Scale taught the sharpest lesson cheaply: a dashboard nobody acts on is decoration.",
-    logo: "/images/icons/grab_logo.png",
+    unlocked: "+ skill unlocked: big data analytics & data science at scale",
+    logos: ["/images/icons/grab_logo.png"],
+    igniteAt: 0.42,
   },
   {
-    period: "2021–2023",
+    kicker: "2021–2023 · ch.3 — building, not just analysing",
     role: "AI & Data Product Leadership",
     company: "MoneyLion → BioMark",
     story:
       "Crossed from analysing products to building them — recommendation systems in consumer fintech, then healthcare data products where getting it wrong is personal.",
-    logo: "/images/icons/moneylion_icon.jpeg",
+    unlocked: "+ skill unlocked: making product decisions & experimenting at scale",
+    logos: ["/images/icons/biomark_logo.png", "/images/icons/moneylion_clean.png"],
+    igniteAt: 0.62,
   },
   {
-    period: "2023–now",
-    role: "Data & AI Builder",
-    company: "Hiredly Group → Independent work",
+    kicker: "2023–now · ch.4 — the supercharge ⚡",
+    role: "AI Builder",
+    company: "Data & AI Lead, Hiredly → Founding AI Engineer, Calibrax",
     story:
-      "Leading across engineering, data science, and product while building agentic AI systems hands-on — the whole stack, exercised weekly.",
-    logo: "/images/icons/hiredly_logo.png",
+      "AI turned every earlier chapter into leverage — analytics instinct, scale engineering, and product judgement now compound in agentic systems I build hands-on, weekly.",
+    unlocked: "⚡ agentic engineering — every skill above, running through one circuit",
+    logos: ["/images/icons/calibrax_logo.png", "/images/icons/hiredly_logo.png"],
+    current: true,
+    igniteAt: 0.85,
   },
-] as const;
+];
+
+export const cvHref = "/docs/shyang_cv.pdf";

@@ -36,6 +36,6 @@ export default function SiteShell({ children }: SiteShellProps) {
     );
   }
 
-  // The current site renders its own header and footer inside the page.
-  return <div className="v2-shell">{children}</div>;
+  // The Sketchbook site renders its own header and footer inside the page.
+  return <div className="sk-shell">{children}</div>;
 }

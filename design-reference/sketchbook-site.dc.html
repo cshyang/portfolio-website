@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Public+Sans:ital,wght@0,300..800;1,300..800&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #f8f3e6; }
+a { color: inherit; }
+a:hover { color: #e2571e; }
+@keyframes progressFill { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes drawLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes drawLineY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes inkIn { from { opacity: 0; transform: translateY(28px) rotate(0.5deg); } to { opacity: 1; transform: translateY(0) rotate(0deg); } }
+@keyframes stampIn { from { opacity: 0; transform: scale(1.6) rotate(-14deg); } to { opacity: 1; transform: scale(1) rotate(-8deg); } }
+@keyframes supercharge { 0% { transform: scaleY(0); opacity: 0; } 8% { opacity: 1; } 45% { transform: scaleY(1); opacity: 1; } 52% { opacity: 0.35; } 60% { opacity: 1; } 68% { opacity: 0.5; } 76% { opacity: 1; } 100% { transform: scaleY(1); opacity: 1; } }
+@keyframes glowBreathe { 0%, 100% { box-shadow: 0 0 8px rgba(226,87,30,0.55), 0 0 18px rgba(226,87,30,0.25); } 50% { box-shadow: 0 0 14px rgba(226,87,30,0.95), 0 0 34px rgba(226,87,30,0.55); } }
+@keyframes ignite { to { border-color: #e2571e; box-shadow: 0 0 0 2.5px rgba(226,87,30,0.18), 0 0 16px rgba(226,87,30,0.6); } }
+@keyframes zapPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(226,87,30,0.45), 0 0 10px rgba(226,87,30,0.5); } 50% { box-shadow: 0 0 0 7px rgba(226,87,30,0), 0 0 22px rgba(226,87,30,0.85); } }
+@keyframes caretBlink { 0%, 45% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}
+</style>
+</helmet>
+<div style="min-height:100vh;position:relative;overflow:clip;background:radial-gradient(circle, rgba(29,67,200,0.13) 0 1px, transparent 1.6px) 0 0 / 22px 22px, url('public/images/textures/sketch-paper.png') repeat 0 0 / 512px 512px, #f8f3e6;color:#1d43c8;font-family:'Bricolage Grotesque','Public Sans',Arial,sans-serif;font-size:16px;line-height:1.6">
+
+  <div aria-hidden="true" style="position:fixed;top:0;bottom:0;left:0;width:4px;z-index:40;background:rgba(29,67,200,0.12)">
+    <span style="position:absolute;inset:0;background:linear-gradient(#1d43c8, #e2571e);transform-origin:top;animation:progressFill linear both;animation-timeline:scroll()"></span>
+  </div>
+
+  <a href="#top" style="position:fixed;top:1.1rem;left:1.4rem;z-index:29;max-width:calc(50vw - 15.5rem);overflow:hidden;white-space:nowrap;font-family:'Caveat',cursive;font-size:26px;font-weight:700;color:#1d43c8;text-decoration:none;transform:rotate(-2deg)">Shyang &#9998;</a>
+  <header data-screen-label="Nav" style="position:fixed;top:1rem;left:50%;z-index:30;width:min(calc(100% - 2rem), 27rem);padding:0.3rem;border:2.5px solid #1d43c8;border-radius:999px;background:rgba(253,250,241,0.78);box-shadow:0 6px 18px rgba(29,67,200,0.18);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);transform:translateX(-50%)">
+    <nav aria-label="Primary navigation" style="position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));min-width:0">
+      <span aria-hidden="true" style="position:absolute;top:0.15rem;bottom:0.15rem;left:0.15rem;z-index:0;width:calc((100% - 0.3rem) / 4);border-radius:999px;background:rgba(226,87,30,0.28);opacity:{{ lensOpacity }};transform:translateX({{ lensX }}%) rotate(-1deg);transition:transform 420ms cubic-bezier(0.16,1,0.3,1), opacity 180ms ease"></span>
+      <a href="#work" style="position:relative;z-index:1;padding:0.5rem 0.4rem;text-align:center;color:{{ navColor0 }};font-size:13.5px;font-weight:800;text-decoration:none;transition:color 200ms ease">Pages</a>
+      <a href="#skills" style="position:relative;z-index:1;padding:0.5rem 0.4rem;text-align:center;color:{{ navColor1 }};font-size:13.5px;font-weight:800;text-decoration:none;transition:color 200ms ease">Toolkit</a>
+      <a href="#journey" style="position:relative;z-index:1;padding:0.5rem 0.4rem;text-align:center;color:{{ navColor2 }};font-size:13.5px;font-weight:800;text-decoration:none;transition:color 200ms ease">Story</a>
+      <a href="#contact" style="position:relative;z-index:1;padding:0.5rem 0.4rem;text-align:center;color:{{ navColor3 }};font-size:13.5px;font-weight:800;text-decoration:none;transition:color 200ms ease">Note &#8599;</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section data-screen-label="Hero" aria-label="Hero" style="position:relative;display:grid;grid-template-columns:repeat(auto-fit, minmax(min(420px, 100%), 1fr));gap:48px;align-items:center;max-width:88rem;margin:0 auto;padding:clamp(104px, 11vw, 148px) clamp(24px, 4vw, 56px) clamp(48px, 6vw, 80px)">
+      <div>
+        <p style="margin:0 0 16px;font-family:'Caveat',cursive;font-size:28px;color:#e2571e;transform:rotate(-1.5deg);display:inline-block;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) both">page 01 — the builder himself</p>
+        <h1 style="margin:0 0 24px;font-weight:800;font-size:clamp(56px, 6.8vw, 100px);line-height:0.95;letter-spacing:-0.03em;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) 120ms both">
+          <span style="display:block;color:transparent;-webkit-text-stroke:3px #1d43c8">I SKETCH,</span>
+          <span style="display:block;color:#1d43c8">THEN I SHIP.</span>
+        </h1>
+        <p style="margin:0 0 20px;max-width:46ch;font-family:'Public Sans',sans-serif;font-size:17px;line-height:1.7;color:#3a56b5;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) 240ms both;text-wrap:pretty">Every opportunity is a new page; every obstacle is a chance to learn and level up. AI agents, data pipelines, product loops. The good ones get built and shipped. Fifteen years of pages so far.</p>
+        <p style="margin:0 0 32px;font-family:'Caveat',cursive;font-size:27px;color:#1d43c8;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) 360ms both">currently sketching: <span style="color:#e2571e">{{ typed }}</span><span style="display:inline-block;width:3px;height:0.9em;margin-left:2px;vertical-align:-0.12em;background:#e2571e;animation:caretBlink 900ms steps(1) infinite"></span></p>
+        <div style="display:flex;gap:20px;align-items:center;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) 480ms both">
+          <a href="#work" ref="{{ magnetRef1 }}" onMouseMove="{{ magnetMove }}" onMouseLeave="{{ magnetLeave }}" style="display:inline-block;padding:13px 28px;border-radius:999px;background:#1d43c8;color:#f8f3e6;font-size:15px;font-weight:800;text-decoration:none;transition:transform 300ms cubic-bezier(0.34,1.56,0.64,1), background 200ms ease" style-hover="background:#e2571e;color:#f8f3e6">Flip through the work &rarr;</a>
+          <span style="font-family:'Caveat',cursive;font-size:24px">&#8592; start here!</span>
+        </div>
+      </div>
+      <div style="position:relative" ref="{{ heroParallaxRef }}">
+        <div style="position:relative;width:100%;aspect-ratio:4 / 3;background:radial-gradient(circle, rgba(29,67,200,0.13) 0 1px, transparent 1.6px) 0 0 / 22px 22px, url('public/images/textures/sketch-paper.png') repeat 0 0 / 512px 512px, #f8f3e6">
+          <sc-if value="{{ heroVideoOn }}" hint-placeholder-val="{{ true }}">
+            <video src="uploads/brush-pen-cafe-cinemagraph-pure-white.mp4" ref="{{ heroVideoRef }}" autoPlay="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" onTimeUpdate="{{ heroVideoLoop }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply"></video>
+          </sc-if>
+          <sc-if value="{{ heroVideoOff }}" hint-placeholder-val="{{ false }}">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="4b-hero-sketch" shape="rect" fit="cover" placeholder="blue ballpoint self-portrait sketch: person at a drafting desk with laptop, plants, coffee" hint-size="100%,420px" style="position:absolute;inset:0;mix-blend-mode:multiply"></x-import>
+          </sc-if>
+        </div>
+        <span style="position:absolute;bottom:-14px;right:0;font-family:'Caveat',cursive;font-size:24px;color:#e2571e;transform:rotate(-3deg)">me, allegedly working</span>
+      </div>
+    </section>
+
+    <section id="work" data-screen-label="Pages" aria-labelledby="work-heading" style="max-width:88rem;margin:0 auto;padding:clamp(40px, 5vw, 64px) clamp(24px, 4vw, 56px) clamp(56px, 7vw, 96px);scroll-margin-top:5.5rem">
+      <div style="position:relative;padding-top:22px;margin-bottom:40px">
+        <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#1d43c8;transform-origin:left;animation:drawLine 900ms cubic-bezier(0.16,1,0.3,1) both;animation-timeline:view();animation-range:entry 0% entry 30%"></span>
+        <div style="display:flex;align-items:baseline;gap:20px;flex-wrap:wrap">
+          <h2 id="work-heading" style="margin:0;font-weight:800;font-size:clamp(34px, 4vw, 52px);letter-spacing:-0.02em">THE PAGES THAT SHIPPED</h2>
+          <span style="font-family:'Caveat',cursive;font-size:26px;color:#e2571e">sketch &#8594; system &#8594; shipped &#10004;</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr));gap:44px">
+        <article style="position:relative;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) both;animation-timeline:view();animation-range:entry 5% entry 35%">
+          <div style="position:relative;width:100%;height:150px;margin-bottom:-8px">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="4b-proj-sketch-1" shape="rect" fit="contain" placeholder="small blue-ink sketch: two chat bubbles with hearts" hint-size="100%,150px" style="position:absolute;inset:0;mix-blend-mode:multiply"></x-import>
+          </div>
+          <div style="position:relative;padding:10px;background:#fff;box-shadow:0 4px 14px rgba(29,67,200,0.18);transform:rotate(-1.2deg);transition:transform 350ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 350ms ease" style-hover="transform:rotate(0deg) translateY(-6px);box-shadow:0 14px 28px rgba(29,67,200,0.24)">
+            <img src="public/images/projects/ai-companion.png" alt="AI Companion interface" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top">
+            <span style="position:absolute;top:-14px;right:-10px;padding:6px 12px;border:2.5px solid #e2571e;border-radius:6px;color:#e2571e;font-size:12px;font-weight:800;letter-spacing:0.1em;background:rgba(248,243,230,0.9);animation:stampIn 500ms cubic-bezier(0.34,1.56,0.64,1) both;animation-timeline:view();animation-range:entry 25% entry 50%">SHIPPED &#10004;</span>
+          </div>
+          <h3 style="margin:18px 0 4px;font-weight:800;font-size:24px">AI Companion</h3>
+          <p style="margin:0 0 10px;font-family:'Public Sans',sans-serif;font-size:13.5px;line-height:1.6;color:#3a56b5">Sketched as &ldquo;a friend in the machine&rdquo; &mdash; shipped with persona behavior, memory, and billing.</p>
+          <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.06em;color:#7185c9">NEXT.JS &middot; OPENAI &middot; LLAMA 2 &middot; STRIPE</p>
+          <a href="https://github.com/cshyang/ai-companion" target="_blank" rel="noreferrer" style="font-family:'Caveat',cursive;font-size:22px;color:#e2571e;text-decoration-thickness:1.5px;text-underline-offset:5px">see the real thing &#8599;</a>
+        </article>
+        <article style="position:relative;margin-top:clamp(0px, (100vw - 1024px) * 99, 36px);animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) 100ms both;animation-timeline:view();animation-range:entry 5% entry 35%">
+          <div style="position:relative;width:100%;height:150px;margin-bottom:-8px">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="4b-proj-sketch-2" shape="rect" fit="contain" placeholder="small blue-ink sketch: stethoscope wrapped around a document" hint-size="100%,150px" style="position:absolute;inset:0;mix-blend-mode:multiply"></x-import>
+          </div>
+          <div style="position:relative;padding:10px;background:#fff;box-shadow:0 4px 14px rgba(29,67,200,0.18);transform:rotate(1deg);transition:transform 350ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 350ms ease" style-hover="transform:rotate(0deg) translateY(-6px);box-shadow:0 14px 28px rgba(29,67,200,0.24)">
+            <img src="public/images/projects/ai_medical_agent.png" alt="AI Medical Agent interface" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top">
+            <span style="position:absolute;top:-14px;right:-10px;padding:6px 12px;border:2.5px solid #e2571e;border-radius:6px;color:#e2571e;font-size:12px;font-weight:800;letter-spacing:0.1em;background:rgba(248,243,230,0.9);animation:stampIn 500ms cubic-bezier(0.34,1.56,0.64,1) both;animation-timeline:view();animation-range:entry 25% entry 50%">SHIPPED &#10004;</span>
+          </div>
+          <h3 style="margin:18px 0 4px;font-weight:800;font-size:24px">AI Medical Agent</h3>
+          <p style="margin:0 0 10px;font-family:'Public Sans',sans-serif;font-size:13.5px;line-height:1.6;color:#3a56b5">Sketched as &ldquo;a translator for lab reports&rdquo; &mdash; shipped for real patients with real questions.</p>
+          <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.06em;color:#7185c9">PYTHON &middot; STREAMLIT &middot; LANGCHAIN &middot; OPENAI</p>
+          <a href="https://github.com/cshyang/langchain-pdf-medical-agent" target="_blank" rel="noreferrer" style="font-family:'Caveat',cursive;font-size:22px;color:#e2571e;text-decoration-thickness:1.5px;text-underline-offset:5px">see the real thing &#8599;</a>
+        </article>
+        <article style="position:relative;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) 200ms both;animation-timeline:view();animation-range:entry 5% entry 35%">
+          <div style="position:relative;width:100%;height:150px;margin-bottom:-8px">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="4b-proj-sketch-3" shape="rect" fit="contain" placeholder="small blue-ink sketch: TV with popcorn bucket" hint-size="100%,150px" style="position:absolute;inset:0;mix-blend-mode:multiply"></x-import>
+          </div>
+          <div style="position:relative;padding:10px;background:#fff;box-shadow:0 4px 14px rgba(29,67,200,0.18);transform:rotate(-0.7deg);transition:transform 350ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 350ms ease" style-hover="transform:rotate(0deg) translateY(-6px);box-shadow:0 14px 28px rgba(29,67,200,0.24)">
+            <img src="public/images/projects/netflix_clone.png" alt="Netflix Clone interface" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top">
+            <span style="position:absolute;top:-14px;right:-10px;padding:6px 12px;border:2.5px solid #e2571e;border-radius:6px;color:#e2571e;font-size:12px;font-weight:800;letter-spacing:0.1em;background:rgba(248,243,230,0.9);animation:stampIn 500ms cubic-bezier(0.34,1.56,0.64,1) both;animation-timeline:view();animation-range:entry 25% entry 50%">SHIPPED &#10004;</span>
+          </div>
+          <h3 style="margin:18px 0 4px;font-weight:800;font-size:24px">Netflix Clone</h3>
+          <p style="margin:0 0 10px;font-family:'Public Sans',sans-serif;font-size:13.5px;line-height:1.6;color:#3a56b5">Sketched as &ldquo;a density study&rdquo; &mdash; shipped on live TMDB data.</p>
+          <p style="margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.06em;color:#7185c9">REACT &middot; NEXT.JS &middot; TAILWIND &middot; TMDB</p>
+          <a href="https://github.com/cshyang/netflix-clone" target="_blank" rel="noreferrer" style="font-family:'Caveat',cursive;font-size:22px;color:#e2571e;text-decoration-thickness:1.5px;text-underline-offset:5px">see the real thing &#8599;</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" data-screen-label="Toolkit" aria-labelledby="skills-heading" style="max-width:88rem;margin:0 auto;padding:0 clamp(24px, 4vw, 56px) clamp(56px, 7vw, 96px);scroll-margin-top:5.5rem">
+      <div style="position:relative;padding-top:22px;margin-bottom:36px">
+        <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#1d43c8;transform-origin:left;animation:drawLine 900ms cubic-bezier(0.16,1,0.3,1) both;animation-timeline:view();animation-range:entry 0% entry 30%"></span>
+        <div style="display:flex;align-items:baseline;gap:20px;flex-wrap:wrap">
+          <h2 id="skills-heading" style="margin:0;font-weight:800;font-size:clamp(30px, 3.4vw, 44px);letter-spacing:-0.02em">THE PEN CASE</h2>
+          <span style="font-family:'Caveat',cursive;font-size:26px;color:#e2571e">four careers, one pen &mdash; AI dissolved the walls</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(220px, 100%), 1fr));gap:24px">
+        <div style="position:relative;padding:20px;border:2.5px solid #1d43c8;border-radius:10px;background:rgba(255,255,255,0.5);transition:transform 300ms cubic-bezier(0.34,1.56,0.64,1), background 250ms ease" style-hover="transform:translateY(-5px) rotate(-0.5deg);background:#fff">
+          <h3 style="margin:0 0 6px;font-weight:800;font-size:21px">DATA</h3>
+          <p style="margin:0 0 12px;font-family:'Public Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#3a56b5">Find the signal, define the decision, make evidence usable.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/postgresql/3a56b5" alt="" style="width:15px;height:15px">SQL</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/python/3a56b5" alt="" style="width:15px;height:15px">PYTHON</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/snowflake/3a56b5" alt="" style="width:15px;height:15px">SNOWFLAKE</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/tableau.svg" alt="" style="width:15px;height:15px;filter:brightness(0) saturate(100%) invert(33%) sepia(29%) saturate(1786%) hue-rotate(200deg) brightness(93%) contrast(90%)">TABLEAU</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/looker/3a56b5" alt="" style="width:15px;height:15px">LOOKER</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/metabase/3a56b5" alt="" style="width:15px;height:15px">METABASE</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/airbyte/3a56b5" alt="" style="width:15px;height:15px">AIRBYTE</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/googlesearchconsole/3a56b5" alt="" style="width:15px;height:15px">SEARCH CONSOLE</span>
+          </div>
+        </div>
+        <div style="position:relative;padding:20px;border:2.5px solid #e2571e;border-radius:10px;background:rgba(255,255,255,0.5);box-shadow:0 0 14px rgba(226,87,30,0.25);transition:transform 300ms cubic-bezier(0.34,1.56,0.64,1), background 250ms ease" style-hover="transform:translateY(-5px) rotate(0.5deg);background:#fff">
+          <span style="position:absolute;top:-13px;right:14px;padding:0 8px;background:#f8f3e6;font-family:'Caveat',cursive;font-size:19px;color:#e2571e;transform:rotate(-2deg)">&#9889; the supercharger</span>
+          <h3 style="margin:0 0 6px;font-weight:800;font-size:21px;color:#e2571e">AI</h3>
+          <p style="margin:0 0 12px;font-family:'Public Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#3a56b5">The ink under every page &mdash; agents built and exercised weekly.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/claude/3a56b5" alt="" style="width:15px;height:15px">CLAUDE</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/openai.svg" alt="" style="width:15px;height:15px;filter:brightness(0) saturate(100%) invert(33%) sepia(29%) saturate(1786%) hue-rotate(200deg) brightness(93%) contrast(90%)">OPENAI</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/langchain/3a56b5" alt="" style="width:15px;height:15px">LANGCHAIN</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/pydantic/3a56b5" alt="" style="width:15px;height:15px">PYDANTIC-AI</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="public/images/icons/pi_logo.png" alt="" style="width:15px;height:15px;object-fit:contain">PI</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="public/images/icons/hermes_logo.png" alt="" style="width:15px;height:15px;object-fit:contain">HERMES AGENT</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/scikitlearn/3a56b5" alt="" style="width:15px;height:15px">MACHINE LEARNING</span>
+          </div>
+        </div>
+        <div style="position:relative;padding:20px;border:2.5px solid #1d43c8;border-radius:10px;background:rgba(255,255,255,0.5);transition:transform 300ms cubic-bezier(0.34,1.56,0.64,1), background 250ms ease" style-hover="transform:translateY(-5px) rotate(-0.4deg);background:#fff">
+          <h3 style="margin:0 0 6px;font-weight:800;font-size:21px">PRODUCT</h3>
+          <p style="margin:0 0 12px;font-family:'Public Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#3a56b5">Reduce ambiguity, choose the useful shape, get it shipped.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/posthog/3a56b5" alt="" style="width:15px;height:15px">POSTHOG</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/googleanalytics/3a56b5" alt="" style="width:15px;height:15px">GOOGLE ANALYTICS</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9">EXPERIMENTS</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9">ROADMAPS</span>
+          </div>
+        </div>
+        <div style="position:relative;padding:20px;border:2.5px solid #1d43c8;border-radius:10px;background:rgba(255,255,255,0.5);transition:transform 300ms cubic-bezier(0.34,1.56,0.64,1), background 250ms ease" style-hover="transform:translateY(-5px) rotate(0.6deg);background:#fff">
+          <h3 style="margin:0 0 6px;font-weight:800;font-size:21px">CODE</h3>
+          <p style="margin:0 0 12px;font-family:'Public Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#3a56b5">Build enough of the real thing to expose weak assumptions early.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/nextdotjs/3a56b5" alt="" style="width:15px;height:15px">NEXT.JS</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/react/3a56b5" alt="" style="width:15px;height:15px">REACT</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/tailwindcss/3a56b5" alt="" style="width:15px;height:15px">TAILWIND</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/googlecloud/3a56b5" alt="" style="width:15px;height:15px">GCP</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/cloudflare/3a56b5" alt="" style="width:15px;height:15px">CLOUDFLARE</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.05em;color:#7185c9"><img src="https://cdn.simpleicons.org/vercel/3a56b5" alt="" style="width:15px;height:15px">VERCEL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey" data-screen-label="Story" aria-labelledby="journey-heading" style="max-width:88rem;margin:0 auto;padding:0 clamp(24px, 4vw, 56px) clamp(56px, 7vw, 96px);scroll-margin-top:5.5rem">
+      <div style="position:relative;padding-top:22px;margin-bottom:44px">
+        <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:2.5px;background:#1d43c8;transform-origin:left;animation:drawLine 900ms cubic-bezier(0.16,1,0.3,1) both;animation-timeline:view();animation-range:entry 0% entry 30%"></span>
+        <div style="display:flex;align-items:baseline;gap:20px;flex-wrap:wrap">
+          <h2 id="journey-heading" style="margin:0;font-weight:800;font-size:clamp(34px, 4vw, 52px);letter-spacing:-0.02em">EARLIER CHAPTERS</h2>
+          <span style="font-family:'Caveat',cursive;font-size:26px;color:#e2571e">the employer-side work &mdash; the pages I can&rsquo;t open-source</span>
+        </div>
+      </div>
+      <ol style="position:relative;margin:0;padding:0 0 0 72px;list-style:none;timeline-scope:--zap">
+        <span aria-hidden="true" style="position:absolute;top:8px;bottom:8px;left:30px;width:2.5px;background:#1d43c8;transform-origin:top;animation:drawLineY both linear;animation-timeline:view();animation-range:entry 0% exit 60%"></span>
+        <span aria-hidden="true" style="position:absolute;top:8px;bottom:8px;left:28.5px;width:5.5px;border-radius:3px;background:#e2571e;transform-origin:top;animation:supercharge both linear, glowBreathe 2.4s ease-in-out infinite;animation-timeline:--zap, auto;animation-range:entry 10% entry 90%, normal"></span>
+        <li style="position:relative;padding:0 0 44px;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) both;animation-timeline:view();animation-range:entry 5% entry 40%">
+          <span aria-hidden="true" style="position:absolute;top:6px;left:-64px;display:grid;width:46px;height:46px;place-items:center;overflow:hidden;border:2.5px solid #1d43c8;border-radius:50%;background:#f8f3e6;z-index:1;animation:ignite both linear;animation-timeline:--zap;animation-range:entry 10% entry 28%"><img src="public/images/icons/artefact_logo.png" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+          <span aria-hidden="true" style="position:absolute;top:6px;left:-88px;display:grid;width:46px;height:46px;place-items:center;overflow:hidden;border:2.5px solid #1d43c8;border-radius:50%;background:#f8f3e6;animation:ignite both linear;animation-timeline:--zap;animation-range:entry 10% entry 28%"><img src="public/images/icons/incubeta_logo.png" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+          <p style="margin:0 0 2px;font-family:'Caveat',cursive;font-size:23px;color:#e2571e">2015&ndash;2018 &middot; ch.1 &mdash; digital analytics</p>
+          <h3 style="margin:0 0 4px;font-weight:800;font-size:clamp(22px, 2.4vw, 30px);line-height:1.1">Analytics Consultant <span style="font-weight:600;color:#7185c9;font-size:0.7em">&mdash; Incubeta &rarr; Artefact Asia</span></h3>
+          <p style="margin:0;max-width:64ch;font-family:'Public Sans',sans-serif;font-size:15px;line-height:1.65;color:#3a56b5;text-wrap:pretty">Client-side consulting across brands and messy behaviour data. The habit that formed here still runs everything: analysis isn&rsquo;t finished until someone changes a decision because of it.</p>
+          <p style="margin:8px 0 0;font-family:'Caveat',cursive;font-size:21px;color:#2c7a3f">+ skill unlocked: how businesses acquire traffic &amp; keep it coming back</p>
+        </li>
+        <li style="position:relative;padding:0 0 44px;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) both;animation-timeline:view();animation-range:entry 5% entry 40%">
+          <span aria-hidden="true" style="position:absolute;top:6px;left:-64px;display:grid;width:46px;height:46px;place-items:center;overflow:hidden;border:2.5px solid #1d43c8;border-radius:50%;background:#f8f3e6;animation:ignite both linear;animation-timeline:--zap;animation-range:entry 30% entry 48%"><img src="public/images/icons/grab_logo.png" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+          <p style="margin:0 0 2px;font-family:'Caveat',cursive;font-size:23px;color:#e2571e">2019&ndash;2020 &middot; ch.2 &mdash; big data at scale</p>
+          <h3 style="margin:0 0 4px;font-weight:800;font-size:clamp(22px, 2.4vw, 30px);line-height:1.1">Lead Market Analyst, Malaysia <span style="font-weight:600;color:#7185c9;font-size:0.7em">&mdash; Grab</span></h3>
+          <p style="margin:0;max-width:64ch;font-family:'Public Sans',sans-serif;font-size:15px;line-height:1.65;color:#3a56b5;text-wrap:pretty">Market analytics at regional scale, where every metric had an owner and a deadline. Scale taught the sharpest lesson cheaply: a dashboard nobody acts on is decoration.</p>
+          <p style="margin:8px 0 0;font-family:'Caveat',cursive;font-size:21px;color:#2c7a3f">+ skill unlocked: big data analytics &amp; data science at scale</p>
+        </li>
+        <li style="position:relative;padding:0 0 44px;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) both;animation-timeline:view();animation-range:entry 5% entry 40%">
+          <span aria-hidden="true" style="position:absolute;top:6px;left:-64px;display:grid;width:46px;height:46px;place-items:center;overflow:hidden;border:2.5px solid #1d43c8;border-radius:50%;background:#f8f3e6;z-index:1;animation:ignite both linear;animation-timeline:--zap;animation-range:entry 50% entry 68%"><img src="public/images/icons/biomark_logo.png" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+          <span aria-hidden="true" style="position:absolute;top:6px;left:-88px;display:grid;width:46px;height:46px;place-items:center;overflow:hidden;border:2.5px solid #1d43c8;border-radius:50%;background:#f8f3e6;animation:ignite both linear;animation-timeline:--zap;animation-range:entry 50% entry 68%"><img src="public/images/icons/moneylion_clean.png" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+          <p style="margin:0 0 2px;font-family:'Caveat',cursive;font-size:23px;color:#e2571e">2021&ndash;2023 &middot; ch.3 &mdash; building, not just analysing</p>
+          <h3 style="margin:0 0 4px;font-weight:800;font-size:clamp(22px, 2.4vw, 30px);line-height:1.1">AI &amp; Data Product Leadership <span style="font-weight:600;color:#7185c9;font-size:0.7em">&mdash; MoneyLion &rarr; BioMark</span></h3>
+          <p style="margin:0;max-width:64ch;font-family:'Public Sans',sans-serif;font-size:15px;line-height:1.65;color:#3a56b5;text-wrap:pretty">Crossed from analysing products to building them &mdash; recommendation systems in consumer fintech, then healthcare data products where getting it wrong is personal.</p>
+          <p style="margin:8px 0 0;font-family:'Caveat',cursive;font-size:21px;color:#2c7a3f">+ skill unlocked: making product decisions &amp; experimenting at scale</p>
+        </li>
+        <li style="position:relative;padding:0;view-timeline:--zap;animation:inkIn 700ms cubic-bezier(0.16,1,0.3,1) both;animation-timeline:view();animation-range:entry 5% entry 40%">
+          <span aria-hidden="true" style="position:absolute;top:6px;left:-64px;display:grid;width:46px;height:46px;place-items:center;overflow:hidden;border:2.5px solid #e2571e;border-radius:50%;background:#fff;z-index:1;animation:zapPulse 1.8s ease-in-out infinite"><img src="public/images/icons/calibrax_logo.png" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+          <span aria-hidden="true" style="position:absolute;top:6px;left:-88px;display:grid;width:46px;height:46px;place-items:center;overflow:hidden;border:2.5px solid #e2571e;border-radius:50%;background:#f8f3e6;animation:zapPulse 1.8s ease-in-out 0.4s infinite"><img src="public/images/icons/hiredly_logo.png" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+          <p style="margin:0 0 2px;font-family:'Caveat',cursive;font-size:23px;color:#e2571e">2023&ndash;now &middot; ch.4 &mdash; the supercharge &#9889;</p>
+          <h3 style="margin:0 0 4px;font-weight:800;font-size:clamp(22px, 2.4vw, 30px);line-height:1.1">AI Builder <span style="font-weight:600;color:#7185c9;font-size:0.7em">&mdash; Data &amp; AI Lead, Hiredly &rarr; Founding AI Engineer, Calibrax</span></h3>
+          <p style="margin:0;max-width:64ch;font-family:'Public Sans',sans-serif;font-size:15px;line-height:1.65;color:#3a56b5;text-wrap:pretty">AI turned every earlier chapter into leverage &mdash; analytics instinct, scale engineering, and product judgement now compound in agentic systems I build hands-on, weekly.</p>
+          <p style="margin:8px 0 0;font-family:'Caveat',cursive;font-size:21px;color:#e2571e">&#9889; agentic engineering &mdash; every skill above, running through one circuit</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="contact" data-screen-label="Contact" aria-labelledby="contact-heading" style="position:relative;background:#1d43c8;color:#f8f3e6;scroll-margin-top:5.5rem">
+      <div aria-hidden="true" style="position:absolute;inset:0;opacity:0.3;background-image:url('public/images/textures/print-grain.webp');background-repeat:repeat;background-size:256px 256px;pointer-events:none"></div>
+      <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit, minmax(min(22rem, 100%), 1fr));gap:clamp(40px, 6vw, 88px);max-width:88rem;margin:0 auto;padding:clamp(56px, 8vw, 104px) clamp(24px, 4vw, 56px)">
+        <div>
+          <p style="margin:0 0 14px;font-family:'Caveat',cursive;font-size:28px;color:#f5b899">page 99 — leave something in the margin</p>
+          <h2 id="contact-heading" style="margin:0 0 22px;font-weight:800;font-size:clamp(38px, 4.8vw, 64px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">Got a blank page worth filling?</h2>
+          <p style="margin:0;max-width:44ch;font-family:'Public Sans',sans-serif;font-size:16px;line-height:1.7;color:#c9d6f6;text-wrap:pretty">I&rsquo;m interested in AI products, data systems, product leadership, and collaborations that need someone comfortable crossing boundaries. Kuala Lumpur &middot; GMT +8.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:30px">
+            <a href="https://www.linkedin.com/in/chaushyang/" target="_blank" rel="noreferrer" style="padding:8px 18px;border:2px solid #f8f3e6;border-radius:999px;color:#f8f3e6;font-size:13px;font-weight:800;text-decoration:none;transition:background 200ms ease, color 200ms ease" style-hover="background:#f8f3e6;color:#1d43c8">LinkedIn &#8599;</a>
+            <a href="https://github.com/cshyang" target="_blank" rel="noreferrer" style="padding:8px 18px;border:2px solid #f8f3e6;border-radius:999px;color:#f8f3e6;font-size:13px;font-weight:800;text-decoration:none;transition:background 200ms ease, color 200ms ease" style-hover="background:#f8f3e6;color:#1d43c8">GitHub &#8599;</a>
+            <a href="#contact" style="padding:8px 18px;border:2px solid #f8f3e6;border-radius:999px;color:#f8f3e6;font-size:13px;font-weight:800;text-decoration:none;transition:background 200ms ease, color 200ms ease" style-hover="background:#f8f3e6;color:#1d43c8">Download CV &darr;</a>
+          </div>
+        </div>
+        <form onSubmit="{{ submitDemo }}" style="position:relative;align-self:start;padding:clamp(24px, 3vw, 40px);background:url('public/images/textures/sketch-paper.png') repeat 0 0 / 512px 512px #fdfaf1;color:#1d43c8;transform:rotate(0.6deg);box-shadow:0 16px 36px rgba(4,16,60,0.35)">
+          <span aria-hidden="true" style="position:absolute;top:-13px;left:50%;width:120px;height:28px;background:rgba(228,205,140,0.7);transform:translateX(-50%) rotate(-2deg);box-shadow:0 1px 3px rgba(42,32,22,0.15)"></span>
+          <p style="margin:0 0 22px;font-family:'Caveat',cursive;font-size:26px;color:#e2571e">a note for Shyang &#9998;</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+            <label for="sb-email" style="font-size:12px;font-weight:800;letter-spacing:0.08em">YOUR EMAIL</label>
+            <input id="sb-email" name="senderEmail" type="email" required="{{ true }}" placeholder="you@example.com&hellip;" style="width:100%;min-height:46px;border:0;border-bottom:2px solid #1d43c8;background:transparent;color:#1d43c8;font-family:'Public Sans',sans-serif;font-size:16px">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px">
+            <label for="sb-message" style="font-size:12px;font-weight:800;letter-spacing:0.08em">WHAT ARE YOU TRYING TO BUILD?</label>
+            <textarea id="sb-message" name="message" rows="5" required="{{ true }}" placeholder="A useful amount of context is enough&hellip;" style="width:100%;min-height:130px;padding-top:8px;border:0;border-bottom:2px solid #1d43c8;background:transparent;color:#1d43c8;font-family:'Public Sans',sans-serif;font-size:16px;resize:vertical"></textarea>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center">
+            <button type="submit" ref="{{ magnetRef2 }}" onMouseMove="{{ magnetMove }}" onMouseLeave="{{ magnetLeave }}" style="padding:13px 28px;border:0;border-radius:999px;background:#e2571e;color:#f8f3e6;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;transition:transform 300ms cubic-bezier(0.34,1.56,0.64,1), background 200ms ease" style-hover="background:#1d43c8">Pin it to the page &#8599;</button>
+            <p role="status" style="margin:0;font-family:'Caveat',cursive;font-size:22px;color:#2c7a3f">{{ formStatus }}</p>
+          </div>
+          <p style="margin:16px 0 0;font-family:'Public Sans',sans-serif;font-size:12.5px;color:#7185c9">Goes straight to my inbox &mdash; I read and reply to every note.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px clamp(24px, 4vw, 56px);border-top:2.5px solid #1d43c8;font-size:13px;font-weight:700">
+    <span>&copy; 2026 Chau Shyang &middot; sketched in Kuala Lumpur &middot; GMT +8</span>
+    <a href="#top" style="text-decoration:none">back to page 01 &uarr;</a>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;typewriter&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot;}, &quot;heroVideo&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot;}}">
+class Component extends DCLogic {
+  state = { typed: "", status: "", active: -1 };
+
+  componentDidMount() {
+    this.heroParallaxRef = this.heroParallaxRef || React.createRef();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // typewriter: type, hold, delete, next
+    const PHRASES = ["ai agents", "data pipelines", "growth loops", "product bets", "new tricks"];
+    let pi = 0, ci = 0, deleting = false;
+    const step = () => {
+      const word = PHRASES[pi];
+      if (!deleting) {
+        ci++;
+        this.setState({ typed: word.slice(0, ci) });
+        if (ci === word.length) { deleting = true; this._type = setTimeout(step, 2200); return; }
+        this._type = setTimeout(step, 65 + Math.random() * 70);
+      } else {
+        ci--;
+        this.setState({ typed: word.slice(0, ci) });
+        if (ci === 0) { deleting = false; pi = (pi + 1) % PHRASES.length; this._type = setTimeout(step, 350); return; }
+        this._type = setTimeout(step, 32);
+      }
+    };
+    if (!reduce && (this.props.typewriter ?? true)) this._type = setTimeout(step, 800); else this.setState({ typed: "ai agents" });
+
+    // hero sketch parallax (direct DOM, no re-render)
+    this._onScroll = () => {
+      const el = this.heroParallaxRef.current;
+      if (el) el.style.transform = `translateY(${Math.min(window.scrollY, 800) * 0.08}px)`;
+      // nav scroll-spy
+      const ids = ["work", "skills", "journey", "contact"];
+      const band = window.innerHeight * 0.4;
+      let active = -1;
+      ids.forEach((id, idx) => {
+        const s = document.getElementById(id);
+        if (!s) return;
+        const r = s.getBoundingClientRect();
+        if (r.top <= band && r.bottom >= band * 0.85 && active === -1) active = idx;
+      });
+      if (active !== this.state.active) this.setState({ active });
+    };
+    if (!reduce) window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onScroll();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._type);
+    window.removeEventListener("scroll", this._onScroll);
+  }
+
+  renderVals() {
+    this.heroParallaxRef = this.heroParallaxRef || React.createRef();
+    this.magnetRef1 = this.magnetRef1 || React.createRef();
+    this.magnetRef2 = this.magnetRef2 || React.createRef();
+    const navColor = (i) => (this.state.active === i ? "#e2571e" : "#1d43c8");
+    const reduceMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const videoOn = (this.props.heroVideo ?? true) && !reduceMotion;
+    return {
+      heroVideoOn: videoOn,
+      heroVideoOff: !videoOn,
+      heroVideoRef: (this.heroVideoRef = this.heroVideoRef || React.createRef()),
+      heroVideoLoop: (e) => {
+        const v = e.currentTarget;
+        // loop back before the file ends so playback never stalls on 'ended'
+        if (v.duration && v.currentTime > v.duration - 0.18) v.currentTime = 0.5;
+      },
+      typed: this.state.typed,
+      formStatus: this.state.status,
+      heroParallaxRef: this.heroParallaxRef,
+      magnetRef1: this.magnetRef1,
+      magnetRef2: this.magnetRef2,
+      navColor0: navColor(0),
+      navColor1: navColor(1),
+      navColor2: navColor(2),
+      navColor3: this.state.active === 3 ? "#e2571e" : "#1d43c8",
+      lensX: Math.max(this.state.active, 0) * 100,
+      lensOpacity: this.state.active >= 0 ? 1 : 0,
+      magnetMove: (e) => {
+        const el = e.currentTarget;
+        const r = el.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) * 0.22;
+        const dy = (e.clientY - (r.top + r.height / 2)) * 0.32;
+        el.style.transform = `translate(${dx}px, ${dy}px)`;
+      },
+      magnetLeave: (e) => { e.currentTarget.style.transform = "translate(0, 0)"; },
+      submitDemo: (e) => { e.preventDefault(); this.setState({ status: "pinned! I’ll write back soon ✓" }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

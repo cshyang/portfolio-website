@@ -1,148 +1,117 @@
 import Image from "next/image";
-import PortraitSwap from "./PortraitSwap";
-import RangeFlow from "./RangeFlow";
-import RangeGlow from "./RangeGlow";
-import RotatingIdentity from "./RotatingIdentity";
-import ToolMark from "./ToolMark";
+import { projects, penCase, type Pen } from "@/lib/data";
+import Reveal from "./Reveal";
+import SectionHead from "./SectionHead";
+import Hero from "./Hero";
+import Story from "./Story";
 import Contact from "./Contact";
-import WorkShowcase from "./WorkShowcase";
-import { aiWrapperTools, domains, journey } from "@/lib/data";
 
-export function Hero() {
+/* eslint-disable @next/next/no-img-element -- 15px tool chips load from the
+   simple-icons CDN, matching the design markup; next/image buys nothing here */
+
+function Work() {
   return (
-    <section className="v2-hero" aria-labelledby="v2-hero-heading">
-      <div className="v2-hero-copy v2-reveal v2-reveal--one">
-        <h1 id="v2-hero-heading">
-          <span className="v2-hero-lead">I&rsquo;m</span>
-          <RotatingIdentity />
-        </h1>
-      </div>
-
-      <div className="v2-hero-portrait v2-reveal v2-reveal--two">
-        <PortraitSwap />
-      </div>
-
-      <div className="v2-hero-context v2-reveal v2-reveal--four">
-        <p className="v2-hero-principle">Useful beats impressive.</p>
-        <p className="v2-hero-summary">
-          I turn rough ideas into useful systems by moving between evidence,
-          product judgment, AI, and hands-on building.
-        </p>
-        <a className="v2-primary-action" href="#work">
-          Selected work <span aria-hidden="true">↘</span>
-        </a>
-      </div>
-    </section>
-  );
-}
-
-export function SelectedWork() {
-  return (
-    <section className="v2-work" id="work" aria-labelledby="work-heading">
-      <div className="v2-section-heading">
-        <p className="v2-utility">Selected work</p>
-        <h2 id="work-heading">Evidence over claims.</h2>
-        <p>
-          Public experiments I built end-to-end and shipped in the open. The
-          professional record — analytics leadership, recommendation systems,
-          healthcare data — lives in the journey below.
-        </p>
-      </div>
-
-      <WorkShowcase />
-    </section>
-  );
-}
-
-export function OperatingRange() {
-  return (
-    <section className="v2-range" id="skills" aria-labelledby="skills-heading">
-      <RangeGlow />
-      <RangeFlow />
-      <div className="v2-range-intro">
-        <div className="v2-range-lede">
-          <p className="v2-utility">Skills</p>
-          <h2 id="skills-heading">Four careers, collapsed into one.</h2>
-          <p>
-            AI didn&rsquo;t replace the stack — it dissolved the walls between
-            marketing, product, data, and engineering.
-          </p>
-        </div>
-        <div className="v2-ai-plate">
-          <p className="v2-ai-plate-label">One AI layer, under all four.</p>
-          <ul className="v2-ai-tools" aria-label="The AI layer that dissolved the walls">
-            {aiWrapperTools.map((tool) => (
-              <li key={tool}>
-                <ToolMark name={tool} />
-                {tool}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="v2-domain-grid">
-        {domains.map((domain) => (
-          <article key={domain.name}>
-            <h3>{domain.name}</h3>
-            <p>{domain.blurb}</p>
-            <ul className="v2-domain-tools" aria-label={`${domain.name} tools`}>
-              {domain.tools.map((tool) => (
-                <li key={tool}>
-                  <ToolMark name={tool} />
-                  {tool}
-                </li>
-              ))}
-            </ul>
-          </article>
+    <section
+      id="work"
+      aria-labelledby="work-heading"
+      className="sk-section"
+      style={{ paddingTop: "clamp(40px, 5vw, 64px)" }}
+    >
+      <SectionHead
+        id="work-heading"
+        title="THE PAGES THAT SHIPPED"
+        note="sketch → system → shipped ✔"
+      />
+      <div className="sk-work-grid">
+        {projects.map((project, i) => (
+          <Reveal key={project.title} className="sk-work-card" delayMs={i * 100}>
+            <div
+              className="sk-polaroid"
+              style={{ "--tilt": `${project.tilt}deg` } as React.CSSProperties}
+            >
+              <Image
+                src={project.image}
+                alt={project.imageAlt}
+                width={800}
+                height={500}
+              />
+              <span className="sk-stamp">SHIPPED ✔</span>
+            </div>
+            <h3 className="sk-work-title">{project.title}</h3>
+            <p className="sk-work-desc">{project.description}</p>
+            <p className="sk-work-tags">{project.tags}</p>
+            <a
+              className="sk-work-link"
+              href={project.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              see the real thing ↗
+            </a>
+          </Reveal>
         ))}
       </div>
-      <p className="v2-range-terminal">
-        <strong>One loop now:</strong> find the problem, build the fix, ship
-        it to people.
-      </p>
     </section>
   );
 }
 
-export function Journey() {
+function PenCard({ pen }: { pen: Pen }) {
   return (
-    <section className="v2-journey" id="journey" aria-labelledby="journey-heading">
-      <div className="v2-section-heading">
-        <p className="v2-utility">Journey</p>
-        <h2 id="journey-heading">A career built by crossing the next boundary.</h2>
-        <p>
-          From analytics to product leadership, then deeper into AI systems and
-          hands-on building. This is where the employer-side work lives — the
-          parts I can&rsquo;t open-source.
-        </p>
-      </div>
-      <ol className="v2-story-list">
-        {journey.map((item) => (
-          <li key={item.period}>
-            <div className="v2-story-meta">
-              <span className="v2-story-mark">
-                <Image src={item.logo} alt="" width={56} height={56} />
-              </span>
-              <span className="v2-story-period">{item.period}</span>
-            </div>
-            <div className="v2-story-copy">
-              <h3>{item.role}</h3>
-              <p className="v2-story-company">{item.company}</p>
-              <p>{item.story}</p>
-            </div>
-          </li>
+    <div
+      className={`sk-pen${pen.supercharge ? " sk-pen--charge" : ""}`}
+      style={{ "--hover-tilt": `${pen.hoverTilt}deg` } as React.CSSProperties}
+    >
+      {pen.supercharge && <span className="sk-pen-label">⚡ the supercharger</span>}
+      <h3 className="sk-pen-name">{pen.name}</h3>
+      <p className="sk-pen-blurb">{pen.blurb}</p>
+      <div className="sk-pen-tools">
+        {pen.tools.map((tool) => (
+          <span key={tool.label} className="sk-tool">
+            {tool.src && (
+              <img
+                src={tool.src}
+                alt=""
+                className={tool.filtered ? "sk-tool-filtered" : undefined}
+              />
+            )}
+            {tool.label}
+          </span>
         ))}
-      </ol>
+      </div>
+    </div>
+  );
+}
+
+function Toolkit() {
+  return (
+    <section id="skills" aria-labelledby="skills-heading" className="sk-section">
+      <SectionHead
+        id="skills-heading"
+        title="THE PEN CASE"
+        note="four careers, one pen — AI dissolved the walls"
+        small
+      />
+      <div className="sk-pens">
+        {penCase.map((pen, i) => (
+          <Reveal key={pen.name} delayMs={i * 80}>
+            <PenCard pen={pen} />
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }
 
 export function Footer() {
   return (
-    <footer className="v2-footer">
-      <span>© {new Date().getFullYear()} Chau Shyang · Kuala Lumpur · GMT +8</span>
-      <a href="/design">Design system</a>
-      <a href="#top">Back to top ↑</a>
+    <footer className="sk-footer">
+      <span>
+        © 2026 Chau Shyang · sketched in Kuala Lumpur · GMT +8 ·{" "}
+        <a href="/legacy" style={{ textDecoration: "underline" }}>
+          previous edition
+        </a>
+      </span>
+      <a href="#top">back to page 01 ↑</a>
     </footer>
   );
 }
@@ -151,9 +120,9 @@ export function PageSections() {
   return (
     <>
       <Hero />
-      <SelectedWork />
-      <OperatingRange />
-      <Journey />
+      <Work />
+      <Toolkit />
+      <Story />
       <Contact />
     </>
   );
