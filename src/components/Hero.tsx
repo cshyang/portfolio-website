@@ -63,6 +63,37 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoOk, setVideoOk] = useState(false);
 
+  // The video begins loading with the SSR HTML, so loadedmetadata/playing can
+  // fire before hydration attaches JSX handlers. Wire it up imperatively and
+  // recover from whatever state we find (Chrome even restores the previous
+  // playback position, possibly already ended).
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || reduceMotion()) return;
+    // loop 0.3s → duration-0.3s: the trims at both ends lack the steam,
+    // and jumping early never stalls on 'ended'
+    const clampLoop = () => {
+      if (v.duration && (v.ended || v.currentTime > v.duration - 0.3)) {
+        v.currentTime = 0.3;
+      }
+    };
+    const onPlaying = () => setVideoOk(true);
+    v.addEventListener("timeupdate", clampLoop);
+    v.addEventListener("playing", onPlaying);
+    const start = () => {
+      clampLoop();
+      if (v.currentTime < 0.3) v.currentTime = 0.3;
+      v.play().catch(() => {});
+    };
+    if (v.readyState >= 1) start();
+    else v.addEventListener("loadedmetadata", start, { once: true });
+    return () => {
+      v.removeEventListener("timeupdate", clampLoop);
+      v.removeEventListener("playing", onPlaying);
+      v.removeEventListener("loadedmetadata", start);
+    };
+  }, []);
+
   // Parallax: translateY(min(scrollY, 800) * 0.08), straight from the design.
   useEffect(() => {
     if (reduceMotion()) return;
@@ -119,22 +150,15 @@ export default function Hero() {
               priority
             />
           )}
-          {/* Enhancement only: stays hidden unless the mp4 exists and plays. */}
+          {/* Enhancement only: fades in over the sketch once the mp4 plays.
+              (display:none would block Chrome from ever starting playback.) */}
           <video
             ref={videoRef}
             src={HERO_VIDEO}
             autoPlay
             muted
             playsInline
-            style={{ display: videoOk ? undefined : "none" }}
-            onPlaying={() => {
-              if (!reduceMotion()) setVideoOk(true);
-            }}
-            onTimeUpdate={(e) => {
-              // loop back before the file ends so playback never stalls on 'ended'
-              const v = e.currentTarget;
-              if (v.duration && v.currentTime > v.duration - 0.18) v.currentTime = 0.5;
-            }}
+            style={{ opacity: videoOk ? 1 : 0, transition: "opacity 600ms ease" }}
           />
         </div>
         <span className="sk-hero-caption">me, allegedly working</span>
