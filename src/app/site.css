@@ -473,8 +473,15 @@
   grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
   gap: 24px;
 }
+/* grid stretches the reveal wrapper; the card fills it so all four match */
+.sk-pen-cell {
+  height: 100%;
+}
 .sk-pen {
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   border: 2.5px solid var(--ink);
   border-radius: 10px;

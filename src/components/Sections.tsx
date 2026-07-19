@@ -93,7 +93,7 @@ function Toolkit() {
       />
       <div className="sk-pens">
         {penCase.map((pen, i) => (
-          <Reveal key={pen.name} delayMs={i * 80}>
+          <Reveal key={pen.name} className="sk-pen-cell" delayMs={i * 80}>
             <PenCard pen={pen} />
           </Reveal>
         ))}
