@@ -89,7 +89,7 @@ const siRaw = (slug: string) =>
 export const penCase: readonly Pen[] = [
   {
     name: "DATA",
-    blurb: "Find the signal, define the decision, make evidence usable.",
+    blurb: "Messy behaviour data in, one clear decision out — no decorative dashboards.",
     hoverTilt: -0.5,
     tools: [
       { label: "SQL", src: si("postgresql") },
@@ -119,7 +119,7 @@ export const penCase: readonly Pen[] = [
   },
   {
     name: "PRODUCT",
-    blurb: "Reduce ambiguity, choose the useful shape, get it shipped.",
+    blurb: "Choose the bet worth building, cut the rest, ship what's left.",
     hoverTilt: -0.4,
     tools: [
       { label: "POSTHOG", src: si("posthog") },
