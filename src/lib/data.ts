@@ -34,32 +34,33 @@ export type Project = {
 
 export const projects: readonly Project[] = [
   {
-    title: "AI Companion",
+    title: "NilaMap",
     description:
-      "Sketched as “a friend in the machine” — shipped with persona behavior, memory, and billing.",
-    tags: "NEXT.JS · OPENAI · LLAMA 2 · STRIPE",
-    image: "/images/projects/ai-companion.png",
-    imageAlt: "AI Companion interface",
-    href: "https://github.com/cshyang/ai-companion",
+      "Sketched as “can I trust this price?” — shipped live on official NAPIC records, one honest verdict per scheme.",
+    tags: "ASTRO · CLOUDFLARE WORKERS · PYTHON · NAPIC DATA",
+    image: "/images/projects/nilamap.png",
+    imageAlt: "NilaMap scheme page: median transacted price, price trend, and liquidity for a KL condominium",
+    href: "https://nilamap.com",
     tilt: -1.2,
   },
   {
-    title: "AI Medical Agent",
+    title: "MoreHands",
     description:
-      "Sketched as “a translator for lab reports” — shipped for real patients with real questions.",
-    tags: "PYTHON · STREAMLIT · LANGCHAIN · OPENAI",
-    image: "/images/projects/ai_medical_agent.png",
-    imageAlt: "AI Medical Agent interface",
-    href: "https://github.com/cshyang/langchain-pdf-medical-agent",
+      "Sketched as “a teammate that lives in Slack” — shipped as audit-logged agents on Cloudflare Durable Objects.",
+    tags: "CLOUDFLARE WORKERS · DURABLE OBJECTS · FLUE · SLACK",
+    image: "/images/projects/morehands.png",
+    imageAlt: "MoreHands Slack thread turning a week of customer feedback into themes, Linear issues, and a Notion summary",
+    href: "https://github.com/cshyang/MoreHands",
     tilt: 1,
   },
   {
-    title: "Netflix Clone",
-    description: "Sketched as “a density study” — shipped on live TMDB data.",
-    tags: "REACT · NEXT.JS · TAILWIND · TMDB",
-    image: "/images/projects/netflix_clone.png",
-    imageAlt: "Netflix Clone interface",
-    href: "https://github.com/cshyang/netflix-clone",
+    title: "Tradeval",
+    description:
+      "Sketched as “an AI that trades on a thesis” — shipped evidence-bound and replayable, fake capital by design.",
+    tags: "NEXT.JS · PYTHON · AI AGENTS · DETERMINISTIC ENGINE",
+    image: "/images/projects/tradeval.jpg",
+    imageAlt: "Tradeval philosophy lab: equity replay chart, rebalance decisions, and factor attribution",
+    href: "https://github.com/cshyang/Tradeval",
     tilt: -0.7,
   },
 ];
