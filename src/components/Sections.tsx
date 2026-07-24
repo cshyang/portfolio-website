@@ -46,7 +46,7 @@ function Work() {
               target="_blank"
               rel="noreferrer"
             >
-              see the real thing ↗
+              see the real thing {"↗︎"}
             </a>
           </Reveal>
         ))}

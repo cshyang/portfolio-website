@@ -77,7 +77,7 @@ export default function Contact() {
               rel="noreferrer"
               className="sk-pill"
             >
-              <LinkedInIcon /> LinkedIn ↗
+              <LinkedInIcon /> LinkedIn {"↗︎"}
             </a>
             <a
               href="https://github.com/cshyang"
@@ -85,7 +85,7 @@ export default function Contact() {
               rel="noreferrer"
               className="sk-pill"
             >
-              <GitHubIcon /> GitHub ↗
+              <GitHubIcon /> GitHub {"↗︎"}
             </a>
             <a href={cvHref} download className="sk-pill">
               Download CV ↓
@@ -121,7 +121,7 @@ export default function Contact() {
           <div className="sk-note-actions">
             <Magnetic>
               <button type="submit" className="sk-send" disabled={isSubmitting}>
-                {isSubmitting ? "Pinning…" : "Pin it to the page ↗"}
+                {isSubmitting ? "Pinning…" : "Pin it to the page ↗︎"}
               </button>
             </Magnetic>
             <p role="status" className="sk-form-status" data-kind={status.kind}>

@@ -5,7 +5,7 @@ export const navigation = [
   { label: "Pages", href: "#work" },
   { label: "Toolkit", href: "#skills" },
   { label: "Story", href: "#journey" },
-  { label: "Note ↗", href: "#contact" },
+  { label: "Note ↗︎", href: "#contact" },
 ] as const;
 
 export const sectionIds = ["work", "skills", "journey", "contact"] as const;
