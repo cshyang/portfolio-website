@@ -118,7 +118,7 @@ export default function Hero() {
         <p className="sk-hero-kicker sk-ink-in">page 01 — the builder himself</p>
         <h1 className="sk-hero-title sk-ink-in" style={{ "--d": "120ms" } as React.CSSProperties}>
           <span className="sk-outline">I AM A PRODUCT MANAGER,</span>
-          <span className="sk-solid">WHO ENGINEER</span>
+          <span className="sk-solid">WHO ENGINEERS</span>
         </h1>
         <p className="sk-hero-lead sk-ink-in" style={{ "--d": "240ms" } as React.CSSProperties}>
           Every opportunity is a new page; every obstacle is a chance to learn
