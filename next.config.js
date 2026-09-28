@@ -24,6 +24,14 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    // The privacy policy moved to Wherewit, which now operates the Meta integrations.
+    return ["/meta-app-privacy-policy", "/meta-app-privacy-policy/"].map((source) => ({
+      source,
+      destination: "https://wherewit.com/privacy/",
+      permanent: true,
+    }));
+  },
   skipTrailingSlashRedirect: true,
 };
 
